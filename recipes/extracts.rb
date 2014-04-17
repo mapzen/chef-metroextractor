@@ -6,12 +6,14 @@
 # create a lockfile to avoid calling osmosis
 #   unless force == true
 #
-bash 'osmosis-lock' do
+file node[:metroextractor][:extracts][:osmosis_lock] do
   action :nothing
-  code <<-EOH
-    touch #{node[:metroextractor][:extracts][:osmosis_lock]}
-  EOH
   not_if { node[:metroextractor][:extracts][:osmosis_force] }
+end
+
+file node[:metroextractor][:extracts][:osmosis_lock] do
+  action  :delete
+  only_if { node[:metroextractor][:extracts][:osmosis_force] }
 end
 
 bash 'osmosis' do
@@ -23,6 +25,6 @@ bash 'osmosis' do
     >/tmp/osmosis.log 2>&1
   EOH
   timeout node[:metroextractor][:extracts][:osmosis_timeout]
-  notifies :run, 'bash[osmosis-lock]', :immediately
+  notifies :create, "file[#{node[:metroextractor][:extracts][:osmosis_lock]}]", :immediately
   not_if { ::File.exist?(node[:metroextractor][:extracts][:osmosis_lock]) }
 end
