@@ -8,7 +8,6 @@
 #
 file node[:metroextractor][:extracts][:osmosis_lock] do
   action :nothing
-  not_if { node[:metroextractor][:extracts][:osmosis_force] }
 end
 
 file node[:metroextractor][:extracts][:osmosis_lock] do
