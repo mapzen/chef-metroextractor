@@ -11,3 +11,7 @@ notifications:
   flowdock: 19033d7eeb112e650d25ab9ed8821084
 notifications:
   email: false
+notifications:
+  email:
+    recipients:
+      - grant@mapzen.com
