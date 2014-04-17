@@ -1,7 +1,5 @@
 language: ruby
-cache:
-  directories:
-  - vendor/bundle
+cache: bundler
 gemfile:
    - Gemfile
 rvm:
