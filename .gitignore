@@ -1,0 +1,18 @@
+site-cookbooks
+nodes
+.vagrant
+Berksfile.lock
+*~
+*#
+.#*
+\#*#
+.*.sw[a-z]
+*.un~
+/cookbooks
+vendor/
+tmp/
+
+# Bundler
+bin/*
+.bundle/*
+vendor/

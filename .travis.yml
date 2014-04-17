@@ -1,0 +1,13 @@
+language: ruby
+cache:
+  directories:
+  - vendor/bundle
+gemfile:
+   - Gemfile
+rvm:
+  - 2.1.0
+script: bundle exec rake
+notifications:
+  flowdock: 19033d7eeb112e650d25ab9ed8821084
+notifications:
+  email: false
