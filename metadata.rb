@@ -6,7 +6,7 @@ description      'Installs/Configures extractor'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.0.6'
 
-recipe 'metroextractor', 'Builds and publishes metro extracts'
+recipe 'metroextractor', 'Builds metro extracts'
 
 %w(
   apt
