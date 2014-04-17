@@ -4,9 +4,9 @@ maintainer_email 'grant@mapzen.com'
 license          'GPL v3'
 description      'Installs/Configures extractor'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.0.2'
+version          '0.0.3'
 
-recipe 'extractor', 'Builds and publishes metro extracts'
+recipe 'metroextractor', 'Builds and publishes metro extracts'
 
 %w(
   apt
