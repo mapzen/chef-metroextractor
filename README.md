@@ -67,7 +67,7 @@ Postgres user password: string
 
 #### osmosis_timeout
 Set the timeout for processing of pbf/bz extracts: int
-* default: 86,400 (1 day)
+* default: 172,800 (2 days)
 
 #### osmosis_force
 By default, if the omosis extracts successfully build, we write a lock file
@@ -79,6 +79,8 @@ Default: nil
 #### osmosis_lock
 Location of osmosis lockfile: string
 * default: basedir/.osmosis.lock
+
+Upstream cookbook overrides
 
 ### osmosis
 
