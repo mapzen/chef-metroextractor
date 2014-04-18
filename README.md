@@ -91,9 +91,10 @@ Location of osmosis lockfile
 * default: basedir/.osmosis.lock
 
 #### osmosis_jvmopts
-JVM options to pass to osmosis
+JVM options to pass to osmosis. Xmx is calculated automatically and 
+set to total available RAM: ```node[:memory][:total].to_i / 1024```
 * type: string
-* default: '-server -Xmx8G'
+* default: '-server -Xmx#{mem}''
 
 Upstream cookbook overrides
 
