@@ -18,7 +18,7 @@ end
 bash 'osmosis' do
   user node[:metroextractor][:user]
   cwd  node[:metroextractor][:basedir]
-  environment('JAVACMD_OPTIONS' => '-server -Xmx4G')
+  environment('JAVACMD_OPTIONS' => node[:metroextractor][:extracts][:osmosis_jvmopts])
   code <<-EOH
     #{node[:metroextractor][:scriptsdir]}/osmosis.sh \
     >/tmp/osmosis.log 2>&1

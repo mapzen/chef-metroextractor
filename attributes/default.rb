@@ -20,6 +20,7 @@ default[:metroextractor][:osm][:password] = 'password'
 # processing
 default[:metroextractor][:extracts][:osmosis_timeout] = 172_800
 default[:metroextractor][:extracts][:osmosis_force]   = nil
+default[:metroextractor][:extracts][:osmosis_jvmopts] = '-server -Xmx8G'
 default[:metroextractor][:extracts][:osmosis_lock]    = "#{node[:metroextractor][:basedir]}/.osmosis.lock"
 
 # osmosis
