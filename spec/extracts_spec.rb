@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe 'metroextractor::extracts' do
-  let(:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
+  let(:chef_run) do
+    ChefSpec::Runner.new do |node|
+      node.automatic[:memory][:total] = '2048kB'
+    end.converge(described_recipe)
+  end
 
   before do
     stub_command('pgrep postgres').and_return(true)
@@ -15,22 +19,25 @@ describe 'metroextractor::extracts' do
     chef_run.should_not create_file '/mnt/.osmosis.lock'
   end
 
-  it 'should not delete the lockfile if osmosis_force is set' do
-    chef_run.should_not delete_file '/mnt/.osmosis.lock'
-  end
-
-  it 'should delete the lockfile with defaults' do
+  it 'should delete the lockfile if osmosis_force is set' do
     chef_run.node.set[:metroextractor][:extracts][:osmosis_force] = true
     chef_run.converge(described_recipe)
 
     chef_run.should delete_file '/mnt/.osmosis.lock'
   end
 
+  it 'should not delete the lockfile with defaults' do
+    chef_run.node.set[:metroextractor][:extracts][:osmosis_force] = nil
+    chef_run.converge(described_recipe)
+
+    chef_run.should_not delete_file '/mnt/.osmosis.lock'
+  end
+
   it 'should run osmosis' do
     chef_run.should run_bash('osmosis').with(
       user:         'postgres',
       cwd:          '/mnt',
-      environment:  { 'JAVACMD_OPTIONS' => '-server -Xmx8G' },
+      environment:  { 'JAVACMD_OPTIONS' => '-server -Xmx1M' },
       timeout:      345_600
     )
   end

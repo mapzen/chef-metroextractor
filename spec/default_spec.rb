@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe 'metroextractor::default' do
-  let(:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
+  let(:chef_run) do
+    ChefSpec::Runner.new do |node|
+      node.automatic[:memory][:total] = '2048kB'
+    end.converge(described_recipe)
+  end
 
   before do
     stub_command('pgrep postgres').and_return(true)
