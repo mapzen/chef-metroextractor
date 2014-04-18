@@ -22,8 +22,8 @@ default[:metroextractor][:extracts][:osmosis_timeout] = 345_600
 default[:metroextractor][:extracts][:osmosis_force]   = nil
 default[:metroextractor][:extracts][:osmosis_lock]    = "#{node[:metroextractor][:basedir]}/.osmosis.lock"
 
-# set osmosis heap to half available ram
-mem = node[:memory][:total].to_i / 1024 / 2
+# set osmosis heap to total available ram
+mem = node[:memory][:total].to_i / 1024
 default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -Xmx#{mem}M"
 
 # osmosis

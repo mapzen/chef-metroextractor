@@ -37,7 +37,7 @@ describe 'metroextractor::extracts' do
     chef_run.should run_bash('osmosis').with(
       user:         'postgres',
       cwd:          '/mnt',
-      environment:  { 'JAVACMD_OPTIONS' => '-server -Xmx1M' },
+      environment:  { 'JAVACMD_OPTIONS' => '-server -Xmx2M' },
       timeout:      345_600
     )
   end
