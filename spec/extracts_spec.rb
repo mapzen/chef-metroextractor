@@ -31,7 +31,7 @@ describe 'metroextractor::extracts' do
       user:         'postgres',
       cwd:          '/mnt',
       environment:  { 'JAVACMD_OPTIONS' => '-server -Xmx8G' },
-      timeout:      172_800
+      timeout:      345_600
     )
   end
 
