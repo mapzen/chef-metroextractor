@@ -52,7 +52,7 @@ Currently required to be pbf (not validated)
 Derive the name of the planet download from the url
 Currently required to be pbf (not validated)
 * type: string
-* default: planeturl.split('/').last
+* default: ```planeturl.split('/').last```
 
 ### metroextractor.osm
 
