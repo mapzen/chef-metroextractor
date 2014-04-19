@@ -25,51 +25,58 @@ Requirements
 
 Attributes
 ----------
-### metroextractor
+### metroextractor.setup
 
 #### basedir
 Base working directory
 * type: string
 * default: /mnt
 
-#### user
-User to run everything as
-* type: string
-* default: postgres
-
 #### scriptsdir
 Where to install scripts
 * type: string
 * default: /opt/metroextractor-scripts
 
-#### planeturl
+### metroextractor.user
+
+#### id
+User to run everything as
+* type: string
+* default: postgres
+
+#### shell
+User shell
+* type: string
+* default: /bin/bash
+
+#### manage_home
+Private
+* type: string
+* default: false
+
+#### create_group
+Create the user group
+* type: boolean
+* default: true
+
+#### ssh_keygen
+Generate ssh keys for the user
+* type: boolean
+* default: false
+
+### metroextractor.planet
+
+#### url
 Where to download the planet
 Currently required to be pbf (not validated)
 * type: string
 * default: http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf
 
-#### planetfile
+#### file
 Derive the name of the planet download from the url
 Currently required to be pbf (not validated)
 * type: string
 * default: ```planeturl.split('/').last```
-
-### metroextractor.osm
-
-#### dbs
-What postgres dbs to create
-* type: array
-* default: [osm]
-
-#### user
-What postgres user to create
-* type: string
-* default: osmuser
-
-#### password
-Postgres user password
-* type: string
-* default: password
 
 ### metroextractor.extracts
 

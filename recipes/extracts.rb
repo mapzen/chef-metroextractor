@@ -16,12 +16,12 @@ file node[:metroextractor][:extracts][:osmosis_lock] do
 end
 
 bash 'osmosis' do
-  user node[:metroextractor][:user]
-  cwd  node[:metroextractor][:basedir]
+  user node[:metroextractor][:user][:id]
+  cwd  node[:metroextractor][:setup][:basedir]
   environment('JAVACMD_OPTIONS' => node[:metroextractor][:extracts][:osmosis_jvmopts])
   code <<-EOH
-    #{node[:metroextractor][:scriptsdir]}/osmosis.sh \
-    >/tmp/osmosis.log 2>&1
+    #{node[:metroextractor][:setup][:scriptsdir]}/osmosis.sh \
+    >#{node[:metroextractor][:setup][:basedir]}/logs/osmosis.log 2>&1
   EOH
   timeout node[:metroextractor][:extracts][:osmosis_timeout]
   notifies :create, "file[#{node[:metroextractor][:extracts][:osmosis_lock]}]", :immediately

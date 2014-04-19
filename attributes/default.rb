@@ -3,28 +3,29 @@
 # Attributes:: default
 #
 
-# metroextractor
-default[:metroextractor][:basedir]      = '/mnt'
-default[:metroextractor][:user]         = 'postgres'
-default[:metroextractor][:scriptsdir]   = '/opt/metroextractor-scripts'
+# setup
+default[:metroextractor][:setup][:basedir]      = '/mnt/metro'
+default[:metroextractor][:setup][:scriptsdir]   = '/opt/metroextractor-scripts'
+
+# user
+default[:metroextractor][:user][:id]            = 'metro'
+default[:metroextractor][:user][:shell]         = '/bin/bash'
+default[:metroextractor][:user][:manage_home]   = false
+default[:metroextractor][:user][:create_group]  = true
+default[:metroextractor][:user][:ssh_keygen]    = false
 
 # planet
-default[:metroextractor][:planeturl]  = 'http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf'
-default[:metroextractor][:planetfile] = node[:metroextractor][:planeturl].split('/').last
-
-# postgres
-default[:metroextractor][:osm][:dbs]      = %w(osm)
-default[:metroextractor][:osm][:user]     = 'osmuser'
-default[:metroextractor][:osm][:password] = 'password'
+default[:metroextractor][:planet][:url]  = 'http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf'
+default[:metroextractor][:planet][:file] = node[:metroextractor][:planet][:url].split('/').last
 
 # processing
 default[:metroextractor][:extracts][:osmosis_timeout] = 345_600
 default[:metroextractor][:extracts][:osmosis_force]   = nil
-default[:metroextractor][:extracts][:osmosis_lock]    = "#{node[:metroextractor][:basedir]}/.osmosis.lock"
+default[:metroextractor][:extracts][:osmosis_lock]    = "#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock"
 
-# set osmosis heap to total available ram
-mem = node[:memory][:total].to_i / 1024
-default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -Xmx#{mem}M"
+# set osmosis heap to half available ram
+heap  = "#{(node.memory.total.to_i * 0.6).floor / 1024}M"
+default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -XX:SurvivorRatio=8 -Xms#{heap} -Xmx#{heap}"
 
 # osmosis
 default[:osmosis][:symlink]      = true
