@@ -12,6 +12,14 @@ Downloads the latest planet in pbf format, and runs through it via osmosis to pr
 extracts in both pbf and bz2 format. If there's demand/interest, we may add back shp files, but for now
 it's just extracts.
 
+What hardware do I need?
+------------------------
+On AWS, using a c3.2xlarge, it takes about 2 days to process all the extracts should you want to produce
+your own.
+
+If you'd rather not go that route, you're in luck. We'll be producing extracts weekly, and you can find
+then here: [Mapzen Metro Extracts](http://metro-extracts.mapzen.com)
+
 Current Build Status
 --------------------
 [![Build Status](https://secure.travis-ci.org/mapzen/chef-metroextractor.png)](http://travis-ci.org/mapzen/chef-metroextractor)
