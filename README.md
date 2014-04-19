@@ -15,7 +15,8 @@ it's just extracts.
 What hardware do I need?
 ------------------------
 On AWS, using a c3.2xlarge, it takes about 2 days to process all the extracts should you want to produce
-your own.
+your own. You'll need roughly 8GB of heap allocated to osmosis (by default, heap size is set to half
+the available RAM, so if you're tight on memory you can adjust this to suite).
 
 If you'd rather not go that route, you're in luck. We'll be producing extracts weekly, and you can find
 then here: [Mapzen Metro Extracts](http://metro-extracts.mapzen.com)
