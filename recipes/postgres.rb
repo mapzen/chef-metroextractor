@@ -12,7 +12,7 @@
 end
 
 pg_user node[:metroextractor][:postgres][:user] do
-  privileges :superuser => true, :createdb => true, :login => true
+  privileges superuser: true, createdb: true, login: true
   encrypted_password node[:metroextractor][:postgres][:password]
 end
 
