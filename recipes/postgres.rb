@@ -11,17 +11,14 @@
   include_recipe r
 end
 
-node[:metroextractor][:osm][:dbs].each do |db|
-  pg_database db do
-    owner     'postgres'
-    encoding  'utf8'
-    template  'template0'
-  end
-
-  pg_database_extensions db do
-    extensions  ['hstore']
-    languages   'plpgsql'
-    postgis     true
-  end
+pg_database node[:metroextractor][:osm][:db] do
+  owner     'postgres'
+  encoding  'utf8'
+  template  'template0'
 end
 
+pg_database_extensions node[:metroextractor][:osm][:db] do
+  extensions  ['hstore']
+  languages   'plpgsql'
+  postgis     true
+end
