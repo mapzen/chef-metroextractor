@@ -3,7 +3,12 @@
 # Recipe:: setup
 #
 
-include_recipe 'osmosis::default'
+%w(
+  osm2pgsql::default
+  osmosis::default
+).each do |r|
+  include_recipe r
+end
 
 # packages
 #
@@ -20,9 +25,21 @@ directory node[:metroextractor][:setup][:scriptsdir] do
 end
 
 template "#{node[:metroextractor][:setup][:scriptsdir]}/osmosis.sh" do
-  mode    0755
   owner   node[:metroextractor][:user][:id]
   source  'osmosis.sh.erb'
+  mode    0755
+end
+
+template "#{node[:metroextractor][:setup][:scriptsdir]}/osm2pgsql.sh" do
+  owner   node[:metroextractor][:user][:id]
+  source  'osm2pgsql.sh.erb'
+  mode    0755
+end
+
+cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/osm2pgsql.style" do
+  owner   node[:metroextractor][:user][:id]
+  source  'osm2pgsql.style'
+  mode    0644
 end
 
 # directories for extracts and logs

@@ -10,7 +10,9 @@ recipe 'metroextractor', 'Builds metro extracts'
 
 %w(
   apt
+  osm2pgsql
   osmosis
+  postgresql
   user
 ).each do |dep|
   depends dep

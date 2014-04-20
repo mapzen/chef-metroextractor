@@ -5,6 +5,7 @@
 
 %w(
   apt
+  metroextractor::postgres
   metroextractor::user
   metroextractor::setup
   metroextractor::planet

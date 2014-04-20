@@ -45,12 +45,29 @@ Attributes
 #### basedir
 Base working directory
 * type: string
-* default: /mnt
+* default: /mnt/metro
 
 #### scriptsdir
 Where to install scripts
 * type: string
 * default: /opt/metroextractor-scripts
+
+### metroextractor.postgres
+
+#### dbs
+What postgres dbs to create
+* type: array
+* default: %w(osm)
+
+#### user
+What postgres user to create
+* type: string
+* default: osmuser
+
+#### password
+Postgres user password
+* type: string
+* default: password
 
 ### metroextractor.user
 
