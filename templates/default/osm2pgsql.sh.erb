@@ -18,13 +18,13 @@ function osm2pgsql_shapefiles
 
     rm tmp/$slug.osm-*.*
     
-    echo "DROP TABLE ${prefix}_line" | psql osm
-    echo "DROP TABLE ${prefix}_nodes" | psql osm
-    echo "DROP TABLE ${prefix}_point" | psql osm
+    echo "DROP TABLE ${prefix}_line"    | psql osm
+    echo "DROP TABLE ${prefix}_nodes"   | psql osm
+    echo "DROP TABLE ${prefix}_point"   | psql osm
     echo "DROP TABLE ${prefix}_polygon" | psql osm
-    echo "DROP TABLE ${prefix}_rels" | psql osm
-    echo "DROP TABLE ${prefix}_roads" | psql osm
-    echo "DROP TABLE ${prefix}_ways" | psql osm
+    echo "DROP TABLE ${prefix}_rels"    | psql osm
+    echo "DROP TABLE ${prefix}_roads"   | psql osm
+    echo "DROP TABLE ${prefix}_ways"    | psql osm
 }
 
 function imposm_shapefiles
@@ -69,33 +69,33 @@ function imposm_shapefiles
 
     rm -r tmp/$slug-imposm
     
-    echo "DROP VIEW ${prefix}_roads" | psql osm
-    echo "DROP VIEW ${prefix}_roads_gen0" | psql osm
-    echo "DROP VIEW ${prefix}_roads_gen1" | psql osm
-    echo "DROP TABLE ${prefix}_admin" | psql osm
-    echo "DROP TABLE ${prefix}_aeroways" | psql osm
-    echo "DROP TABLE ${prefix}_amenities" | psql osm
-    echo "DROP TABLE ${prefix}_buildings" | psql osm
-    echo "DROP TABLE ${prefix}_landusages" | psql osm
-    echo "DROP TABLE ${prefix}_landusages_gen0" | psql osm
-    echo "DROP TABLE ${prefix}_landusages_gen1" | psql osm
-    echo "DROP TABLE ${prefix}_mainroads" | psql osm
-    echo "DROP TABLE ${prefix}_mainroads_gen0" | psql osm
-    echo "DROP TABLE ${prefix}_mainroads_gen1" | psql osm
-    echo "DROP TABLE ${prefix}_minorroads" | psql osm
-    echo "DROP TABLE ${prefix}_motorways" | psql osm
-    echo "DROP TABLE ${prefix}_motorways_gen0" | psql osm
-    echo "DROP TABLE ${prefix}_motorways_gen1" | psql osm
-    echo "DROP TABLE ${prefix}_places" | psql osm
-    echo "DROP TABLE ${prefix}_railways" | psql osm
-    echo "DROP TABLE ${prefix}_railways_gen0" | psql osm
-    echo "DROP TABLE ${prefix}_railways_gen1" | psql osm
-    echo "DROP TABLE ${prefix}_transport_areas" | psql osm
-    echo "DROP TABLE ${prefix}_transport_points" | psql osm
-    echo "DROP TABLE ${prefix}_waterareas" | psql osm
-    echo "DROP TABLE ${prefix}_waterareas_gen0" | psql osm
-    echo "DROP TABLE ${prefix}_waterareas_gen1" | psql osm
-    echo "DROP TABLE ${prefix}_waterways" | psql osm
+    echo "DROP VIEW ${prefix}_roads"              | psql osm
+    echo "DROP VIEW ${prefix}_roads_gen0"         | psql osm
+    echo "DROP VIEW ${prefix}_roads_gen1"         | psql osm
+    echo "DROP TABLE ${prefix}_admin"             | psql osm
+    echo "DROP TABLE ${prefix}_aeroways"          | psql osm
+    echo "DROP TABLE ${prefix}_amenities"         | psql osm
+    echo "DROP TABLE ${prefix}_buildings"         | psql osm
+    echo "DROP TABLE ${prefix}_landusages"        | psql osm
+    echo "DROP TABLE ${prefix}_landusages_gen0"   | psql osm
+    echo "DROP TABLE ${prefix}_landusages_gen1"   | psql osm
+    echo "DROP TABLE ${prefix}_mainroads"         | psql osm
+    echo "DROP TABLE ${prefix}_mainroads_gen0"    | psql osm
+    echo "DROP TABLE ${prefix}_mainroads_gen1"    | psql osm
+    echo "DROP TABLE ${prefix}_minorroads"        | psql osm
+    echo "DROP TABLE ${prefix}_motorways"         | psql osm
+    echo "DROP TABLE ${prefix}_motorways_gen0"    | psql osm
+    echo "DROP TABLE ${prefix}_motorways_gen1"    | psql osm
+    echo "DROP TABLE ${prefix}_places"            | psql osm
+    echo "DROP TABLE ${prefix}_railways"          | psql osm
+    echo "DROP TABLE ${prefix}_railways_gen0"     | psql osm
+    echo "DROP TABLE ${prefix}_railways_gen1"     | psql osm
+    echo "DROP TABLE ${prefix}_transport_areas"   | psql osm
+    echo "DROP TABLE ${prefix}_transport_points"  | psql osm
+    echo "DROP TABLE ${prefix}_waterareas"        | psql osm
+    echo "DROP TABLE ${prefix}_waterareas_gen0"   | psql osm
+    echo "DROP TABLE ${prefix}_waterareas_gen1"   | psql osm
+    echo "DROP TABLE ${prefix}_waterways"         | psql osm
 }
 
 osm2pgsql_shapefiles abuja &
