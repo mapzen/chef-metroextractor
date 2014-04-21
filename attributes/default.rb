@@ -25,7 +25,6 @@ default[:metroextractor][:planet][:file] = node[:metroextractor][:planet][:url].
 
 # extracts
 default[:metroextractor][:extracts][:osmosis_timeout] = 172_800
-default[:metroextractor][:extracts][:osmosis_force]   = nil
 default[:metroextractor][:extracts][:osmosis_lock]    = "#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock"
 
 # set osmosis heap to half available ram
@@ -34,7 +33,6 @@ default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -XX:SurvivorRat
 
 # shapes
 default[:metroextractor][:shapes][:osm2pgsql_timeout] = 172_800
-default[:metroextractor][:shapes][:osm2pgsql_force]   = nil
 default[:metroextractor][:shapes][:osm2pgsql_lock]    = "#{node[:metroextractor][:setup][:basedir]}/.osm2pgsql.lock"
 
 # osmosis

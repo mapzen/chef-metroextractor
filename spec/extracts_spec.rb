@@ -20,20 +20,6 @@ describe 'metroextractor::extracts' do
     chef_run.should_not create_file '/mnt/metro/.osmosis.lock'
   end
 
-  it 'should delete the lockfile if osmosis_force is set' do
-    chef_run.node.set[:metroextractor][:extracts][:osmosis_force] = true
-    chef_run.converge(described_recipe)
-
-    chef_run.should delete_file '/mnt/metro/.osmosis.lock'
-  end
-
-  it 'should not delete the lockfile with defaults' do
-    chef_run.node.set[:metroextractor][:extracts][:osmosis_force] = nil
-    chef_run.converge(described_recipe)
-
-    chef_run.should_not delete_file '/mnt/metro/.osmosis.lock'
-  end
-
   it 'should run osmosis' do
     chef_run.should run_bash('osmosis').with(
       user:         'metro',

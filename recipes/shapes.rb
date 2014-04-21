@@ -3,16 +3,8 @@
 # Recipe:: shapes
 #
 
-# create a lockfile to avoid calling osm2pgsql
-#   unless force == true
-#
 file node[:metroextractor][:shapes][:osm2pgsql_lock] do
-  action :nothing
-end
-
-file node[:metroextractor][:shapes][:osm2pgsql_lock] do
-  action  :delete
-  only_if { node[:metroextractor][:shapes][:osm2pgsql_force] }
+  action  :nothing
 end
 
 bash 'osm2pgsql' do
