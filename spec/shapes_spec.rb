@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'metroextractor::default' do
+describe 'metroextractor::shapes' do
   let(:chef_run) do
     ChefSpec::Runner.new do |node|
       node.automatic[:memory][:total] = '2048kB'
@@ -16,15 +16,16 @@ describe 'metroextractor::default' do
     stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osm'\" | grep osm").and_return(true)
   end
 
-  %w(
-    apt
-    metroextractor::user
-    metroextractor::setup
-    metroextractor::planet
-    metroextractor::extracts
-  ).each do |r|
-    it "should include the #{r} recipe" do
-      chef_run.should include_recipe r
-    end
+  it 'should define the lockfile' do
+    chef_run.should_not create_file '/mnt/metro/.osm2pgsql.lock'
   end
+
+  it 'should run osm2pgsql' do
+    chef_run.should run_bash('osm2pgsql').with(
+      user:         'metro',
+      cwd:          '/mnt/metro',
+      timeout:      172_800
+    )
+  end
+
 end

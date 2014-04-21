@@ -9,6 +9,15 @@ describe 'metroextractor::user' do
       end.converge(described_recipe)
     end
 
+    before do
+      stub_command('pgrep postgres').and_return(true)
+      stub_command('test -f /var/lib/postgresql/9.3/main/PG_VERSION').and_return(true)
+      stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osmuser'\" | grep osmuser").and_return(true)
+      stub_command("psql -c \"SELECT datname from pg_database WHERE datname='osm'\" | grep osm").and_return(true)
+      stub_command("psql -c 'SELECT lanname FROM pg_catalog.pg_language' osm | grep '^ plpgsql$'").and_return(true)
+      stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osm'\" | grep osm").and_return(true)
+    end
+
     it 'should create the user metro' do
       chef_run.should create_user_account('metro').with(
         manage_home:  false,
@@ -28,6 +37,15 @@ describe 'metroextractor::user' do
         node.automatic[:memory][:total]       = '2048kB'
         node.set[:metroextractor][:user][:id] = 'root'
       end.converge(described_recipe)
+    end
+
+    before do
+      stub_command('pgrep postgres').and_return(true)
+      stub_command('test -f /var/lib/postgresql/9.3/main/PG_VERSION').and_return(true)
+      stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osmuser'\" | grep osmuser").and_return(true)
+      stub_command("psql -c \"SELECT datname from pg_database WHERE datname='osm'\" | grep osm").and_return(true)
+      stub_command("psql -c 'SELECT lanname FROM pg_catalog.pg_language' osm | grep '^ plpgsql$'").and_return(true)
+      stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osm'\" | grep osm").and_return(true)
     end
 
     it 'should not create the user root' do

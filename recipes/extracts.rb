@@ -3,16 +3,8 @@
 # Recipe:: extracts
 #
 
-# create a lockfile to avoid calling osmosis
-#   unless force == true
-#
 file node[:metroextractor][:extracts][:osmosis_lock] do
-  action :nothing
-end
-
-file node[:metroextractor][:extracts][:osmosis_lock] do
-  action  :delete
-  only_if { node[:metroextractor][:extracts][:osmosis_force] }
+  action  :nothing
 end
 
 bash 'osmosis' do
