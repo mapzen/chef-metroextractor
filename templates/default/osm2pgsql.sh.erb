@@ -4,7 +4,7 @@ PGPASSWORD=<%= node[:metroextractor][:postgres][:password] %>
 OSMOPTS="--host <%= node[:hostname] %> --database <%= node[:metroextractor][:postgres][:db] %> --username <%= node[:metroextractor][:postgres][:user] %>"
 PGSQLOPTS="-h <%= node[:hostname] %> -d <%= node[:metroextractor][:postgres][:db] %> -U <%= node[:metroextractor][:postgres][:user] %>"
 PGSQL2SHPOPTS="-h <%= node[:hostname] %> -u <%= node[:metroextractor][:postgres][:user] %> -P <%= node[:metroextractor][:postgres][:password] %> <%= node[:metroextractor][:postgres][:db] %>"
-export PGPASSWORD OSMOPTS PGSQLOPTS
+export PGPASSWORD OSMOPTS PGSQLOPTS PGSQL2SHPOPTS
 
 # 
 # This script expects to be run as the postgres user.
