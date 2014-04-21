@@ -52,23 +52,6 @@ Where to install scripts
 * type: string
 * default: /opt/metroextractor-scripts
 
-### metroextractor.postgres
-
-#### dbs
-What postgres dbs to create
-* type: array
-* default: %w(osm)
-
-#### user
-What postgres user to create
-* type: string
-* default: osmuser
-
-#### password
-Postgres user password
-* type: string
-* default: password
-
 ### metroextractor.user
 
 #### id
@@ -96,6 +79,24 @@ Generate ssh keys for the user
 * type: boolean
 * default: false
 
+### metroextractor.postgres
+
+#### dbs
+What postgres dbs to create
+* type: array
+* default: %w(osm)
+
+#### user
+What postgres user to create
+* type: string
+* default: osmuser
+
+#### password
+Postgres user password
+* type: string
+* default: password
+
+
 ### metroextractor.planet
 
 #### url
@@ -115,7 +116,7 @@ Currently required to be pbf (not validated)
 #### osmosis_timeout
 Set the timeout for processing of pbf/bz extracts
 * type: int
-* default: 172,800 (2 days)
+* default: 172_800 (2 days)
 
 #### osmosis_force
 By default, if the omosis extracts successfully build, we write a lock file
@@ -134,6 +135,25 @@ JVM options to pass to osmosis. Xmx is calculated automatically and
 set to total available RAM: ```#{(node.memory.total.to_i * 0.6).floor / 1024}M```
 * type: string
 * default: '-server -XX:SurvivorRatio=8 -Xms#{heap} -Xmx#{heap}'
+
+### metroextractor.shapes
+
+#### osm2pgsql_timeout
+Set the timeout for processing of shape files
+* type: int
+* default: 172_800 (2 days)
+
+#### osm2pgsql_force
+By default, if the osm2pgsql shapes successfully build, we write a lock file
+to prevent the process from running again and overwritting data. You can 
+either remove the lockfile to bypass this, or force a run by setting this
+value to true.
+* default: nil
+
+#### osm2pgsql_lock
+Location of osm2pgsql lockfile
+* type: string
+* default: basedir/.osm2pgsql.lock
 
 Upstream cookbook overrides
 

@@ -38,7 +38,7 @@ describe 'metroextractor::shapes' do
     chef_run.should run_bash('osm2pgsql').with(
       user:         'metro',
       cwd:          '/mnt/metro',
-      timeout:      345_600
+      timeout:      172_800
     )
   end
 

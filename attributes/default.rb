@@ -24,18 +24,18 @@ default[:metroextractor][:planet][:url]  = 'http://ftp.heanet.ie/mirrors/openstr
 default[:metroextractor][:planet][:file] = node[:metroextractor][:planet][:url].split('/').last
 
 # extracts
-default[:metroextractor][:extracts][:osmosis_timeout] = 345_600
+default[:metroextractor][:extracts][:osmosis_timeout] = 172_800
 default[:metroextractor][:extracts][:osmosis_force]   = nil
 default[:metroextractor][:extracts][:osmosis_lock]    = "#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock"
-
-# shapes
-default[:metroextractor][:shapes][:osm2pgsql_timeout] = 345_600
-default[:metroextractor][:shapes][:osm2pgsql_force]   = nil
-default[:metroextractor][:shapes][:osm2pgsql_lock]    = "#{node[:metroextractor][:setup][:basedir]}/.osm2pgsql.lock"
 
 # set osmosis heap to half available ram
 heap  = "#{(node[:memory][:total].to_i * 0.6).floor / 1024}M"
 default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -XX:SurvivorRatio=8 -Xms#{heap} -Xmx#{heap}"
+
+# shapes
+default[:metroextractor][:shapes][:osm2pgsql_timeout] = 172_800
+default[:metroextractor][:shapes][:osm2pgsql_force]   = nil
+default[:metroextractor][:shapes][:osm2pgsql_lock]    = "#{node[:metroextractor][:setup][:basedir]}/.osm2pgsql.lock"
 
 # osmosis
 default[:osmosis][:symlink]      = true

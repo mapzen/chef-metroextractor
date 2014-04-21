@@ -39,7 +39,7 @@ describe 'metroextractor::extracts' do
       user:         'metro',
       cwd:          '/mnt/metro',
       environment:  { 'JAVACMD_OPTIONS' => '-server -XX:SurvivorRatio=8 -Xms1M -Xmx1M' },
-      timeout:      345_600
+      timeout:      172_800
     )
   end
 
