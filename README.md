@@ -19,7 +19,7 @@ your own. You'll need roughly 8GB of heap allocated to osmosis (by default, heap
 the available RAM, so if you're tight on memory you can adjust this to suite).
 
 If you'd rather not go that route, you're in luck. We'll be producing extracts weekly, and you can find
-then here: [Mapzen Metro Extracts](http://metro-extracts.mapzen.com)
+then here: [Mapzen Metro Extracts](http://mapzen.com/metro-extracts/)
 
 Current Build Status
 --------------------
