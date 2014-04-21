@@ -17,6 +17,7 @@ describe 'metroextractor::setup' do
   end
 
   %w(
+    osm2pgsql::default
     osmosis::default
   ).each do |r|
     it "should include the #{r} recipe" do
@@ -24,8 +25,13 @@ describe 'metroextractor::setup' do
     end
   end
 
-  it 'should install gdal-bin' do
-    chef_run.should install_package 'gdal-bin'
+  %w(
+    gdal-bin
+    imposm
+  ).each do |p|
+    it 'should install gdal-bin' do
+      chef_run.should install_package p
+    end
   end
 
   it 'should create the directory /opt/metroextractor-scripts' do
@@ -36,6 +42,19 @@ describe 'metroextractor::setup' do
     chef_run.should create_template('/opt/metroextractor-scripts/osmosis.sh').with(
       mode:   0755,
       source: 'osmosis.sh.erb'
+    )
+  end
+
+  it 'should create template /opt/metroextractor-scripts/osm2pgsql.sh' do
+    chef_run.should create_template('/opt/metroextractor-scripts/osm2pgsql.sh').with(
+      mode:   0755,
+      source: 'osm2pgsql.sh.erb'
+    )
+  end
+
+  it 'should create the file /opt/metroextractor-scripts/osm2pgsql.style' do
+    chef_run.should create_cookbook_file('/opt/metroextractor-scripts/osm2pgsql.style').with(
+      source: 'osm2pgsql.style'
     )
   end
 
