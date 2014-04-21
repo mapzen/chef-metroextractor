@@ -42,65 +42,65 @@ function imposm_shapefiles
     # "--connect" is an undocumented option for imposm; Olive Tonnhofer assures me it won't disappear in the future.
     imposm --read --cache-dir tmp/$slug-imposm --write --table-prefix=${prefix}_ --connect postgis://postgres:@<%= node[:hostname] %>/osm ex/$slug.osm.pbf
 
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-admin.shp osm ${prefix}_admin
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-aeroways.shp osm ${prefix}_aeroways
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-amenities.shp osm ${prefix}_amenities
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-buildings.shp osm ${prefix}_buildings
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-landusages.shp osm ${prefix}_landusages
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-landusages_gen0.shp osm ${prefix}_landusages_gen0
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-landusages_gen1.shp osm ${prefix}_landusages_gen1
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-mainroads.shp osm ${prefix}_mainroads
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-mainroads_gen0.shp osm ${prefix}_mainroads_gen0
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-mainroads_gen1.shp osm ${prefix}_mainroads_gen1
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-minorroads.shp osm ${prefix}_minorroads
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-motorways.shp osm ${prefix}_motorways
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-motorways_gen0.shp osm ${prefix}_motorways_gen0
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-motorways_gen1.shp osm ${prefix}_motorways_gen1
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-places.shp osm ${prefix}_places
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-railways.shp osm ${prefix}_railways
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-railways_gen0.shp osm ${prefix}_railways_gen0
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-railways_gen1.shp osm ${prefix}_railways_gen1
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-roads.shp osm ${prefix}_roads
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-roads_gen0.shp osm ${prefix}_roads_gen0
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-roads_gen1.shp osm ${prefix}_roads_gen1
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-transport_areas.shp osm ${prefix}_transport_areas
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-transport_points.shp osm ${prefix}_transport_points
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-waterareas.shp osm ${prefix}_waterareas
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-waterareas_gen0.shp osm ${prefix}_waterareas_gen0
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-waterareas_gen1.shp osm ${prefix}_waterareas_gen1
-    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-waterways.shp osm ${prefix}_waterways
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-admin.shp ${PGSQLOPTS} ${prefix}_admin
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-aeroways.shp ${PGSQLOPTS} ${prefix}_aeroways
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-amenities.shp ${PGSQLOPTS} ${prefix}_amenities
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-buildings.shp ${PGSQLOPTS} ${prefix}_buildings
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-landusages.shp ${PGSQLOPTS} ${prefix}_landusages
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-landusages_gen0.shp ${PGSQLOPTS} ${prefix}_landusages_gen0
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-landusages_gen1.shp ${PGSQLOPTS} ${prefix}_landusages_gen1
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-mainroads.shp ${PGSQLOPTS} ${prefix}_mainroads
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-mainroads_gen0.shp ${PGSQLOPTS} ${prefix}_mainroads_gen0
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-mainroads_gen1.shp ${PGSQLOPTS} ${prefix}_mainroads_gen1
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-minorroads.shp ${PGSQLOPTS} ${prefix}_minorroads
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-motorways.shp ${PGSQLOPTS} ${prefix}_motorways
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-motorways_gen0.shp ${PGSQLOPTS} ${prefix}_motorways_gen0
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-motorways_gen1.shp ${PGSQLOPTS} ${prefix}_motorways_gen1
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-places.shp ${PGSQLOPTS} ${prefix}_places
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-railways.shp ${PGSQLOPTS} ${prefix}_railways
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-railways_gen0.shp ${PGSQLOPTS} ${prefix}_railways_gen0
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-railways_gen1.shp ${PGSQLOPTS} ${prefix}_railways_gen1
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-roads.shp ${PGSQLOPTS} ${prefix}_roads
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-roads_gen0.shp ${PGSQLOPTS} ${prefix}_roads_gen0
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-roads_gen1.shp ${PGSQLOPTS} ${prefix}_roads_gen1
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-transport_areas.shp ${PGSQLOPTS} ${prefix}_transport_areas
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-transport_points.shp ${PGSQLOPTS} ${prefix}_transport_points
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-waterareas.shp ${PGSQLOPTS} ${prefix}_waterareas
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-waterareas_gen0.shp ${PGSQLOPTS} ${prefix}_waterareas_gen0
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-waterareas_gen1.shp ${PGSQLOPTS} ${prefix}_waterareas_gen1
+    pgsql2shp -rk -f tmp/$slug-imposm/$slug.osm-waterways.shp ${PGSQLOPTS} ${prefix}_waterways
 
     zip -j tmp/$slug.imposm-shapefiles.zip tmp/$slug-imposm/$slug.osm-*.shp tmp/$slug-imposm/$slug.osm-*.prj tmp/$slug-imposm/$slug.osm-*.dbf tmp/$slug-imposm/$slug.osm-*.shx
 
     rm -r tmp/$slug-imposm
     
-    echo "DROP VIEW ${prefix}_roads"              | psql osm
-    echo "DROP VIEW ${prefix}_roads_gen0"         | psql osm
-    echo "DROP VIEW ${prefix}_roads_gen1"         | psql osm
-    echo "DROP TABLE ${prefix}_admin"             | psql osm
-    echo "DROP TABLE ${prefix}_aeroways"          | psql osm
-    echo "DROP TABLE ${prefix}_amenities"         | psql osm
-    echo "DROP TABLE ${prefix}_buildings"         | psql osm
-    echo "DROP TABLE ${prefix}_landusages"        | psql osm
-    echo "DROP TABLE ${prefix}_landusages_gen0"   | psql osm
-    echo "DROP TABLE ${prefix}_landusages_gen1"   | psql osm
-    echo "DROP TABLE ${prefix}_mainroads"         | psql osm
-    echo "DROP TABLE ${prefix}_mainroads_gen0"    | psql osm
-    echo "DROP TABLE ${prefix}_mainroads_gen1"    | psql osm
-    echo "DROP TABLE ${prefix}_minorroads"        | psql osm
-    echo "DROP TABLE ${prefix}_motorways"         | psql osm
-    echo "DROP TABLE ${prefix}_motorways_gen0"    | psql osm
-    echo "DROP TABLE ${prefix}_motorways_gen1"    | psql osm
-    echo "DROP TABLE ${prefix}_places"            | psql osm
-    echo "DROP TABLE ${prefix}_railways"          | psql osm
-    echo "DROP TABLE ${prefix}_railways_gen0"     | psql osm
-    echo "DROP TABLE ${prefix}_railways_gen1"     | psql osm
-    echo "DROP TABLE ${prefix}_transport_areas"   | psql osm
-    echo "DROP TABLE ${prefix}_transport_points"  | psql osm
-    echo "DROP TABLE ${prefix}_waterareas"        | psql osm
-    echo "DROP TABLE ${prefix}_waterareas_gen0"   | psql osm
-    echo "DROP TABLE ${prefix}_waterareas_gen1"   | psql osm
-    echo "DROP TABLE ${prefix}_waterways"         | psql osm
+    echo "DROP VIEW ${prefix}_roads"              | psql ${PGSQLOPTS}
+    echo "DROP VIEW ${prefix}_roads_gen0"         | psql ${PGSQLOPTS}
+    echo "DROP VIEW ${prefix}_roads_gen1"         | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_admin"             | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_aeroways"          | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_amenities"         | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_buildings"         | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_landusages"        | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_landusages_gen0"   | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_landusages_gen1"   | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_mainroads"         | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_mainroads_gen0"    | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_mainroads_gen1"    | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_minorroads"        | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_motorways"         | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_motorways_gen0"    | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_motorways_gen1"    | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_places"            | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_railways"          | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_railways_gen0"     | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_railways_gen1"     | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_transport_areas"   | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_transport_points"  | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_waterareas"        | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_waterareas_gen0"   | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_waterareas_gen1"   | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_waterways"         | psql ${PGSQLOPTS}
 }
 
 osm2pgsql_shapefiles abuja &
