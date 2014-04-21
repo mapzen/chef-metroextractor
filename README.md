@@ -57,7 +57,7 @@ Where to install scripts
 #### id
 User to run everything as
 * type: string
-* default: postgres
+* default: metro
 
 #### shell
 User shell
