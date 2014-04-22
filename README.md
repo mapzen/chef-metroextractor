@@ -14,9 +14,9 @@ it's just extracts.
 
 What hardware do I need?
 ------------------------
-On AWS, using a c3.2xlarge, it takes about 2 days to process all the extracts should you want to produce
-your own. You'll need roughly 8GB of heap allocated to osmosis (by default, heap size is set to half
-the available RAM, so if you're tight on memory you can adjust this to suite).
+On AWS, using a c3.2xlarge, it takes about 2 days to process all the extracts and shapes should you want to
+produce your own. You'll need roughly 8GB of heap allocated to osmosis for the extracts portion (by default,
+heap size is set to half the available RAM, so if you're tight on memory you can adjust this to suite).
 
 If you'd rather not go that route, you're in luck. We'll be producing extracts weekly, and you can find
 then here: [Mapzen Metro Extracts](http://mapzen.com/metro-extracts/)
@@ -125,7 +125,7 @@ Location of osmosis lockfile
 
 #### osmosis_jvmopts
 JVM options to pass to osmosis. Xmx is calculated automatically and 
-set to total available RAM: ```#{(node.memory.total.to_i * 0.6).floor / 1024}M```
+set to total available RAM: ```#{(node[:memory][:total].to_i * 0.6).floor / 1024}M```
 * type: string
 * default: '-server -XX:SurvivorRatio=8 -Xms#{heap} -Xmx#{heap}'
 
