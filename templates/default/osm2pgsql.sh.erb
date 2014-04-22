@@ -6,10 +6,6 @@ PGSQLOPTS="-h <%= node[:hostname] %> -d <%= node[:metroextractor][:postgres][:db
 PGSQL2SHPOPTS="-h <%= node[:hostname] %> -u <%= node[:metroextractor][:postgres][:user] %> -P <%= node[:metroextractor][:postgres][:password] %> <%= node[:metroextractor][:postgres][:db] %>"
 export PGPASSWORD OSMOPTS PGSQLOPTS PGSQL2SHPOPTS
 
-# 
-# This script expects to be run as the postgres user.
-# 
-
 function osm2pgsql_shapefiles
 {
     slug=$1
