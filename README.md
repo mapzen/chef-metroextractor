@@ -4,8 +4,6 @@ Metroextractor Chef Cookbook
 Chef cookbook to automate the building of metro extracts.
 Heavily influenced/borrowed from Mike Migurski's [Extractotron](https://github.com/migurski/Extractotron/)
 
-!!! NOTE !!! Currently still in development... things can (and will) change, but master is functional.
-
 What does it do?
 ----------------
 Downloads the latest planet in pbf format, and runs through it via osmosis to produce a number of metro
