@@ -2,7 +2,8 @@ Metroextractor Chef Cookbook
 ===================
 ![Build Status](https://circleci.com/gh/mapzen/chef-metroextractor.png?circle-token=143ea95327e7591cf64082ca9a790c5014529c3b)
 
-Chef cookbook to automate the building of metro extracts.
+Attribution
+-----------
 Heavily influenced/borrowed from Mike Migurski's [Extractotron](https://github.com/migurski/Extractotron/)
 
 What does it do?
