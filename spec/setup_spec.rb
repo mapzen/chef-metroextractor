@@ -28,6 +28,7 @@ describe 'metroextractor::setup' do
   %w(
     gdal-bin
     imposm
+    zip
   ).each do |p|
     it 'should install gdal-bin' do
       chef_run.should install_package p
@@ -64,5 +65,9 @@ describe 'metroextractor::setup' do
 
   it 'should create /mnt/metro/logs' do
     chef_run.should create_directory '/mnt/metro/logs'
+  end
+
+  it 'should create /mnt/metro/shp' do
+    chef_run.should create_directory '/mnt/metro/shp'
   end
 end
