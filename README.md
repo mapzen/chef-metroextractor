@@ -1,5 +1,6 @@
 Metroextractor Chef Cookbook
 ===================
+![Build Status](https://circleci.com/gh/mapzen/chef-metroextractor.png?circle-token=143ea95327e7591cf64082ca9a790c5014529c3b)
 
 Chef cookbook to automate the building of metro extracts.
 Heavily influenced/borrowed from Mike Migurski's [Extractotron](https://github.com/migurski/Extractotron/)
@@ -21,10 +22,6 @@ If you'd rather not go that route, you're in luck. We'll be producing extracts w
 then here: [Mapzen Metro Extracts](http://mapzen.com/metro-extracts/)
 
 Pull requests for new cities are more than welcome.
-
-Current Build Status
---------------------
-![Build Status](https://circleci.com/gh/mapzen/chef-metroextractor.png?circle-token=143ea95327e7591cf64082ca9a790c5014529c3b)
 
 Usage
 -----
