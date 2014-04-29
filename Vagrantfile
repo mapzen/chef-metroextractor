@@ -1,21 +1,21 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
+Vagrant.configure('2') do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  config.vm.hostname = "extractor"
+  config.vm.hostname = 'metroextractor'
 
-  config.vm.box = "ubuntu-12.04-omnibus-chef"
-  config.vm.box_url = "http://grahamc.com/vagrant/ubuntu-12.04-omnibus-chef.box"
+  config.vm.box     = 'ubuntu-12.04-omnibus-chef'
+  config.vm.box_url = 'http://grahamc.com/vagrant/ubuntu-12.04-omnibus-chef.box'
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
   # any other machines on the same network, but cannot be accessed (through this
   # network interface) by any external networks.
-  config.vm.network :private_network, ip: "33.33.33.10"
+  config.vm.network :private_network, ip: '33.33.33.10'
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -26,8 +26,8 @@ Vagrant.configure("2") do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network :forwarded_port, host: 8080, guest: 80
-  config.vm.network :forwarded_port, host: 8000, guest: 8000
+  # config.vm.network :forwarded_port, host: 8080, guest: 80
+  # config.vm.network :forwarded_port, host: 8000, guest: 8000
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -50,8 +50,8 @@ Vagrant.configure("2") do |config|
   # View the documentation for the provider you're using for more
   # information on available options.
 
-  #config.ssh.max_tries = 40
-  #config.ssh.timeout   = 120
+  # config.ssh.max_tries = 40
+  # config.ssh.timeout   = 120
 
   # The path to the Berksfile to use with Vagrant Berkshelf
   # config.berkshelf.berksfile_path = "./Berksfile"
@@ -70,15 +70,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
-      "extractor" => {
-        "config" => {
-          "include_sample" => true
-        }
-      }
     }
 
     chef.run_list = [
-      "recipe[metroextractor::default]"
+      'recipe[metroextractor::default]'
     ]
   end
 end
