@@ -24,6 +24,14 @@ then here: [Mapzen Metro Extracts](http://mapzen.com/metro-extracts/)
 
 Pull requests for new cities are more than welcome.
 
+Contributing
+------------
+Extract creation is driven off the file files/default/cities.json. If you'd like to add an extract, you can either
+update the file directly if you feel comfortable doing so and submit a pull request, or open a GitHub issue and
+we'll look into doing it for you.
+
+If you'd like to update any other code, please fork, update, write specs for your changes and submit a pull.
+
 Usage
 -----
     include_recipe 'metroextractor'
@@ -176,10 +184,6 @@ Installation
 * and re-cook with the following:
     `knife solo cook root@${host} -r 'recipe[metroextractor]'`
 * alternatively, you can add the metroextractor cookbook to your chef server and wrap it as you see fit
-
-Contributing
-------------
-Fork, create a feature branch, write specs, send a pull! Weeee...
 
 License and Authors
 -------------------
