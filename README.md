@@ -26,7 +26,7 @@ Pull requests for new cities are more than welcome.
 
 Contributing
 ------------
-Extract creation is driven off the file files/default/cities.json. If you'd like to add an extract, you can either
+Extract creation is driven off the file `files/default/cities.json`. If you'd like to add an extract, you can either
 update the file directly if you feel comfortable doing so and submit a pull request, or open a GitHub issue and
 we'll look into doing it for you.
 
