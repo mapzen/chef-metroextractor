@@ -39,8 +39,16 @@ describe 'metroextractor::setup' do
     chef_run.should create_directory '/opt/metroextractor-scripts'
   end
 
+  it 'should create file /opt/metroextractor-scripts/cities.json' do
+    chef_run.should create_cookbook_file('/opt/metroextractor-scripts/cities.json').with(
+      owner:  'metro',
+      source: 'cities.json'
+    )
+  end
+
   it 'should create template /opt/metroextractor-scripts/osmosis.sh' do
     chef_run.should create_template('/opt/metroextractor-scripts/osmosis.sh').with(
+      owner:  'metro',
       mode:   0755,
       source: 'osmosis.sh.erb'
     )
@@ -48,6 +56,7 @@ describe 'metroextractor::setup' do
 
   it 'should create template /opt/metroextractor-scripts/osm2pgsql.sh' do
     chef_run.should create_template('/opt/metroextractor-scripts/osm2pgsql.sh').with(
+      owner:  'metro',
       mode:   0755,
       source: 'osm2pgsql.sh.erb'
     )
@@ -55,6 +64,7 @@ describe 'metroextractor::setup' do
 
   it 'should create the file /opt/metroextractor-scripts/osm2pgsql.style' do
     chef_run.should create_cookbook_file('/opt/metroextractor-scripts/osm2pgsql.style').with(
+      owner:  'metro',
       source: 'osm2pgsql.style'
     )
   end

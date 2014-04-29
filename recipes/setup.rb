@@ -26,6 +26,11 @@ directory node[:metroextractor][:setup][:scriptsdir] do
   owner node[:metroextractor][:user][:id]
 end
 
+cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
+  owner   node[:metroextractor][:user][:id]
+  source  'cities.json'
+end
+
 template "#{node[:metroextractor][:setup][:scriptsdir]}/osmosis.sh" do
   owner   node[:metroextractor][:user][:id]
   source  'osmosis.sh.erb'
