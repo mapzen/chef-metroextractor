@@ -13,9 +13,10 @@ function osm2pgsql_shapefiles
 
     osm2pgsql -sluc -C 1024 ${OSMOPTS} -S <%= node[:metroextractor][:setup][:scriptsdir] %>/osm2pgsql.style -p ${prefix} ex/$slug.osm.bz2
     
-    pgsql2shp -rk -f shp/$slug.osm-point.shp ${PGSQL2SHPOPTS} ${prefix}_point
-    pgsql2shp -rk -f shp/$slug.osm-polygon.shp ${PGSQL2SHPOPTS} ${prefix}_polygon
-    pgsql2shp -rk -f shp/$slug.osm-line.shp ${PGSQL2SHPOPTS} ${prefix}_line
+    pgsql2shp -rk -f shp/$slug.osm-point.shp    ${PGSQL2SHPOPTS} ${prefix}_point
+    pgsql2shp -rk -f shp/$slug.osm-polygon.shp  ${PGSQL2SHPOPTS} ${prefix}_polygon
+    pgsql2shp -rk -f shp/$slug.osm-line.shp     ${PGSQL2SHPOPTS} ${prefix}_line
+
     zip -j shp/$slug.osm2pgsql-shapefiles.zip shp/$slug.osm-*.shp shp/$slug.osm-*.prj shp/$slug.osm-*.dbf shp/$slug.osm-*.shx
 
     rm shp/$slug.osm-*.*
@@ -39,33 +40,33 @@ function imposm_shapefiles
     # "--connect" is an undocumented option for imposm; Olive Tonnhofer assures me it won't disappear in the future.
     imposm --read --cache-dir shp/$slug-imposm --write --table-prefix=${prefix}_ --connect postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@<%= node[:hostname] %>/<%= node[:metroextractor][:postgres][:db] %> ex/$slug.osm.pbf
 
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-admin.shp ${PGSQL2SHPOPTS} ${prefix}_admin
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-aeroways.shp ${PGSQL2SHPOPTS} ${prefix}_aeroways
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-amenities.shp ${PGSQL2SHPOPTS} ${prefix}_amenities
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-buildings.shp ${PGSQL2SHPOPTS} ${prefix}_buildings
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-landusages.shp ${PGSQL2SHPOPTS} ${prefix}_landusages
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-landusages_gen0.shp ${PGSQL2SHPOPTS} ${prefix}_landusages_gen0
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-landusages_gen1.shp ${PGSQL2SHPOPTS} ${prefix}_landusages_gen1
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-mainroads.shp ${PGSQL2SHPOPTS} ${prefix}_mainroads
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-mainroads_gen0.shp ${PGSQL2SHPOPTS} ${prefix}_mainroads_gen0
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-mainroads_gen1.shp ${PGSQL2SHPOPTS} ${prefix}_mainroads_gen1
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-minorroads.shp ${PGSQL2SHPOPTS} ${prefix}_minorroads
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-motorways.shp ${PGSQL2SHPOPTS} ${prefix}_motorways
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-motorways_gen0.shp ${PGSQL2SHPOPTS} ${prefix}_motorways_gen0
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-motorways_gen1.shp ${PGSQL2SHPOPTS} ${prefix}_motorways_gen1
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-places.shp ${PGSQL2SHPOPTS} ${prefix}_places
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-railways.shp ${PGSQL2SHPOPTS} ${prefix}_railways
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-railways_gen0.shp ${PGSQL2SHPOPTS} ${prefix}_railways_gen0
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-railways_gen1.shp ${PGSQL2SHPOPTS} ${prefix}_railways_gen1
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-roads.shp ${PGSQL2SHPOPTS} ${prefix}_roads
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-roads_gen0.shp ${PGSQL2SHPOPTS} ${prefix}_roads_gen0
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-roads_gen1.shp ${PGSQL2SHPOPTS} ${prefix}_roads_gen1
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-transport_areas.shp ${PGSQL2SHPOPTS} ${prefix}_transport_areas
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-transport_points.shp ${PGSQL2SHPOPTS} ${prefix}_transport_points
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-waterareas.shp ${PGSQL2SHPOPTS} ${prefix}_waterareas
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-waterareas_gen0.shp ${PGSQL2SHPOPTS} ${prefix}_waterareas_gen0
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-waterareas_gen1.shp ${PGSQL2SHPOPTS} ${prefix}_waterareas_gen1
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-waterways.shp ${PGSQL2SHPOPTS} ${prefix}_waterways
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-admin.shp             ${PGSQL2SHPOPTS} ${prefix}_admin
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-aeroways.shp          ${PGSQL2SHPOPTS} ${prefix}_aeroways
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-amenities.shp         ${PGSQL2SHPOPTS} ${prefix}_amenities
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-buildings.shp         ${PGSQL2SHPOPTS} ${prefix}_buildings
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-landusages.shp        ${PGSQL2SHPOPTS} ${prefix}_landusages
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-landusages_gen0.shp   ${PGSQL2SHPOPTS} ${prefix}_landusages_gen0
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-landusages_gen1.shp   ${PGSQL2SHPOPTS} ${prefix}_landusages_gen1
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-mainroads.shp         ${PGSQL2SHPOPTS} ${prefix}_mainroads
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-mainroads_gen0.shp    ${PGSQL2SHPOPTS} ${prefix}_mainroads_gen0
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-mainroads_gen1.shp    ${PGSQL2SHPOPTS} ${prefix}_mainroads_gen1
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-minorroads.shp        ${PGSQL2SHPOPTS} ${prefix}_minorroads
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-motorways.shp         ${PGSQL2SHPOPTS} ${prefix}_motorways
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-motorways_gen0.shp    ${PGSQL2SHPOPTS} ${prefix}_motorways_gen0
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-motorways_gen1.shp    ${PGSQL2SHPOPTS} ${prefix}_motorways_gen1
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-places.shp            ${PGSQL2SHPOPTS} ${prefix}_places
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-railways.shp          ${PGSQL2SHPOPTS} ${prefix}_railways
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-railways_gen0.shp     ${PGSQL2SHPOPTS} ${prefix}_railways_gen0
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-railways_gen1.shp     ${PGSQL2SHPOPTS} ${prefix}_railways_gen1
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-roads.shp             ${PGSQL2SHPOPTS} ${prefix}_roads
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-roads_gen0.shp        ${PGSQL2SHPOPTS} ${prefix}_roads_gen0
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-roads_gen1.shp        ${PGSQL2SHPOPTS} ${prefix}_roads_gen1
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-transport_areas.shp   ${PGSQL2SHPOPTS} ${prefix}_transport_areas
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-transport_points.shp  ${PGSQL2SHPOPTS} ${prefix}_transport_points
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-waterareas.shp        ${PGSQL2SHPOPTS} ${prefix}_waterareas
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-waterareas_gen0.shp   ${PGSQL2SHPOPTS} ${prefix}_waterareas_gen0
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-waterareas_gen1.shp   ${PGSQL2SHPOPTS} ${prefix}_waterareas_gen1
+    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-waterways.shp         ${PGSQL2SHPOPTS} ${prefix}_waterways
 
     zip -j shp/$slug.imposm-shapefiles.zip shp/$slug-imposm/$slug.osm-*.shp shp/$slug-imposm/$slug.osm-*.prj shp/$slug-imposm/$slug.osm-*.dbf shp/$slug-imposm/$slug.osm-*.shx
 
