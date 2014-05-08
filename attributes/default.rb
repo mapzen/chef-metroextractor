@@ -18,6 +18,7 @@ default[:metroextractor][:user][:ssh_keygen]    = false
 default[:metroextractor][:postgres][:db]        = 'osm'
 default[:metroextractor][:postgres][:user]      = 'osm'
 default[:metroextractor][:postgres][:password]  = 'password'
+default[:postgresql][:data_directory]           = "#{node[:metroextractor][:setup][:basedir]}/pg_data"
 
 # planet
 default[:metroextractor][:planet][:url]  = 'http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf'

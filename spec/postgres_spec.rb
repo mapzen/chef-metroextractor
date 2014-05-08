@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'metroextractor::default' do
+describe 'metroextractor::postgres' do
   let(:chef_run) do
     ChefSpec::Runner.new do |node|
       node.automatic[:memory][:total] = '2048kB'
@@ -17,15 +17,10 @@ describe 'metroextractor::default' do
     stub_command('test -f /mnt/metro/pg_data/PG_VERSION').and_return(true)
   end
 
-  %w(
-    apt
-    metroextractor::user
-    metroextractor::setup
-    metroextractor::planet
-    metroextractor::extracts
-  ).each do |r|
-    it "should include the #{r} recipe" do
-      chef_run.should include_recipe r
-    end
+  it 'should create the postgres data directory' do
+    chef_run.should create_directory('/mnt/metro/pg_data').with(
+      owner: 'postgres'
+    )
   end
+
 end

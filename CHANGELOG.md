@@ -1,6 +1,10 @@
 metroextractor CHANGELOG
 ===================
 
+0.3.0
+-----
+- override default postgres data dir to avoid running out of space
+
 0.2.1
 -----
 - use array in osm2pgsql.sh
