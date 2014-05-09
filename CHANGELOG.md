@@ -1,6 +1,11 @@
 metroextractor CHANGELOG
 ===================
 
+0.3.2
+-----
+- turn off autovacuum
+- checkpoint segments
+
 0.3.1
 -----
 - add avignon to cities.json
