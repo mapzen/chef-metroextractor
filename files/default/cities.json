@@ -404,6 +404,14 @@
                         "right": "24.421"
                     }
                 },
+                "avignon": {
+                    "bbox": {
+                        "top": "44.100",
+                        "left": "4.596",
+                        "bottom": "43.792",
+                        "right": "5.091"
+                    }
+                },
                 "barcelona": {
                     "bbox": {
                         "top": "41.687",
