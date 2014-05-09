@@ -9,7 +9,7 @@ Heavily influenced by Mike Migurski's [Extractotron](https://github.com/migurski
 What does it do?
 ----------------
 Downloads the latest planet in pbf format.
-Produces, via osmosis, a number of metro extracts in both pbf and bz2 format.
+Produces, via osmosis, a number of metro extracts in both pbf and bz2 formats.
 Produces shape files in both imposm and osm2pgsql formats.
 
 What hardware do I need?
