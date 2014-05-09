@@ -1,6 +1,10 @@
 metroextractor CHANGELOG
 ===================
 
+0.3.1
+-----
+- add avignon to cities.json
+
 0.3.0
 -----
 - override default postgres data dir to avoid running out of space
