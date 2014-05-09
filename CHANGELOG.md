@@ -1,6 +1,11 @@
 metroextractor CHANGELOG
 ===================
 
+0.4.0
+-----
+- rewind the default postgres template
+- apply more postgres tuning
+
 0.3.2
 -----
 - turn off autovacuum

@@ -20,6 +20,10 @@ default[:metroextractor][:postgres][:user]      = 'osm'
 default[:metroextractor][:postgres][:password]  = 'password'
 default[:postgresql][:data_directory]           = "#{node[:metroextractor][:setup][:basedir]}/pg_data"
 default[:postgresql][:autovacuum]               = 'off'
+default[:postgresql][:work_mem]                 = '64MB'
+default[:postgresql][:temp_buffers]             = '128MB'
+default[:postgresql][:shared_buffers]           = '1GB'
+default[:postgresql][:maintenance_work_mem]     = '1GB'
 default[:postgresql][:checkpoint_segments]      = '20'
 
 # planet
