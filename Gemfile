@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'berkshelf'   , '= 3.1.1'
 gem 'chef'        , '= 11.10.4'
+gem 'chef-rewind' , '= 0.0.8'
 gem 'chefspec'    , '= 3.4.0'
 gem 'foodcritic'  , '= 3.0.3'
 gem 'rainbow'     , '= 2.0.0'
