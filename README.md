@@ -4,7 +4,7 @@ Metroextractor Chef Cookbook
 
 Attribution
 -----------
-Heavily influenced/borrowed from Mike Migurski's [Extractotron](https://github.com/migurski/Extractotron/)
+Heavily influenced by Mike Migurski's [Extractotron](https://github.com/migurski/Extractotron/)
 
 What does it do?
 ----------------
