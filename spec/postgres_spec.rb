@@ -37,4 +37,8 @@ describe 'metroextractor::postgres' do
     )
   end
 
+  it 'should restart postgres' do
+    chef_run.should restart_service 'postgresql'
+  end
+
 end

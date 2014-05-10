@@ -20,7 +20,6 @@ rewind template: "/etc/postgresql/#{node[:postgresql][:version]}/main/postgresql
   owner     'postgres'
   group     'postgres'
   mode      0644
-  notifies  :restart, 'service[postgresql]'
 end
 
 directory node[:postgresql][:data_directory] do
@@ -43,4 +42,9 @@ pg_database_extensions node[:metroextractor][:postgres][:db] do
   extensions  ['hstore']
   languages   'plpgsql'
   postgis     true
+end
+
+# force a restart up front
+service 'postgresql' do
+  action :restart
 end

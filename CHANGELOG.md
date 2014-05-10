@@ -1,6 +1,10 @@
 metroextractor CHANGELOG
 ===================
 
+0.4.1
+-----
+- restart postgres immediately
+
 0.4.0
 -----
 - rewind the default postgres template
