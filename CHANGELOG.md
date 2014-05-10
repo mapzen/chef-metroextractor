@@ -1,6 +1,10 @@
 metroextractor CHANGELOG
 ===================
 
+0.4.2
+-----
+- bug fix in postgres template
+
 0.4.1
 -----
 - restart postgres immediately

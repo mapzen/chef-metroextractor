@@ -438,7 +438,7 @@ log_line_prefix = '<%= node["postgresql"]["log_line_prefix"] %>'     # special v
 # AUTOVACUUM PARAMETERS
 #------------------------------------------------------------------------------
 
-#autovacuum = <%= node["postgresql"]["autovacuum"] %>      # Enable autovacuum subprocess?  'on'
+autovacuum = <%= node["postgresql"]["autovacuum"] %>      # Enable autovacuum subprocess?  'on'
           # requires track_counts to also be on.
 #log_autovacuum_min_duration = <%= node["postgresql"]["log_autovacuum_min_duration"] %> # -1 disables, 0 logs all actions and
           # their durations, > 0 logs only
