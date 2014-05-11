@@ -3,7 +3,7 @@
 # Recipe:: shapes
 #
 
-file node[:metroextractor][:shapes][:osm2pgsql_lock] do
+file "#{node[:metroextractor][:setup][:basedir]}/.osm2pgsql.lock" do
   action  :nothing
 end
 
@@ -15,6 +15,6 @@ bash 'osm2pgsql' do
     >#{node[:metroextractor][:setup][:basedir]}/logs/osm2pgsql.log 2>&1
   EOH
   timeout node[:metroextractor][:shapes][:osm2pgsql_timeout]
-  notifies :create, "file[#{node[:metroextractor][:shapes][:osm2pgsql_lock]}]", :immediately
-  not_if { ::File.exist?(node[:metroextractor][:shapes][:osm2pgsql_lock]) }
+  notifies :create, "file[#{node[:metroextractor][:setup][:basedir]}/.osm2pgsql.lock]", :immediately
+  not_if { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.osm2pgsql.lock") }
 end

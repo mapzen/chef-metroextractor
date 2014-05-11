@@ -1,6 +1,10 @@
 metroextractor CHANGELOG
 ===================
 
+0.5.0
+-----
+- fixes to allow easier overrides
+
 0.4.2
 -----
 - bug fix in postgres template

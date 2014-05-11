@@ -3,8 +3,8 @@
 # Recipe:: extracts
 #
 
-file node[:metroextractor][:extracts][:osmosis_lock] do
-  action  :nothing
+file "#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock" do
+  action :nothing
 end
 
 bash 'osmosis' do
@@ -16,6 +16,6 @@ bash 'osmosis' do
     >#{node[:metroextractor][:setup][:basedir]}/logs/osmosis.log 2>&1
   EOH
   timeout node[:metroextractor][:extracts][:osmosis_timeout]
-  notifies :create, "file[#{node[:metroextractor][:extracts][:osmosis_lock]}]", :immediately
-  not_if { ::File.exist?(node[:metroextractor][:extracts][:osmosis_lock]) }
+  notifies :create, "file[#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock]", :immediately
+  not_if { ::File.exist?("#{node[:metroextractor][:extracts][:osmosis_lock]}/.osmosis.lock") }
 end
