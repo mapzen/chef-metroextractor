@@ -1,5 +1,9 @@
 metroextractor CHANGELOG
-===================
+========================
+
+0.6.0
+-----
+- break out cities.json into its own repository
 
 0.5.1
 -----

@@ -20,17 +20,26 @@ end
   package p
 end
 
-# scripts
+# scripts basedir
 #
 directory node[:metroextractor][:setup][:scriptsdir] do
   owner node[:metroextractor][:user][:id]
 end
 
-cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
-  owner   node[:metroextractor][:user][:id]
-  source  'cities.json'
+# cities
+#
+git "#{node[:metroextractor][:setup][:scriptsdir]}/metroextractor-cities" do
+  action      :sync
+  repository  node[:metroextractor][:setup][:cities_repo]
+  user        node[:metroextractor][:user][:id]
 end
 
+link "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
+  to "#{node[:metroextractor][:setup][:scriptsdir]}/metroextractor-cities/cities.json"
+end
+
+# scripts
+#
 template "#{node[:metroextractor][:setup][:scriptsdir]}/osmosis.sh" do
   owner   node[:metroextractor][:user][:id]
   source  'osmosis.sh.erb'

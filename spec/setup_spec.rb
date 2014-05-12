@@ -39,10 +39,17 @@ describe 'metroextractor::setup' do
     chef_run.should create_directory '/opt/metroextractor-scripts'
   end
 
-  it 'should create file /opt/metroextractor-scripts/cities.json' do
-    chef_run.should create_cookbook_file('/opt/metroextractor-scripts/cities.json').with(
-      owner:  'metro',
-      source: 'cities.json'
+  it 'should clone metroextractor-cities' do
+    chef_run.should sync_git('/opt/metroextractor-scripts/metroextractor-cities').with(
+      action:       [:sync],
+      repository:   'https://github.com/mapzen/metroextractor-cities.git',
+      user:         'metro'
+    )
+  end
+
+  it 'should symlink cities.json' do
+    chef_run.should create_link('/opt/metroextractor-scripts/cities.json').with(
+      to: '/opt/metroextractor-scripts/metroextractor-cities/cities.json'
     )
   end
 
