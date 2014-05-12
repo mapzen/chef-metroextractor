@@ -22,13 +22,12 @@ to be safe, ~75GB of disk space.
 If you'd rather not go that route, you're in luck. We'll be producing extracts weekly, and you can find
 then here: [Mapzen Metro Extracts](http://mapzen.com/metro-extracts/)
 
-Pull requests for new cities are more than welcome.
 
 Contributing
 ------------
-Extract creation is driven off the file `files/default/cities.json`. If you'd like to add an extract, you can either
-update the file directly if you feel comfortable doing so and submit a pull request, or open a GitHub issue and
-we'll look into doing it for you.
+Extract creation is drivin off the cities.json file found here: [metroextractor-cities](https://github.com/mapzen/metroextractor-cities).
+If you'd like to add an extract, you can either update the file directly if you feel comfortable doing so and submit a pull request,
+or open a GitHub issue and we'll look into doing it for you.
 
 If you'd like to update any other code, please fork, update, write specs for your changes and submit a pull.
 
