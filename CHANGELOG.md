@@ -1,6 +1,10 @@
 metroextractor CHANGELOG
 ===================
 
+0.5.1
+-----
+- brisbane, perth, darwin...
+
 0.5.0
 -----
 - fixes to allow easier overrides
