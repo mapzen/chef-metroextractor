@@ -1,6 +1,10 @@
 metroextractor CHANGELOG
 ========================
 
+0.6.1
+-----
+- use localhost in osm2pgsql.sh
+
 0.6.0
 -----
 - break out cities.json into its own repository

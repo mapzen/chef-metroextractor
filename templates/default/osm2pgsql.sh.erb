@@ -1,9 +1,9 @@
 #!/bin/bash -x
 
 PGPASSWORD=<%= node[:metroextractor][:postgres][:password] %>
-OSMOPTS="--host <%= node[:hostname] %> --database <%= node[:metroextractor][:postgres][:db] %> --username <%= node[:metroextractor][:postgres][:user] %>"
-PGSQLOPTS="-h <%= node[:hostname] %> -d <%= node[:metroextractor][:postgres][:db] %> -U <%= node[:metroextractor][:postgres][:user] %>"
-PGSQL2SHPOPTS="-h <%= node[:hostname] %> -u <%= node[:metroextractor][:postgres][:user] %> -P <%= node[:metroextractor][:postgres][:password] %> <%= node[:metroextractor][:postgres][:db] %>"
+OSMOPTS="--host localhost --database <%= node[:metroextractor][:postgres][:db] %> --username <%= node[:metroextractor][:postgres][:user] %>"
+PGSQLOPTS="-h localhost -d <%= node[:metroextractor][:postgres][:db] %> -U <%= node[:metroextractor][:postgres][:user] %>"
+PGSQL2SHPOPTS="-h localhost -u <%= node[:metroextractor][:postgres][:user] %> -P <%= node[:metroextractor][:postgres][:password] %> <%= node[:metroextractor][:postgres][:db] %>"
 export PGPASSWORD OSMOPTS PGSQLOPTS PGSQL2SHPOPTS
 
 function osm2pgsql_shapefiles
@@ -38,7 +38,7 @@ function imposm_shapefiles
   mkdir shp/$slug-imposm
     
   # "--connect" is an undocumented option for imposm; Olive Tonnhofer assures me it won't disappear in the future.
-  imposm --read --cache-dir shp/$slug-imposm --write --table-prefix=${prefix}_ --connect postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@<%= node[:hostname] %>/<%= node[:metroextractor][:postgres][:db] %> ex/$slug.osm.pbf
+  imposm --read --cache-dir shp/$slug-imposm --write --table-prefix=${prefix}_ --connect postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %> ex/$slug.osm.pbf
 
   declare -a arr=('admin' 'aeroways' 'amenities' 'buildings' 'landusages' 'landusages_gen0' 'landusages_gen1' 'mainroads' 'landusages_gen1' 'mainroads_gen1' 'minorroads' 'motorways' 'motorways_gen0' 'motorways_gen1' 'places' 'railways' 'railways_gen0' 'railways_gen1' 'roads' 'roads_gen0' 'roads_gen1' 'transport_areas' 'transport_points' 'waterareas' 'waterareas_gen0' 'waterareas_gen1' 'waterways')
 
