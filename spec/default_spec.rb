@@ -19,10 +19,12 @@ describe 'metroextractor::default' do
 
   %w(
     apt
+    metroextractor::postgres
     metroextractor::user
     metroextractor::setup
     metroextractor::planet
     metroextractor::extracts
+    metroextractor::shapes
   ).each do |r|
     it "should include the #{r} recipe" do
       chef_run.should include_recipe r
