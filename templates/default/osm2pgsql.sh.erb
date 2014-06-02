@@ -8,26 +8,26 @@ export PGPASSWORD OSMOPTS PGSQLOPTS PGSQL2SHPOPTS
 
 function osm2pgsql_shapefiles
 {
-    slug=$1
-    prefix=${slug//-/_}_osm
+  slug=$1
+  prefix=${slug//-/_}_osm
 
-    osm2pgsql -sluc -C 1024 ${OSMOPTS} -S <%= node[:metroextractor][:setup][:scriptsdir] %>/osm2pgsql.style -p ${prefix} ex/$slug.osm.bz2
+  osm2pgsql -sluc -C 1024 ${OSMOPTS} -S <%= node[:metroextractor][:setup][:scriptsdir] %>/osm2pgsql.style -p ${prefix} ex/$slug.osm.bz2
     
-    pgsql2shp -rk -f shp/$slug.osm-point.shp    ${PGSQL2SHPOPTS} ${prefix}_point
-    pgsql2shp -rk -f shp/$slug.osm-polygon.shp  ${PGSQL2SHPOPTS} ${prefix}_polygon
-    pgsql2shp -rk -f shp/$slug.osm-line.shp     ${PGSQL2SHPOPTS} ${prefix}_line
+  pgsql2shp -rk -f shp/$slug.osm-point.shp    ${PGSQL2SHPOPTS} ${prefix}_point
+  pgsql2shp -rk -f shp/$slug.osm-polygon.shp  ${PGSQL2SHPOPTS} ${prefix}_polygon
+  pgsql2shp -rk -f shp/$slug.osm-line.shp     ${PGSQL2SHPOPTS} ${prefix}_line
 
-    zip -j shp/$slug.osm2pgsql-shapefiles.zip shp/$slug.osm-*.shp shp/$slug.osm-*.prj shp/$slug.osm-*.dbf shp/$slug.osm-*.shx
+  zip -j shp/$slug.osm2pgsql-shapefiles.zip shp/$slug.osm-*.shp shp/$slug.osm-*.prj shp/$slug.osm-*.dbf shp/$slug.osm-*.shx
 
-    rm shp/$slug.osm-*.*
+  rm shp/$slug.osm-*.*
     
-    echo "DROP TABLE ${prefix}_line"    | psql ${PGSQLOPTS}
-    echo "DROP TABLE ${prefix}_nodes"   | psql ${PGSQLOPTS}
-    echo "DROP TABLE ${prefix}_point"   | psql ${PGSQLOPTS}
-    echo "DROP TABLE ${prefix}_polygon" | psql ${PGSQLOPTS}
-    echo "DROP TABLE ${prefix}_rels"    | psql ${PGSQLOPTS}
-    echo "DROP TABLE ${prefix}_roads"   | psql ${PGSQLOPTS}
-    echo "DROP TABLE ${prefix}_ways"    | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_line"    | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_nodes"   | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_point"   | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_polygon" | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_rels"    | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_roads"   | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_ways"    | psql ${PGSQLOPTS}
 }
 
 function imposm_shapefiles
