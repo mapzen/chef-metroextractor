@@ -4,7 +4,7 @@
 #
 
 file "#{node[:metroextractor][:setup][:basedir]}/.osm2pgsql.lock" do
-  action  :nothing
+  action :nothing
 end
 
 bash 'osm2pgsql' do
