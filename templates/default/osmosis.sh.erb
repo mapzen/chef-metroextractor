@@ -13,10 +13,10 @@ osmosis --read-pbf-fast <%= node[:metroextractor][:setup][:basedir] %>/<%= node[
   <% val['cities'].keys.each do |city| %>
     <% count += 1 %>
   <% end %>
-  --bb top=<%= val['bbox']['top'] %> left=<%= val['bbox']['left'] %> bottom=<%= val['bbox']['bottom'] %> right=<%= val['bbox']['right'] %> \
+  --bb top=<%= val['bbox']['top'] %> left=<%= val['bbox']['left'] %> bottom=<%= val['bbox']['bottom'] %> right=<%= val['bbox']['right'] %> clipIncompleteEntities=true \
   --b --tee outputCount=<%= count %> \
   <% val['cities'].each do |city, val| %>
-    --bb top=<%= val['bbox']['top'] %> left=<%= val['bbox']['left'] %> bottom=<%= val['bbox']['bottom'] %> right=<%= val['bbox']['right'] %> \
+    --bb top=<%= val['bbox']['top'] %> left=<%= val['bbox']['left'] %> bottom=<%= val['bbox']['bottom'] %> right=<%= val['bbox']['right'] %> clipIncompleteEntities=true \
     --tee outputCount=2 --wx file=ex/<%= city %>.osm.bz2 --wb file=ex/<%= city %>.osm.pbf \
   <% end %>
 <% end %>

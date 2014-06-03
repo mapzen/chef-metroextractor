@@ -1,6 +1,11 @@
 metroextractor CHANGELOG
 ========================
 
+0.6.2
+-----
+- add clipIncompleteEntities=true to bounding box statements in osmosis.sh 
+  to avoid dangling references
+
 0.6.1
 -----
 - use localhost in osm2pgsql.sh
