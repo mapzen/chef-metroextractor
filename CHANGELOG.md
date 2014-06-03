@@ -1,6 +1,10 @@
 metroextractor CHANGELOG
 ========================
 
+0.6.3
+-----
+- add geojson output
+
 0.6.2
 -----
 - add clipIncompleteEntities=true to bounding box statements in osmosis.sh 
