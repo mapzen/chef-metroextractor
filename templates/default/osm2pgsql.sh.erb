@@ -55,6 +55,12 @@ function imposm_shapefiles
   done
 }
 
+funtion ogr2ogr_geojson
+{
+  slug=$1
+  ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.geojson shp/${slug}.shp
+}
+
 <% require 'json' %>
 <% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") %>
 <% data = JSON.parse(json) %>
@@ -62,6 +68,7 @@ function imposm_shapefiles
   <% val['cities'].keys.each do |city| %>
 osm2pgsql_shapefiles <%= city %> &
 imposm_shapefiles <%= city %> &
+ogr2ogr_geojson <%= city %> &
 wait
   <% end %>
 <% end %>
