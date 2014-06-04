@@ -1,6 +1,10 @@
 metroextractor CHANGELOG
 ========================
 
+0.6.6
+-----
+- bug fix in shapes.rb for lockfile
+
 0.6.5
 -----
 - lock the planet download

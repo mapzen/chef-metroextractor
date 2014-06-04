@@ -17,5 +17,5 @@ bash 'osmosis' do
   EOH
   timeout node[:metroextractor][:extracts][:osmosis_timeout]
   notifies :create, "file[#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock]", :immediately
-  not_if { ::File.exist?("#{node[:metroextractor][:extracts][:osmosis_lock]}/.osmosis.lock") }
+  not_if { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock") }
 end
