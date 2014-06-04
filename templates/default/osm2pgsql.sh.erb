@@ -55,7 +55,7 @@ function imposm_shapefiles
   done
 }
 
-funtion ogr2ogr_geojson
+function ogr2ogr_geojson
 {
   slug=$1
   ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.geojson shp/${slug}.shp

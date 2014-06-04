@@ -1,6 +1,10 @@
 metroextractor CHANGELOG
 ========================
 
+0.6.4
+-----
+- osm2pgsql.sh fix: function, not funtion (!)
+
 0.6.3
 -----
 - add geojson output
