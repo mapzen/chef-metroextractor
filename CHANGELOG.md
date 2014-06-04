@@ -1,6 +1,10 @@
 metroextractor CHANGELOG
 ========================
 
+0.6.5
+-----
+- lock the planet download
+
 0.6.4
 -----
 - osm2pgsql.sh fix: function, not funtion (!)
