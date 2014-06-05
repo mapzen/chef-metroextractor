@@ -1,6 +1,10 @@
 metroextractor CHANGELOG
 ========================
 
+0.6.9
+-----
+- clean up osm2pgsql.sh
+
 0.6.8
 -----
 - more fixes for geojson output

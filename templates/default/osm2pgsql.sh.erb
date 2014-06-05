@@ -50,7 +50,6 @@ function imposm_shapefiles
 
   for i in ${arr[@]}; do
     pgsql2shp -rk -f shp/${slug}-imposm/${slug}.osm-${i}.shp ${PGSQL2SHPOPTS} ${prefix}_${i}
-
     ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}-imposm/${slug}-${i}.geojson shp/${slug}-imposm/${slug}.osm-${i}.shp
   done
 
@@ -58,7 +57,6 @@ function imposm_shapefiles
   zip -j shp/${slug}.imposm-geojson.zip shp/${slug}-imposm/${slug}-*.geojson
 
   rm -r shp/${slug}-imposm
-  rm shp/${slug}-imposm/${slug}-*.geojson
 
   for i in ${arr[@]}; do
     echo "DROP VIEW ${prefix}_${i}" | psql ${PGSQLOPTS}
