@@ -1,6 +1,15 @@
 metroextractor CHANGELOG
 ========================
 
+0.6.8
+-----
+- more fixes for geojson output
+- add geojson for imposm shp files
+
+0.6.7
+-----
+- bug fix for geojson output
+
 0.6.6
 -----
 - bug fix in shapes.rb for lockfile

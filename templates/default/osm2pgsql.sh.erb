@@ -11,16 +11,22 @@ function osm2pgsql_shapefiles
   slug=$1
   prefix=${slug//-/_}_osm
 
-  osm2pgsql -sluc -C 1024 ${OSMOPTS} -S <%= node[:metroextractor][:setup][:scriptsdir] %>/osm2pgsql.style -p ${prefix} ex/$slug.osm.bz2
-    
-  pgsql2shp -rk -f shp/$slug.osm-point.shp    ${PGSQL2SHPOPTS} ${prefix}_point
+  osm2pgsql -sluc -C 1024 ${OSMOPTS} -S /opt/metroextractor-scripts/osm2pgsql.style -p ${prefix} ex/$slug.osm.bz2
+
+  pgsql2shp -rk -f shp/$slug.osm-point.shp    ${PGSQL2SHPOPTS} ${prefix}_point  
   pgsql2shp -rk -f shp/$slug.osm-polygon.shp  ${PGSQL2SHPOPTS} ${prefix}_polygon
-  pgsql2shp -rk -f shp/$slug.osm-line.shp     ${PGSQL2SHPOPTS} ${prefix}_line
+  pgsql2shp -rk -f shp/$slug.osm-line.shp     ${PGSQL2SHPOPTS} ${prefix}_line   
+
+  ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.osm-line.geojson shp/${slug}.osm-line.shp      
+  ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.osm-point.geojson shp/${slug}.osm-point.shp    
+  ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.osm-polygon.geojson shp/${slug}.osm-polygon.shp
 
   zip -j shp/$slug.osm2pgsql-shapefiles.zip shp/$slug.osm-*.shp shp/$slug.osm-*.prj shp/$slug.osm-*.dbf shp/$slug.osm-*.shx
+  zip -j shp/$slug.osm2pgsql-geojson.zip shp/$slug.osm-*.geojson
 
   rm shp/$slug.osm-*.*
-    
+  rm shp/$slug.osm-*.geojson
+
   echo "DROP TABLE ${prefix}_line"    | psql ${PGSQLOPTS}
   echo "DROP TABLE ${prefix}_nodes"   | psql ${PGSQLOPTS}
   echo "DROP TABLE ${prefix}_point"   | psql ${PGSQLOPTS}
@@ -34,31 +40,29 @@ function imposm_shapefiles
 {
   slug=$1
   prefix=${slug//-/_}
-   
+
   mkdir shp/$slug-imposm
-    
+
   # "--connect" is an undocumented option for imposm; Olive Tonnhofer assures me it won't disappear in the future.
-  imposm --read --cache-dir shp/$slug-imposm --write --table-prefix=${prefix}_ --connect postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %> ex/$slug.osm.pbf
+  imposm --read --cache-dir shp/${slug}-imposm --write --table-prefix=${prefix}_ --connect postgis://osm:password@localhost/osm ex/${slug}.osm.pbf
 
   declare -a arr=('admin' 'aeroways' 'amenities' 'buildings' 'landusages' 'landusages_gen0' 'landusages_gen1' 'mainroads' 'landusages_gen1' 'mainroads_gen1' 'minorroads' 'motorways' 'motorways_gen0' 'motorways_gen1' 'places' 'railways' 'railways_gen0' 'railways_gen1' 'roads' 'roads_gen0' 'roads_gen1' 'transport_areas' 'transport_points' 'waterareas' 'waterareas_gen0' 'waterareas_gen1' 'waterways')
 
   for i in ${arr[@]}; do
-    pgsql2shp -rk -f shp/$slug-imposm/$slug.osm-${i}.shp ${PGSQL2SHPOPTS} ${prefix}_${i}
+    pgsql2shp -rk -f shp/${slug}-imposm/${slug}.osm-${i}.shp ${PGSQL2SHPOPTS} ${prefix}_${i}
+
+    ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}-imposm/${slug}-${i}.geojson shp/${slug}-imposm/${slug}.osm-${i}.shp
   done
 
-  zip -j shp/$slug.imposm-shapefiles.zip shp/$slug-imposm/$slug.osm-*.shp shp/$slug-imposm/$slug.osm-*.prj shp/$slug-imposm/$slug.osm-*.dbf shp/$slug-imposm/$slug.osm-*.shx
+  zip -j shp/${slug}.imposm-shapefiles.zip shp/${slug}-imposm/${slug}.osm-*.shp shp/${slug}-imposm/${slug}.osm-*.prj shp/${slug}-imposm/${slug}.osm-*.dbf shp/${slug}-imposm/${slug}.osm-*.shx
+  zip -j shp/${slug}.imposm-geojson.zip shp/${slug}-imposm/${slug}-*.geojson
 
-  rm -r shp/$slug-imposm
+  rm -r shp/${slug}-imposm
+  rm shp/${slug}-imposm/${slug}-*.geojson
 
   for i in ${arr[@]}; do
     echo "DROP VIEW ${prefix}_${i}" | psql ${PGSQLOPTS}
   done
-}
-
-function ogr2ogr_geojson
-{
-  slug=$1
-  ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.geojson shp/${slug}.shp
 }
 
 <% require 'json' %>
@@ -68,7 +72,6 @@ function ogr2ogr_geojson
   <% val['cities'].keys.each do |city| %>
 osm2pgsql_shapefiles <%= city %> &
 imposm_shapefiles <%= city %> &
-ogr2ogr_geojson <%= city %> &
 wait
   <% end %>
 <% end %>
