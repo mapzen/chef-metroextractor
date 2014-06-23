@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.7.1
+-----
+- merge osm2pgsql geojson output into a single file
+
 0.7.0
 -----
 - install imposm via pip to get latest 2.x release, in hopes of 

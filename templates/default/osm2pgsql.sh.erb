@@ -11,7 +11,7 @@ function osm2pgsql_shapefiles
   slug=$1
   prefix=${slug//-/_}_osm
 
-  osm2pgsql -sluc -C 1024 ${OSMOPTS} -S /opt/metroextractor-scripts/osm2pgsql.style -p ${prefix} ex/$slug.osm.bz2
+  osm2pgsql -sluc -C 1024 ${OSMOPTS} -S <%= node[:metroextractor][:setup][:scriptsdir] %>/osm2pgsql.style -p ${prefix} ex/$slug.osm.bz2
 
   pgsql2shp -rk -f shp/$slug.osm-point.shp    ${PGSQL2SHPOPTS} ${prefix}_point  
   pgsql2shp -rk -f shp/$slug.osm-polygon.shp  ${PGSQL2SHPOPTS} ${prefix}_polygon
@@ -21,11 +21,20 @@ function osm2pgsql_shapefiles
   ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.osm-point.geojson shp/${slug}.osm-point.shp    
   ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.osm-polygon.geojson shp/${slug}.osm-polygon.shp
 
-  zip -j shp/$slug.osm2pgsql-shapefiles.zip shp/$slug.osm-*.shp shp/$slug.osm-*.prj shp/$slug.osm-*.dbf shp/$slug.osm-*.shx
-  zip -j shp/$slug.osm2pgsql-geojson.zip shp/$slug.osm-*.geojson
+  # merge the line/point/polygon geojson output
+  #
+  <%= node[:metroextractor][:setup][:scriptsdir] %>/merge-geojson.py ${slug}.osm-line.geojson ${slug}.osm-point.geojson ${slug}.osm-polygon.geojson -o shp/${slug}.osm.geojson
 
+  # zip up our output
+  #
+  zip -j shp/$slug.osm2pgsql-shapefiles.zip shp/$slug.osm-*.shp shp/$slug.osm-*.prj shp/$slug.osm-*.dbf shp/$slug.osm-*.shx
+  zip -j shp/$slug.osm2pgsql-geojson.zip shp/$slug.osm.geojson
+
+  # remove source files
+  #
   rm shp/$slug.osm-*.*
   rm shp/$slug.osm-*.geojson
+  rm shp/$slug.osm.geojson
 
   echo "DROP TABLE ${prefix}_line"    | psql ${PGSQLOPTS}
   echo "DROP TABLE ${prefix}_nodes"   | psql ${PGSQLOPTS}

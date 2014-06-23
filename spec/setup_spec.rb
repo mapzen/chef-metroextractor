@@ -27,6 +27,7 @@ describe 'metroextractor::setup' do
   end
 
   %w(
+    build-essential
     gdal-bin
     libtokyocabinet-dev
     libprotobuf-dev
@@ -79,6 +80,13 @@ describe 'metroextractor::setup' do
     chef_run.should create_cookbook_file('/opt/metroextractor-scripts/osm2pgsql.style').with(
       owner:  'metro',
       source: 'osm2pgsql.style'
+    )
+  end
+
+  it 'should create the file /opt/metroextractor-scripts/merge-geojson.py' do
+    chef_run.should create_cookbook_file('/opt/metroextractor-scripts/merge-geojson.py').with(
+      owner:  'metro',
+      source: 'merge-geojson.py'
     )
   end
 
