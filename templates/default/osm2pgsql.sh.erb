@@ -23,7 +23,7 @@ function osm2pgsql_shapefiles
 
   # merge the line/point/polygon geojson output
   #
-  <%= node[:metroextractor][:setup][:scriptsdir] %>/merge-geojson.py ${slug}.osm-line.geojson ${slug}.osm-point.geojson ${slug}.osm-polygon.geojson -o shp/${slug}.osm.geojson
+  <%= node[:metroextractor][:setup][:scriptsdir] %>/merge-geojson.py shp/${slug}.osm-line.geojson shp/${slug}.osm-point.geojson shp/${slug}.osm-polygon.geojson -o shp/${slug}.osm.geojson
 
   # zip up our output
   #
