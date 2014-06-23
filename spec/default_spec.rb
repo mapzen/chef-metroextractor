@@ -15,6 +15,7 @@ describe 'metroextractor::default' do
     stub_command("psql -c 'SELECT lanname FROM pg_catalog.pg_language' osm | grep '^ plpgsql$'").and_return(true)
     stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osm'\" | grep osm").and_return(true)
     stub_command('test -f /mnt/metro/pg_data/PG_VERSION').and_return(true)
+    stub_command("psql -c \"SELECT datname from pg_database WHERE datname='osm'\" postgres | grep osm").and_return(true)
   end
 
   %w(
