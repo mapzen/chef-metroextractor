@@ -11,12 +11,16 @@ function osm2pgsql_shapefiles
   slug=$1
   prefix=${slug//-/_}_osm
 
+  # generate shp files
+  #
   osm2pgsql -sluc -C 1024 ${OSMOPTS} -S <%= node[:metroextractor][:setup][:scriptsdir] %>/osm2pgsql.style -p ${prefix} ex/$slug.osm.bz2
 
   pgsql2shp -rk -f shp/$slug.osm-point.shp    ${PGSQL2SHPOPTS} ${prefix}_point  
   pgsql2shp -rk -f shp/$slug.osm-polygon.shp  ${PGSQL2SHPOPTS} ${prefix}_polygon
   pgsql2shp -rk -f shp/$slug.osm-line.shp     ${PGSQL2SHPOPTS} ${prefix}_line   
 
+  # generate geojson from shp files
+  #
   ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.osm-line.geojson shp/${slug}.osm-line.shp      
   ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.osm-point.geojson shp/${slug}.osm-point.shp    
   ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.osm-polygon.geojson shp/${slug}.osm-polygon.shp
@@ -36,6 +40,8 @@ function osm2pgsql_shapefiles
   rm shp/$slug.osm-*.geojson
   rm shp/$slug.osm.geojson
 
+  # clean up the db
+  #
   echo "DROP TABLE ${prefix}_line"    | psql ${PGSQLOPTS}
   echo "DROP TABLE ${prefix}_nodes"   | psql ${PGSQLOPTS}
   echo "DROP TABLE ${prefix}_point"   | psql ${PGSQLOPTS}
