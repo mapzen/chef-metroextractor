@@ -13,6 +13,7 @@ end
 # packages
 #
 %w(
+  build-essential
   gdal-bin
   libtokyocabinet-dev
   libprotobuf-dev
