@@ -14,7 +14,12 @@ end
 #
 %w(
   gdal-bin
-  imposm
+  libtokyocabinet-dev
+  libprotobuf-dev
+  protobuf-c-compiler
+  protobuf-compiler
+  python-dev
+  python-pip
   zip
 ).each do |p|
   package p
@@ -71,4 +76,10 @@ end
 #
 directory "#{node[:metroextractor][:setup][:basedir]}/shp" do
   owner node[:metroextractor][:user][:id]
+end
+
+# compile imposm
+#
+python_pip 'imposm' do
+  version '2.5.0'
 end

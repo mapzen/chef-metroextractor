@@ -1,5 +1,10 @@
-metroextractor CHANGELOG
+metroextractor changelog
 ========================
+
+0.7.0
+-----
+- install imposm via pip to get latest 2.x release, in hopes of 
+  resolving an ongoing imposm bug (hangs)
 
 0.6.9
 -----

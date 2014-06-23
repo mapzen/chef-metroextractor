@@ -27,10 +27,15 @@ describe 'metroextractor::setup' do
 
   %w(
     gdal-bin
-    imposm
+    libtokyocabinet-dev
+    libprotobuf-dev
+    protobuf-c-compiler
+    protobuf-compiler
+    python-dev
+    python-pip
     zip
   ).each do |p|
-    it 'should install gdal-bin' do
+    it "should install package #{p}" do
       chef_run.should install_package p
     end
   end
@@ -86,5 +91,11 @@ describe 'metroextractor::setup' do
 
   it 'should create /mnt/metro/shp' do
     chef_run.should create_directory '/mnt/metro/shp'
+  end
+
+  it 'should python_pip install imposm' do
+    chef_run.should install_python_pip('imposm').with(
+      version: '2.5.0'
+    )
   end
 end
