@@ -1,6 +1,14 @@
 metroextractor changelog
 ========================
 
+0.7.3
+-----
+- add omitmetadata to osmosis cmd line
+
+0.7.2
+-----
+- DROP VIEW should be DROP TABLE in osm2pgsql.sh
+
 0.7.1
 -----
 - merge osm2pgsql geojson output into a single file
