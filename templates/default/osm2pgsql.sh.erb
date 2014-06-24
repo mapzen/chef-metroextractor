@@ -15,9 +15,9 @@ function osm2pgsql_shapefiles
   #
   osm2pgsql -sluc -C 1024 ${OSMOPTS} -S <%= node[:metroextractor][:setup][:scriptsdir] %>/osm2pgsql.style -p ${prefix} ex/$slug.osm.bz2
 
-  pgsql2shp -rk -f shp/$slug.osm-point.shp    ${PGSQL2SHPOPTS} ${prefix}_point  
-  pgsql2shp -rk -f shp/$slug.osm-polygon.shp  ${PGSQL2SHPOPTS} ${prefix}_polygon
-  pgsql2shp -rk -f shp/$slug.osm-line.shp     ${PGSQL2SHPOPTS} ${prefix}_line   
+  pgsql2shp -rk -f shp/${slug}.osm-point.shp    ${PGSQL2SHPOPTS} ${prefix}_point  
+  pgsql2shp -rk -f shp/${slug}.osm-polygon.shp  ${PGSQL2SHPOPTS} ${prefix}_polygon
+  pgsql2shp -rk -f shp/${slug}.osm-line.shp     ${PGSQL2SHPOPTS} ${prefix}_line   
 
   # generate geojson from shp files
   #
@@ -31,14 +31,14 @@ function osm2pgsql_shapefiles
 
   # zip up our output
   #
-  zip -j shp/$slug.osm2pgsql-shapefiles.zip shp/$slug.osm-*.shp shp/$slug.osm-*.prj shp/$slug.osm-*.dbf shp/$slug.osm-*.shx
-  zip -j shp/$slug.osm2pgsql-geojson.zip shp/$slug.osm.geojson
+  zip -j shp/${slug}.osm2pgsql-shapefiles.zip shp/${slug}.osm-*.shp shp/${slug}.osm-*.prj shp/${slug}.osm-*.dbf shp/${slug}.osm-*.shx
+  zip -j shp/${slug}.osm2pgsql-geojson.zip shp/${slug}.osm.geojson
 
   # remove source files
   #
-  rm shp/$slug.osm-*.*
-  rm shp/$slug.osm-*.geojson
-  rm shp/$slug.osm.geojson
+  rm shp/${slug}.osm-*.*
+  rm shp/${slug}.osm-*.geojson
+  rm shp/${slug}.osm.geojson
 
   # clean up the db
   #
