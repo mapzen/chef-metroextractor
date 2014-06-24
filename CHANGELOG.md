@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.7.5
+-----
+- override the source projection (-s_srs epsg:900913) for imposm geojson creation
+  - should resolve issue https://github.com/mapzen/metroextractor-cities/issues/17
+
 0.7.4
 -----
 - set compress=none in osmosis output. Per the docs, files should write twice as fast
