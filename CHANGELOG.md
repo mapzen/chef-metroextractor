@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.7.4
+-----
+- set compress=none in osmosis output. Per the docs, files should write twice as fast
+  at the expense of 2x space requirement
+
 0.7.3
 -----
 - add omitmetadata to osmosis cmd line

@@ -17,6 +17,6 @@ osmosis --read-pbf-fast <%= node[:metroextractor][:setup][:basedir] %>/<%= node[
   --b --tee outputCount=<%= count %> \
   <% val['cities'].each do |city, val| %>
     --bb top=<%= val['bbox']['top'] %> left=<%= val['bbox']['left'] %> bottom=<%= val['bbox']['bottom'] %> right=<%= val['bbox']['right'] %> clipIncompleteEntities=true \
-    --tee outputCount=2 --wx file=ex/<%= city %>.osm.bz2 --wb omitmetadata=true file=ex/<%= city %>.osm.pbf \
+    --tee outputCount=2 --wx file=ex/<%= city %>.osm.bz2 --wb compress=none omitmetadata=true file=ex/<%= city %>.osm.pbf \
   <% end %>
 <% end %>
