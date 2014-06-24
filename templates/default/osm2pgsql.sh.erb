@@ -74,7 +74,7 @@ function imposm_shapefiles
   rm -r shp/${slug}-imposm
 
   for i in ${arr[@]}; do
-    echo "DROP VIEW ${prefix}_${i}" | psql ${PGSQLOPTS}
+    echo "DROP TABLE ${prefix}_${i}" | psql ${PGSQLOPTS}
   done
 }
 
