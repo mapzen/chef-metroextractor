@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.7.12
+------
+- remove unnecessary 'rm' from cleanup in osm2pgsql.sh
+
 0.7.11
 ------
 - use DROP ... CASCADE
