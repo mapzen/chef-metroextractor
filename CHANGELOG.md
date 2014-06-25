@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.7.11
+------
+- use DROP ... CASCADE
+
 0.7.10
 -----
 - use execute rather than bash for planet download
