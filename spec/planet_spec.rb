@@ -25,9 +25,9 @@ describe 'metroextractor::planet' do
   # end
 
   it 'should download the planet' do
-    chef_run.should run_bash('download planet').with(
+    chef_run.should run_execute('wget --quiet -O planet-latest.osm.pbf http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf').with(
       cwd:      '/mnt/metro',
-      command:  'wget http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf'
+      creates:  '/mnt/metro/planet-latest.osm.pbf'
     )
   end
 

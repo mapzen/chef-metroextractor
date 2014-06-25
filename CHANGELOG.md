@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.7.10
+-----
+- use execute rather than bash for planet download
+- use --quiet
+
 0.7.9
 -----
 - download planet with wget, remote_file is insanely slow with large files

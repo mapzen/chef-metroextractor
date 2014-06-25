@@ -10,9 +10,9 @@ ENV['TMP'] = node[:metroextractor][:setup][:basedir]
 
 # lockfile
 #
-file "#{node[:metroextractor][:setup][:basedir]}/.planet.lock" do
-  action :nothing
-end
+# file "#{node[:metroextractor][:setup][:basedir]}/.planet.lock" do
+#   action :nothing
+# end
 
 # fail if someone tries to pull something other than
 #   a pbf data file
@@ -25,9 +25,7 @@ fail if node[:metroextractor][:planet][:file] !~ /\.pbf$/
 #   not_if    { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.planet.lock") }
 # end
 
-bash 'download planet' do
+execute "wget --quiet -O #{node[:metroextractor][:planet][:file]} #{node[:metroextractor][:planet][:url]}" do
   cwd       node[:metroextractor][:setup][:basedir]
-  command   "wget #{node[:metroextractor][:planet][:url]}"
-  notifies  :create, "file[#{node[:metroextractor][:setup][:basedir]}/.planet.lock]", :immediately
-  not_if    { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.planet.lock") }
+  creates   "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}"
 end
