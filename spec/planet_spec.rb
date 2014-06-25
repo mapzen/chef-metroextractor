@@ -17,10 +17,17 @@ describe 'metroextractor::planet' do
     stub_command("psql -c \"SELECT datname from pg_database WHERE datname='osm'\" postgres | grep osm").and_return(true)
   end
 
+  # it 'should download the planet' do
+  #   chef_run.should create_remote_file('/mnt/metro/planet-latest.osm.pbf').with(
+  #     source: 'http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf',
+  #     mode:   0644
+  #   )
+  # end
+
   it 'should download the planet' do
-    chef_run.should create_remote_file('/mnt/metro/planet-latest.osm.pbf').with(
-      source: 'http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf',
-      mode:   0644
+    chef_run.should run_bash('download planet').with(
+      cwd:      '/mnt/metro',
+      command:  'wget http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf'
     )
   end
 
