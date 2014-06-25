@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.7.6
+-----
+- be explicit about modes
+- set correct mode for merge script
+
 0.7.5
 -----
 - override the source projection (-s_srs epsg:900913) for imposm geojson creation

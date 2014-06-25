@@ -61,11 +61,13 @@ end
 cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/osm2pgsql.style" do
   owner   node[:metroextractor][:user][:id]
   source  'osm2pgsql.style'
+  mode    0644
 end
 
 cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/merge-geojson.py" do
   owner   node[:metroextractor][:user][:id]
   source  'merge-geojson.py'
+  mode    0755
 end
 
 # directories for extracts and logs
