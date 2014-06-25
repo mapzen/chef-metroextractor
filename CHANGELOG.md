@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.7.8
+-----
+- speed up osmosis: set workers, buffers
+
 0.7.7
 -----
 - remove compress=none from osmosis, as it doesn't appear to have any real effect
