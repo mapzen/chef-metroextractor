@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.7.7
+-----
+- remove compress=none from osmosis, as it doesn't appear to have any real effect
+  on performance (speed), so might as well keep file size down
+
 0.7.6
 -----
 - be explicit about modes
