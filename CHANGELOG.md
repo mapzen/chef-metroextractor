@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.7.9
+-----
+- download planet with wget, remote_file is insanely slow with large files
+
 0.7.8
 -----
 - speed up osmosis: set workers, buffers

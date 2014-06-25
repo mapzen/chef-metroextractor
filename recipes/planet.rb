@@ -18,9 +18,16 @@ end
 #   a pbf data file
 fail if node[:metroextractor][:planet][:file] !~ /\.pbf$/
 
-remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}" do
-  source    node[:metroextractor][:planet][:url]
-  mode      0644
+# remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}" do
+#   source    node[:metroextractor][:planet][:url]
+#   mode      0644
+#   notifies  :create, "file[#{node[:metroextractor][:setup][:basedir]}/.planet.lock]", :immediately
+#   not_if    { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.planet.lock") }
+# end
+
+bash 'download planet' do
+  cwd       node[:metroextractor][:setup][:basedir]
+  command   "wget #{node[:metroextractor][:planet][:url]}"
   notifies  :create, "file[#{node[:metroextractor][:setup][:basedir]}/.planet.lock]", :immediately
-  not_if { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.planet.lock") }
+  not_if    { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.planet.lock") }
 end
