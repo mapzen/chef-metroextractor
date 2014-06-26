@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.7.13
+------
+- don't merge osm2pgsql geojson this way. Disable for now.
+
 0.7.12
 ------
 - remove unnecessary 'rm' from cleanup in osm2pgsql.sh
