@@ -29,10 +29,10 @@ describe 'metroextractor::setup' do
         chef_run.should install_package p
       end
     end
-  end
 
-  it 'should install package imposm' do
-    chef_run.should install_package 'imposm'
+    it 'should install package imposm' do
+      chef_run.should install_package 'imposm'
+    end
   end
 
   context 'we are running on Ubuntu 12.04' do
@@ -89,8 +89,6 @@ describe 'metroextractor::setup' do
   let(:chef_run) do
     ChefSpec::Runner.new do |node|
       node.automatic[:memory][:total]   = '2048kB'
-      node.automatic[:platform]         = 'ubuntu'
-      node.automatic[:platform_version] = '14.04'
     end.converge(described_recipe)
   end
 
