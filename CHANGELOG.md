@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.8.0
+-----
+- tested on Ubuntu 14.04LTS
+- on 12.04, continue installing imposm via pip, use pkg on 14.04
+
 0.7.13
 ------
 - don't merge osm2pgsql geojson this way. Disable for now.

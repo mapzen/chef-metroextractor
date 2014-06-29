@@ -37,8 +37,10 @@ Usage
 
 Supported Platforms
 -------------------
-Tested on Ubuntu12.04LTS. You can probably get away with distributions similar to those, but as yet
-they have not been tested.
+Tested and supported on the following platforms:
+
+* Ubuntu 12.04LTS
+* Ubuntu 14.04LTS
 
 Requirements
 ------------

@@ -86,8 +86,15 @@ directory "#{node[:metroextractor][:setup][:basedir]}/shp" do
   owner node[:metroextractor][:user][:id]
 end
 
-# compile imposm
+# install imposm:
+#   use pip on 12.04, pkg on 14.04
 #
 python_pip 'imposm' do
   version '2.5.0'
+  only_if { platform?('ubuntu') && node[:platform_version] == '12.04' }
+end
+
+package 'imposm' do
+  action :install
+  only_if { platform?('ubuntu') && node[:platform_version] == '14.04' }
 end
