@@ -1,9 +1,96 @@
 require 'spec_helper'
 
 describe 'metroextractor::setup' do
+  context 'we are running on Ubuntu 14.04' do
+    let(:chef_run) do
+      ChefSpec::Runner.new do |node|
+        node.automatic[:memory][:total]   = '2048kB'
+        node.automatic[:platform]         = 'ubuntu'
+        node.automatic[:platform_version] = '14.04'
+      end.converge(described_recipe)
+    end
+
+    before do
+      stub_command('pgrep postgres').and_return(true)
+      stub_command('test -f /var/lib/postgresql/9.3/main/PG_VERSION').and_return(true)
+      stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osmuser'\" | grep osmuser").and_return(true)
+      stub_command("psql -c \"SELECT datname from pg_database WHERE datname='osm'\" | grep osm").and_return(true)
+      stub_command("psql -c 'SELECT lanname FROM pg_catalog.pg_language' osm | grep '^ plpgsql$'").and_return(true)
+      stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osm'\" | grep osm").and_return(true)
+      stub_command("psql -c \"SELECT datname from pg_database WHERE datname='osm'\" postgres | grep osm").and_return(true)
+    end
+
+    %w(
+      build-essential
+      gdal-bin
+      zip
+    ).each do |p|
+      it "should install package #{p}" do
+        chef_run.should install_package p
+      end
+    end
+  end
+
+  it 'should install package imposm' do
+    chef_run.should install_package 'imposm'
+  end
+
+  context 'we are running on Ubuntu 12.04' do
+    let(:chef_run) do
+      ChefSpec::Runner.new do |node|
+        node.automatic[:memory][:total]   = '2048kB'
+        node.automatic[:platform]         = 'ubuntu'
+        node.automatic[:platform_version] = '12.04'
+      end.converge(described_recipe)
+    end
+
+    before do
+      stub_command('pgrep postgres').and_return(true)
+      stub_command('test -f /var/lib/postgresql/9.3/main/PG_VERSION').and_return(true)
+      stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osmuser'\" | grep osmuser").and_return(true)
+      stub_command("psql -c \"SELECT datname from pg_database WHERE datname='osm'\" | grep osm").and_return(true)
+      stub_command("psql -c 'SELECT lanname FROM pg_catalog.pg_language' osm | grep '^ plpgsql$'").and_return(true)
+      stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osm'\" | grep osm").and_return(true)
+      stub_command("psql -c \"SELECT datname from pg_database WHERE datname='osm'\" postgres | grep osm").and_return(true)
+    end
+
+    %w(
+      osm2pgsql::default
+      osmosis::default
+    ).each do |r|
+      it "should include the #{r} recipe" do
+        chef_run.should include_recipe r
+      end
+    end
+
+    %w(
+      build-essential
+      gdal-bin
+      libtokyocabinet-dev
+      libprotobuf-dev
+      protobuf-c-compiler
+      protobuf-compiler
+      python-dev
+      python-pip
+      zip
+    ).each do |p|
+      it "should install package #{p}" do
+        chef_run.should install_package p
+      end
+    end
+
+    it 'should python_pip install imposm' do
+      chef_run.should install_python_pip('imposm').with(
+        version: '2.5.0'
+      )
+    end
+  end
+
   let(:chef_run) do
     ChefSpec::Runner.new do |node|
-      node.automatic[:memory][:total] = '2048kB'
+      node.automatic[:memory][:total]   = '2048kB'
+      node.automatic[:platform]         = 'ubuntu'
+      node.automatic[:platform_version] = '14.04'
     end.converge(described_recipe)
   end
 
@@ -15,31 +102,6 @@ describe 'metroextractor::setup' do
     stub_command("psql -c 'SELECT lanname FROM pg_catalog.pg_language' osm | grep '^ plpgsql$'").and_return(true)
     stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osm'\" | grep osm").and_return(true)
     stub_command("psql -c \"SELECT datname from pg_database WHERE datname='osm'\" postgres | grep osm").and_return(true)
-  end
-
-  %w(
-    osm2pgsql::default
-    osmosis::default
-  ).each do |r|
-    it "should include the #{r} recipe" do
-      chef_run.should include_recipe r
-    end
-  end
-
-  %w(
-    build-essential
-    gdal-bin
-    libtokyocabinet-dev
-    libprotobuf-dev
-    protobuf-c-compiler
-    protobuf-compiler
-    python-dev
-    python-pip
-    zip
-  ).each do |p|
-    it "should install package #{p}" do
-      chef_run.should install_package p
-    end
   end
 
   it 'should create the directory /opt/metroextractor-scripts' do
@@ -100,11 +162,5 @@ describe 'metroextractor::setup' do
 
   it 'should create /mnt/metro/shp' do
     chef_run.should create_directory '/mnt/metro/shp'
-  end
-
-  it 'should python_pip install imposm' do
-    chef_run.should install_python_pip('imposm').with(
-      version: '2.5.0'
-    )
   end
 end

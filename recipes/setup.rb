@@ -10,20 +10,30 @@
   include_recipe r
 end
 
-# packages
+# packages for 12.04 and 14.04
 #
 %w(
   build-essential
   gdal-bin
+  zip
+).each do |p|
+  package p
+end
+
+# packages for compiling/installing imposm on 12.04
+#
+%w(
   libtokyocabinet-dev
   libprotobuf-dev
   protobuf-c-compiler
   protobuf-compiler
   python-dev
   python-pip
-  zip
 ).each do |p|
-  package p
+  package p do
+    action :install
+    only_if { platform?('ubuntu') && node[:platform_version] == '12.04' }
+  end
 end
 
 # scripts basedir

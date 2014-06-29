@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.8.1
+-----
+- clean up pkg installs for 12.04 vs 14.04
+- specs
+
 0.8.0
 -----
 - tested on Ubuntu 14.04LTS
