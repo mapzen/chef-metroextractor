@@ -42,5 +42,4 @@ default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -XX:SurvivorRat
 default[:metroextractor][:shapes][:osm2pgsql_timeout] = 172_800
 
 # osmosis
-default[:osmosis][:symlink]      = true
 default[:osmosis][:install_type] = 'tgz'

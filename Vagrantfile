@@ -8,8 +8,8 @@ Vagrant.configure('2') do |config|
 
   config.vm.hostname = 'metroextractor'
 
-  config.vm.box     = 'ubuntu-12.04-omnibus-chef'
-  config.vm.box_url = 'http://grahamc.com/vagrant/ubuntu-12.04-omnibus-chef.box'
+  config.vm.box     = 'ubuntu-14.04-official'
+  config.vm.box_url = 'https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box'
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
