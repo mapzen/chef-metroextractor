@@ -77,8 +77,7 @@ function imposm_shapefiles
 <% data = JSON.parse(json) %>
 <% data['regions'].each do |region, val| %>
   <% val['cities'].keys.each do |city| %>
-osm2pgsql_shapefiles <%= city %> &
-imposm_shapefiles <%= city %> &
-wait
+osm2pgsql_shapefiles <%= city %>
+imposm_shapefiles <%= city %>
   <% end %>
 <% end %>

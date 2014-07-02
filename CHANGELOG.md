@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.8.4
+-----
+- test osm2pgsql.sh with osm2pgsql/imposm commands being run in series rather than parallel (hangs)
+
 0.8.3
 -----
 - clean up imposm install logic
