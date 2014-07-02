@@ -2,6 +2,7 @@ source 'https://api.berkshelf.com'
 metadata
 
 cookbook 'apt'
+cookbook 'ark'
 cookbook 'python'
 cookbook 'user'
 

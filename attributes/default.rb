@@ -15,6 +15,12 @@ default[:metroextractor][:user][:manage_home]   = false
 default[:metroextractor][:user][:create_group]  = true
 default[:metroextractor][:user][:ssh_keygen]    = false
 
+# imposm
+default[:metroextractor][:imposm][:major_version] = 'imposm3'
+default[:metroextractor][:imposm][:version]       = '0.1'
+default[:metroextractor][:imposm][:url]           = 'http://imposm.org/static/rel/imposm3-0.1dev-20140702-ced9f92-linux-x86-64.tar.gz'
+default[:metroextractor][:imposm][:installdir]    = '/usr/local'
+
 # postgres
 default[:metroextractor][:postgres][:db]        = 'osm'
 default[:metroextractor][:postgres][:user]      = 'osm'

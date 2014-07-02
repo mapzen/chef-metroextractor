@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.9.0
+-----
+- use imposm3
+- TODO: specs for all the variations in setup.rb
+
 0.8.4
 -----
 - test osm2pgsql.sh with osm2pgsql/imposm commands being run in series rather than parallel (hangs)

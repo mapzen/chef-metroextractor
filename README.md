@@ -105,6 +105,28 @@ Postgres user password
 * default: password
 
 
+### metroextractor.imposm
+
+#### major_version
+Which version of imposm to use. Valid values are 'imposm2' and 'imposm3'.
+* type: string
+* default: imposm3
+
+#### version
+If using imposm3, what version (arbitrary given the present release structure)
+* type: string
+* default: 0.1
+
+#### url
+Url to retrieve imposm3 from
+* type: string
+* default: http://imposm.org/static/rel/imposm3-0.1dev-20140702-ced9f92-linux-x86-64.tar.gz
+
+#### installdir
+Base location that ark will place imposm3 in (e.g. /usr/local/bin/imposm3). Ark will symlink the binary into /usr/local/bin.
+* type: string
+* default: '/usr/local'
+
 ### metroextractor.planet
 
 #### url

@@ -4,12 +4,13 @@ maintainer_email 'grant@mapzen.com'
 license          'GPL v3'
 description      'Installs/Configures extractor'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.8.4'
+version          '0.9.0'
 
 recipe 'metroextractor', 'Builds metro extracts'
 
 %w(
   apt
+  ark
   osm2pgsql
   osmosis
   postgresql

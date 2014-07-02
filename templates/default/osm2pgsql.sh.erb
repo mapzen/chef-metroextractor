@@ -53,13 +53,13 @@ function imposm_shapefiles
   mkdir shp/$slug-imposm
 
   # "--connect" is an undocumented option for imposm; Olive Tonnhofer assures me it won't disappear in the future.
-  imposm --read --cache-dir shp/${slug}-imposm --write --table-prefix=${prefix}_ --connect postgis://osm:password@localhost/osm ex/${slug}.osm.pbf
+  imposm3 import -mapping <%= node[:metroextractor][:imposm][:installdir] %>/imposm3/mapping.json -read ex/${slug}.osm.pbf -cachedir shp/${slug}-imposm -write -connection postgis://osm:password@localhost/osm?prefix=${prefix}_ -deployproduction
 
   declare -a arr=('admin' 'aeroways' 'amenities' 'buildings' 'landusages' 'landusages_gen0' 'landusages_gen1' 'mainroads' 'landusages_gen1' 'mainroads_gen1' 'minorroads' 'motorways' 'motorways_gen0' 'motorways_gen1' 'places' 'railways' 'railways_gen0' 'railways_gen1' 'roads' 'roads_gen0' 'roads_gen1' 'transport_areas' 'transport_points' 'waterareas' 'waterareas_gen0' 'waterareas_gen1' 'waterways')
 
   for i in ${arr[@]}; do
     pgsql2shp -rk -f shp/${slug}-imposm/${slug}.osm-${i}.shp ${PGSQL2SHPOPTS} ${prefix}_${i}
-    ogr2ogr -f GeoJSON -s_srs epsg:900913 -t_srs crs:84 shp/${slug}-imposm/${slug}-${i}.geojson shp/${slug}-imposm/${slug}.osm-${i}.shp
+    ogr2ogr -f GeoJSON -s_srs epsg:3857 -t_srs crs:84 shp/${slug}-imposm/${slug}-${i}.geojson shp/${slug}-imposm/${slug}.osm-${i}.shp
   done
 
   zip -j shp/${slug}.imposm-shapefiles.zip shp/${slug}-imposm/${slug}.osm-*.shp shp/${slug}-imposm/${slug}.osm-*.prj shp/${slug}-imposm/${slug}.osm-*.dbf shp/${slug}-imposm/${slug}.osm-*.shx
@@ -77,7 +77,8 @@ function imposm_shapefiles
 <% data = JSON.parse(json) %>
 <% data['regions'].each do |region, val| %>
   <% val['cities'].keys.each do |city| %>
-osm2pgsql_shapefiles <%= city %>
-imposm_shapefiles <%= city %>
+osm2pgsql_shapefiles <%= city %> &
+imposm_shapefiles <%= city %> &
+wait
   <% end %>
 <% end %>

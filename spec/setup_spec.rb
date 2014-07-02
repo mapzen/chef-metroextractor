@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'metroextractor::setup' do
-  context 'we are running on Ubuntu 14.04' do
+  context 'we are running on Ubuntu 14.04 with defaults' do
     let(:chef_run) do
       ChefSpec::Runner.new do |node|
         node.automatic[:memory][:total]   = '2048kB'
@@ -30,12 +30,12 @@ describe 'metroextractor::setup' do
       end
     end
 
-    it 'should install package imposm' do
-      expect(chef_run).to install_package 'imposm'
+    it 'should ark install package imposm' do
+      expect(chef_run).to install_ark 'imposm3'
     end
   end
 
-  context 'we are running on Ubuntu 12.04' do
+  context 'we are running on Ubuntu 12.04 with defaults' do
     let(:chef_run) do
       ChefSpec::Runner.new do |node|
         node.automatic[:memory][:total]   = '2048kB'
@@ -61,28 +61,6 @@ describe 'metroextractor::setup' do
       it "should include the #{r} recipe" do
         expect(chef_run).to include_recipe r
       end
-    end
-
-    %w(
-      build-essential
-      gdal-bin
-      libtokyocabinet-dev
-      libprotobuf-dev
-      protobuf-c-compiler
-      protobuf-compiler
-      python-dev
-      python-pip
-      zip
-    ).each do |p|
-      it "should install package #{p}" do
-        expect(chef_run).to install_package p
-      end
-    end
-
-    it 'should python_pip install imposm' do
-      expect(chef_run).to install_python_pip('imposm').with(
-        version: '2.5.0'
-      )
     end
   end
 

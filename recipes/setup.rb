@@ -33,18 +33,27 @@ end
 ).each do |p|
   package p do
     action :install
-    only_if { platform?('ubuntu') && node[:platform_version] == '12.04' }
+    only_if { platform?('ubuntu') && node[:platform_version] == '12.04' && node[:metroextractor][:imposm][:major_version] == 'imposm2' }
   end
 end
 
 python_pip 'imposm' do
   version '2.5.0'
-  only_if { platform?('ubuntu') && node[:platform_version] <= '12.04' }
+  only_if { platform?('ubuntu') && node[:platform_version] <= '12.04' && node[:metroextractor][:imposm][:major_version] == 'imposm2' }
 end
 
 package 'imposm' do
   action :install
-  only_if { platform?('ubuntu') && node[:platform_version] > '12.04' }
+  only_if { platform?('ubuntu') && node[:platform_version] > '12.04' && node[:metroextractor][:imposm][:major_version] == 'imposm2' }
+end
+
+ark 'imposm3' do
+  owner         'root'
+  url           node[:metroextractor][:imposm][:url]
+  version       node[:metroextractor][:imposm][:version]
+  prefix_root   node[:metroextractor][:imposm][:installdir]
+  has_binaries  ['imposm3']
+  only_if       { node[:metroextractor][:imposm][:major_version] == 'imposm3' }
 end
 
 # scripts basedir
