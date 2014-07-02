@@ -4,7 +4,7 @@
 #
 
 %w(
-  apt
+  apt::default
   metroextractor::postgres
   metroextractor::user
   metroextractor::setup
