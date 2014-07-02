@@ -20,7 +20,8 @@ end
   package p
 end
 
-# packages for compiling/installing imposm on 12.04
+# packages for compiling/installing imposm on 12.04.
+#   use pip on <= 12.04, pkg when > 12.04
 #
 %w(
   libtokyocabinet-dev
@@ -34,6 +35,16 @@ end
     action :install
     only_if { platform?('ubuntu') && node[:platform_version] == '12.04' }
   end
+end
+
+python_pip 'imposm' do
+  version '2.5.0'
+  only_if { platform?('ubuntu') && node[:platform_version] <= '12.04' }
+end
+
+package 'imposm' do
+  action :install
+  only_if { platform?('ubuntu') && node[:platform_version] > '12.04' }
 end
 
 # scripts basedir
@@ -94,17 +105,4 @@ end
 #
 directory "#{node[:metroextractor][:setup][:basedir]}/shp" do
   owner node[:metroextractor][:user][:id]
-end
-
-# install imposm:
-#   use pip on 12.04, pkg on 14.04
-#
-python_pip 'imposm' do
-  version '2.5.0'
-  only_if { platform?('ubuntu') && node[:platform_version] == '12.04' }
-end
-
-package 'imposm' do
-  action :install
-  only_if { platform?('ubuntu') && node[:platform_version] == '14.04' }
 end
