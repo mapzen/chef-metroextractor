@@ -20,7 +20,7 @@ describe 'metroextractor::user' do
     end
 
     it 'should create the user metro' do
-      chef_run.should create_user_account('metro').with(
+      expect(chef_run).to create_user_account('metro').with(
         manage_home:  false,
         home:         '/mnt/metro',
         shell:        '/bin/bash',
@@ -41,7 +41,7 @@ describe 'metroextractor::user' do
     end
 
     it 'should not create the user root' do
-      chef_run.should_not create_user_account('root')
+      expect(chef_run).to_not create_user_account('root')
     end
   end
 

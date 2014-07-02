@@ -1,10 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'berkshelf'   , '= 3.1.1'
-gem 'chef'        , '= 11.10.4'
+gem 'berkshelf'   , '= 3.1.3'
 gem 'chef-rewind' , '= 0.0.8'
-gem 'chefspec'    , '= 3.4.0'
-gem 'foodcritic'  , '= 3.0.3'
+gem 'chefspec'    , '= 4.0.1'
+gem 'foodcritic'  , '= 4.0.0'
 gem 'rainbow'     , '= 2.0.0'
-gem 'rspec'       , '= 2.14.1'
 gem 'rubocop'     , '= 0.20.0'

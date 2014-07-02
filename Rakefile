@@ -10,7 +10,7 @@ task :build do
   # Fail the build only for correctness
   #
   puts "\nRunning foodcritic".color(:blue)
-  sh "foodcritic --chef-version 11.10 --epic-fail correctness #{File.dirname(sandbox)}/cookbook"
+  sh "foodcritic --chef-version 11.10 --tags ~FC001 --epic-fail correctness #{File.dirname(sandbox)}/cookbook"
 
   # Check ruby syntax
   #

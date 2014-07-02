@@ -19,17 +19,17 @@ describe 'metroextractor::postgres' do
   end
 
   it 'should create the postgres data directory' do
-    chef_run.should create_directory('/mnt/metro/pg_data').with(
+    expect(chef_run).to create_directory('/mnt/metro/pg_data').with(
       owner: 'postgres'
     )
   end
 
   it 'should install chef_gem chef-rewind' do
-    chef_run.should install_chef_gem 'chef-rewind'
+    expect(chef_run).to install_chef_gem 'chef-rewind'
   end
 
   it 'should create template postgresql.conf' do
-    chef_run.should create_template('/etc/postgresql/9.3/main/postgresql.conf').with(
+    expect(chef_run).to create_template('/etc/postgresql/9.3/main/postgresql.conf').with(
       source:   'postgresql.conf.standard.erb',
       cookbook: 'metroextractor',
       owner:    'postgres',
@@ -39,7 +39,7 @@ describe 'metroextractor::postgres' do
   end
 
   it 'should restart postgres' do
-    chef_run.should restart_service 'postgresql'
+    expect(chef_run).to restart_service 'postgresql'
   end
 
 end

@@ -26,12 +26,12 @@ describe 'metroextractor::setup' do
       zip
     ).each do |p|
       it "should install package #{p}" do
-        chef_run.should install_package p
+        expect(chef_run).to install_package p
       end
     end
 
     it 'should install package imposm' do
-      chef_run.should install_package 'imposm'
+      expect(chef_run).to install_package 'imposm'
     end
   end
 
@@ -59,7 +59,7 @@ describe 'metroextractor::setup' do
       osmosis::default
     ).each do |r|
       it "should include the #{r} recipe" do
-        chef_run.should include_recipe r
+        expect(chef_run).to include_recipe r
       end
     end
 
@@ -75,12 +75,12 @@ describe 'metroextractor::setup' do
       zip
     ).each do |p|
       it "should install package #{p}" do
-        chef_run.should install_package p
+        expect(chef_run).to install_package p
       end
     end
 
     it 'should python_pip install imposm' do
-      chef_run.should install_python_pip('imposm').with(
+      expect(chef_run).to install_python_pip('imposm').with(
         version: '2.5.0'
       )
     end
@@ -103,11 +103,11 @@ describe 'metroextractor::setup' do
   end
 
   it 'should create the directory /opt/metroextractor-scripts' do
-    chef_run.should create_directory '/opt/metroextractor-scripts'
+    expect(chef_run).to create_directory '/opt/metroextractor-scripts'
   end
 
   it 'should clone metroextractor-cities' do
-    chef_run.should sync_git('/opt/metroextractor-scripts/metroextractor-cities').with(
+    expect(chef_run).to sync_git('/opt/metroextractor-scripts/metroextractor-cities').with(
       action:       [:sync],
       repository:   'https://github.com/mapzen/metroextractor-cities.git',
       user:         'metro'
@@ -115,13 +115,13 @@ describe 'metroextractor::setup' do
   end
 
   it 'should symlink cities.json' do
-    chef_run.should create_link('/opt/metroextractor-scripts/cities.json').with(
+    expect(chef_run).to create_link('/opt/metroextractor-scripts/cities.json').with(
       to: '/opt/metroextractor-scripts/metroextractor-cities/cities.json'
     )
   end
 
   it 'should create template /opt/metroextractor-scripts/osmosis.sh' do
-    chef_run.should create_template('/opt/metroextractor-scripts/osmosis.sh').with(
+    expect(chef_run).to create_template('/opt/metroextractor-scripts/osmosis.sh').with(
       owner:  'metro',
       mode:   0755,
       source: 'osmosis.sh.erb'
@@ -129,7 +129,7 @@ describe 'metroextractor::setup' do
   end
 
   it 'should create template /opt/metroextractor-scripts/osm2pgsql.sh' do
-    chef_run.should create_template('/opt/metroextractor-scripts/osm2pgsql.sh').with(
+    expect(chef_run).to create_template('/opt/metroextractor-scripts/osm2pgsql.sh').with(
       owner:  'metro',
       mode:   0755,
       source: 'osm2pgsql.sh.erb'
@@ -137,28 +137,28 @@ describe 'metroextractor::setup' do
   end
 
   it 'should create the file /opt/metroextractor-scripts/osm2pgsql.style' do
-    chef_run.should create_cookbook_file('/opt/metroextractor-scripts/osm2pgsql.style').with(
+    expect(chef_run).to create_cookbook_file('/opt/metroextractor-scripts/osm2pgsql.style').with(
       owner:  'metro',
       source: 'osm2pgsql.style'
     )
   end
 
   it 'should create the file /opt/metroextractor-scripts/merge-geojson.py' do
-    chef_run.should create_cookbook_file('/opt/metroextractor-scripts/merge-geojson.py').with(
+    expect(chef_run).to create_cookbook_file('/opt/metroextractor-scripts/merge-geojson.py').with(
       owner:  'metro',
       source: 'merge-geojson.py'
     )
   end
 
   it 'should create /mnt/metro/ex' do
-    chef_run.should create_directory '/mnt/metro/ex'
+    expect(chef_run).to create_directory '/mnt/metro/ex'
   end
 
   it 'should create /mnt/metro/logs' do
-    chef_run.should create_directory '/mnt/metro/logs'
+    expect(chef_run).to create_directory '/mnt/metro/logs'
   end
 
   it 'should create /mnt/metro/shp' do
-    chef_run.should create_directory '/mnt/metro/shp'
+    expect(chef_run).to create_directory '/mnt/metro/shp'
   end
 end

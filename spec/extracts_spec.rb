@@ -18,11 +18,11 @@ describe 'metroextractor::extracts' do
   end
 
   it 'should define the lockfile' do
-    chef_run.should_not create_file '/mnt/metro/.osmosis.lock'
+    expect(chef_run).to_not create_file '/mnt/metro/.osmosis.lock'
   end
 
   it 'should run osmosis' do
-    chef_run.should run_bash('osmosis').with(
+    expect(chef_run).to run_bash('osmosis').with(
       user:         'metro',
       cwd:          '/mnt/metro',
       environment:  { 'JAVACMD_OPTIONS' => '-server -XX:SurvivorRatio=8 -Xms1M -Xmx1M' },

@@ -28,7 +28,7 @@ describe 'metroextractor::default' do
     metroextractor::shapes
   ).each do |r|
     it "should include the #{r} recipe" do
-      chef_run.should include_recipe r
+      expect(chef_run).to include_recipe r
     end
   end
 end
