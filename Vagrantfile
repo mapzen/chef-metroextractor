@@ -74,7 +74,8 @@ Vagrant.configure('2') do |config|
 
     chef.run_list = [
       'recipe[metroextractor::user]',
-      'recipe[metroextractor::setup]'
+      'recipe[metroextractor::setup]',
+      'recipe[metroextractor::postgres]'
     ]
   end
 end
