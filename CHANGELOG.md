@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.9.2
+-----
+- remove hardcoded db/user/password in osm2pgsql.sh
+
 0.9.1
 -----
 - need to support both imposm2/3 in osm2pgsql.sh

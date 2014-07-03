@@ -56,9 +56,9 @@ function imposm_shapefiles
   #
   <%- case node[:metroextractor][:imposm][:major_version] -%>
   <% when 'imposm3' -%>
-  imposm3 import -mapping <%= node[:metroextractor][:imposm][:installdir] %>/imposm3/mapping.json -read ex/${slug}.osm.pbf -cachedir shp/${slug}-imposm -write -connection postgis://osm:password@localhost/osm?prefix=${prefix}_ -deployproduction
+  imposm3 import -mapping <%= node[:metroextractor][:imposm][:installdir] %>/imposm3/mapping.json -read ex/${slug}.osm.pbf -cachedir shp/${slug}-imposm -write -connection postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %>?prefix=${prefix}_ -deployproduction
   <% when 'imposm2' -%>
-  imposm --read --cache-dir shp/${slug}-imposm --write --table-prefix=${prefix}_ --connect postgis://osm:password@localhost/osm ex/${slug}.osm.pbf
+  imposm --read --cache-dir shp/${slug}-imposm --write --table-prefix=${prefix}_ --connect postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %> ex/${slug}.osm.pbf
   <% end -%>
 
   declare -a arr=('admin' 'aeroways' 'amenities' 'buildings' 'landusages' 'landusages_gen0' 'landusages_gen1' 'mainroads' 'landusages_gen1' 'mainroads_gen1' 'minorroads' 'motorways' 'motorways_gen0' 'motorways_gen1' 'places' 'railways' 'railways_gen0' 'railways_gen1' 'roads' 'roads_gen0' 'roads_gen1' 'transport_areas' 'transport_points' 'waterareas' 'waterareas_gen0' 'waterareas_gen1' 'waterways')
