@@ -15,9 +15,6 @@ default[:metroextractor][:user][:manage_home]   = false
 default[:metroextractor][:user][:create_group]  = true
 default[:metroextractor][:user][:ssh_keygen]    = false
 
-# osmosis
-default[:metroextractor][:osmosis][:heap] = '4G'
-
 # imposm
 default[:metroextractor][:imposm][:major_version] = 'imposm3'
 default[:metroextractor][:imposm][:version]       = '0.1'
@@ -43,8 +40,8 @@ default[:metroextractor][:planet][:file] = node[:metroextractor][:planet][:url].
 # extracts
 default[:metroextractor][:extracts][:osmosis_timeout] = 172_800
 
-# set osmosis heap to half available ram
-heap  = "#{(node[:memory][:total].to_i * 0.6).floor / 1024}M"
+# set osmosis heap (per process!!!)
+heap  = '4G'
 default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -XX:SurvivorRatio=8 -Xms#{heap} -Xmx#{heap}"
 
 # shapes

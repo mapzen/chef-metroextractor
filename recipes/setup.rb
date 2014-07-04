@@ -76,12 +76,6 @@ end
 
 # scripts
 #
-file "#{node[:metroextractor][:setup][:basedir]}/.osmosis" do
-  mode    0644
-  owner   node[:metroextractor][:user][:id]
-  content "JAVACMD_OPTIONS=-Xmx#{node[:metroextractor][:osmosis][:heap]}"
-end
-
 template "#{node[:metroextractor][:setup][:scriptsdir]}/osmosis.sh" do
   owner   node[:metroextractor][:user][:id]
   source  'osmosis.sh.erb'

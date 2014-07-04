@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.10.5
+------
+- fix osmosis heap setup
+
 0.10.4
 ------
 - allow download to linger for up to 2 hours
