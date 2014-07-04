@@ -1,23 +1,27 @@
 <% require 'json' %>
-<% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") %>
-<% data = JSON.parse(json) %>
-<% outputcount = 0 %>
-<% data['regions'].keys.each do |region| %>
-  <% outputcount += 1 %>
-<% end %>
-osmosis --read-pbf-fast <%= node[:metroextractor][:setup][:basedir] %>/<%= node[:metroextractor][:planet][:file] %> workers=<%= node[:cpu][:total] * 4 %> \
---b bufferCapacity=20000 \
+<% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") -%>
+<% data = JSON.parse(json) -%>
+
+<% outputcount = 0 -%>
+<% data['regions'].keys.each do |region| -%>
+  <% outputcount += 1 -%>
+<% end -%>
+
+<% data['regions'].each do |region, val| -%>
+  <% count = 0 -%>
+  <% val['cities'].keys.each do |city| -%>
+    <% count += 1 -%>
+  <% end -%>
+osmosis --read-pbf-fast <%= node[:metroextractor][:setup][:basedir] %>/<%= node[:metroextractor][:planet][:file] %> workers=<%= node[:cpu][:total] %> \
+--b bufferCapacity=10000 \
 --log-progress interval=60 \
 --tee outputCount=<%= outputcount %> \
-<% data['regions'].each do |region, val| %>
-  <% count = 0 %>
-  <% val['cities'].keys.each do |city| %>
-    <% count += 1 %>
-  <% end %>
   --bb top=<%= val['bbox']['top'] %> left=<%= val['bbox']['left'] %> bottom=<%= val['bbox']['bottom'] %> right=<%= val['bbox']['right'] %> clipIncompleteEntities=true \
   --b --tee outputCount=<%= count %> \
   <% val['cities'].each do |city, val| %>
     --bb top=<%= val['bbox']['top'] %> left=<%= val['bbox']['left'] %> bottom=<%= val['bbox']['bottom'] %> right=<%= val['bbox']['right'] %> clipIncompleteEntities=true \
     --tee outputCount=2 --wx file=ex/<%= city %>.osm.bz2 --wb omitmetadata=true file=ex/<%= city %>.osm.pbf \
   <% end %>
+  &
+  wait
 <% end %>

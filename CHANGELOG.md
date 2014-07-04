@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.9.4
+-----
+- experiment with multiple osmosis processes, one per region
+
 0.9.3
 -----
 - more workers for osmosis
