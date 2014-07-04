@@ -1,4 +1,4 @@
-<% require 'json' %>
+<% require 'json' -%>
 <% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") -%>
 <% data = JSON.parse(json) -%>
 
@@ -23,5 +23,6 @@ osmosis --read-pbf-fast <%= node[:metroextractor][:setup][:basedir] %>/<%= node[
     --tee outputCount=2 --wx file=ex/<%= city %>.osm.bz2 --wb omitmetadata=true file=ex/<%= city %>.osm.pbf \
   <% end %>
   &
+
 <% end %>
 wait
