@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.10.3
+------
+- limit osmosis heap size (per instance) via .osmosis conf file
+
 0.10.2
 ------
 - download url change

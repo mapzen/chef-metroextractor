@@ -15,6 +15,9 @@ default[:metroextractor][:user][:manage_home]   = false
 default[:metroextractor][:user][:create_group]  = true
 default[:metroextractor][:user][:ssh_keygen]    = false
 
+# osmosis
+default[:metroextractor][:osmosis][:heap] = '4G'
+
 # imposm
 default[:metroextractor][:imposm][:major_version] = 'imposm3'
 default[:metroextractor][:imposm][:version]       = '0.1'
