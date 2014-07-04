@@ -25,7 +25,7 @@ describe 'metroextractor::planet' do
   # end
 
   it 'should download the planet' do
-    expect(chef_run).to run_execute('wget --quiet -O planet-latest.osm.pbf http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf').with(
+    expect(chef_run).to run_execute('wget --quiet -O planet-latest.osm.pbf http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf').with(
       cwd:      '/mnt/metro',
       creates:  '/mnt/metro/planet-latest.osm.pbf'
     )
