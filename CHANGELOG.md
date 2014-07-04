@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.9.5
+-----
+- bug fixes
+
 0.9.4
 -----
 - experiment with multiple osmosis processes, one per region
