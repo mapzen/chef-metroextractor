@@ -2,11 +2,6 @@
 <% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") -%>
 <% data = JSON.parse(json) -%>
 
-<% outputcount = 0 -%>
-<% data['regions'].keys.each do |region| -%>
-  <% outputcount += 1 -%>
-<% end -%>
-
 <% data['regions'].each do |region, val| -%>
   <% count = 0 -%>
   <% val['cities'].keys.each do |city| -%>
