@@ -14,14 +14,10 @@ Produces shape files in both imposm and osm2pgsql formats.
 
 What hardware do I need?
 ------------------------
-On AWS, using a c3.4xlarge, it takes about 30 hours to process all the extracts and shapes should you want to
-produce your own. You'll need roughly 8GB of heap allocated to osmosis for the extracts portion (by default,
-heap size is set to half the available RAM, so if you're tight on memory you can adjust this to suit), and
-to be safe, ~75GB of disk space.
+On AWS, a c3.4xl (30GB RAM and at least 75GB of free disk). The entire process will take ~18 hours.
 
 If you'd rather not go that route, you're in luck. We'll be producing extracts weekly, and you can find
-then here: [Mapzen Metro Extracts](http://mapzen.com/metro-extracts/)
-
+them here: [Mapzen Metro Extracts](http://mapzen.com/metro-extracts/)
 
 Contributing
 ------------
@@ -175,17 +171,13 @@ Upstream cookbook overrides
 
 ### osmosis
 
-#### symlink
-Create a symlink into /usr/bin
-* default: true
-
 #### install_type
 Install from source
 * default: tgz
 
 Dependencies
 -----------
-apt, osm2pgsql, osmosis postgresql
+apt, ark, osm2pgsql, osmosis postgresql, python, user
 
 Vagrant Environment
 ===================
