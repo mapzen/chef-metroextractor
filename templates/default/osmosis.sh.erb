@@ -15,7 +15,7 @@
 osmosis --read-pbf-fast <%= node[:metroextractor][:setup][:basedir] %>/<%= node[:metroextractor][:planet][:file] %> workers=<%= node[:cpu][:total] / 2 %> \
 --b bufferCapacity=10000 \
 --log-progress interval=60 \
---tee outputCount=1
+--tee outputCount=1 \
   --bb top=<%= val['bbox']['top'] %> left=<%= val['bbox']['left'] %> bottom=<%= val['bbox']['bottom'] %> right=<%= val['bbox']['right'] %> clipIncompleteEntities=true \
   --b --tee outputCount=<%= count %> \
   <% val['cities'].each do |city, val| %>
