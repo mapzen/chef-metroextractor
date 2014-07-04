@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.10.6
+------
+- node cache for osmosis
+
 0.10.5
 ------
 - fix osmosis heap setup

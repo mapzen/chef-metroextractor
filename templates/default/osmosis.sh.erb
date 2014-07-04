@@ -8,7 +8,7 @@
     <% count += 1 -%>
   <% end -%>
 osmosis --read-pbf-fast <%= node[:metroextractor][:setup][:basedir] %>/<%= node[:metroextractor][:planet][:file] %> workers=<%= node[:cpu][:total] %> \
---b bufferCapacity=2000 \
+--b bufferCapacity=10000 \
 --log-progress interval=60 \
 --tee outputCount=1 \
   --bb top=<%= val['bbox']['top'] %> left=<%= val['bbox']['left'] %> bottom=<%= val['bbox']['bottom'] %> right=<%= val['bbox']['right'] %> clipIncompleteEntities=true \
