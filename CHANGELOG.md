@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.9.3
+-----
+- more workers for osmosis
+
 0.9.2
 -----
 - remove hardcoded db/user/password in osm2pgsql.sh

@@ -5,7 +5,7 @@
 <% data['regions'].keys.each do |region| %>
   <% outputcount += 1 %>
 <% end %>
-osmosis --read-pbf-fast <%= node[:metroextractor][:setup][:basedir] %>/<%= node[:metroextractor][:planet][:file] %> workers=<%= node[:cpu][:total] %> \
+osmosis --read-pbf-fast <%= node[:metroextractor][:setup][:basedir] %>/<%= node[:metroextractor][:planet][:file] %> workers=<%= node[:cpu][:total] * 4 %> \
 --b bufferCapacity=20000 \
 --log-progress interval=60 \
 --tee outputCount=<%= outputcount %> \
