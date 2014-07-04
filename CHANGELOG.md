@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.10.4
+------
+- allow download to linger for up to 2 hours
+
 0.10.3
 ------
 - limit osmosis heap size (per instance) via .osmosis conf file

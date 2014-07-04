@@ -28,4 +28,5 @@ fail if node[:metroextractor][:planet][:file] !~ /\.pbf$/
 execute "wget --quiet -O #{node[:metroextractor][:planet][:file]} #{node[:metroextractor][:planet][:url]}" do
   cwd       node[:metroextractor][:setup][:basedir]
   creates   "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}"
+  timeout   7200
 end
