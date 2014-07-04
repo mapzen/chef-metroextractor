@@ -1,6 +1,14 @@
 metroextractor changelog
 ========================
 
+0.10.2
+------
+- download url change
+
+0.10.1
+------
+- osmosis buffer size
+
 0.10.0
 ------
 - big bump for osmosis changes

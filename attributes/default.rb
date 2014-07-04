@@ -34,7 +34,7 @@ default[:postgresql][:maintenance_work_mem]     = '1GB'
 default[:postgresql][:checkpoint_segments]      = '20'
 
 # planet
-default[:metroextractor][:planet][:url]  = 'http://ftp.heanet.ie/mirrors/openstreetmap.org/pbf/planet-latest.osm.pbf'
+default[:metroextractor][:planet][:url]  = 'http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf'
 default[:metroextractor][:planet][:file] = node[:metroextractor][:planet][:url].split('/').last
 
 # extracts
