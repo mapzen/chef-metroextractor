@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.10.0
+------
+- big bump for osmosis changes
+
 0.9.5
 -----
 - bug fixes

@@ -7,7 +7,7 @@
   <% val['cities'].keys.each do |city| -%>
     <% count += 1 -%>
   <% end -%>
-osmosis --read-pbf-fast <%= node[:metroextractor][:setup][:basedir] %>/<%= node[:metroextractor][:planet][:file] %> workers=<%= node[:cpu][:total] / 2 %> \
+osmosis --read-pbf-fast <%= node[:metroextractor][:setup][:basedir] %>/<%= node[:metroextractor][:planet][:file] %> workers=<%= node[:cpu][:total] %> \
 --b bufferCapacity=10000 \
 --log-progress interval=60 \
 --tee outputCount=1 \
