@@ -144,11 +144,6 @@ Set the timeout for processing of pbf/bz extracts
 * type: int
 * default: 172_800 (2 days)
 
-#### osmosis_lock
-Location of osmosis lockfile
-* type: string
-* default: basedir/.osmosis.lock
-
 #### osmosis_jvmopts
 JVM options to pass to osmosis. Xmx is calculated automatically and 
 set to total available RAM: ```#{(node[:memory][:total].to_i * 0.6).floor / 1024}M```
@@ -162,10 +157,10 @@ Set the timeout for processing of shape files
 * type: int
 * default: 172_800 (2 days)
 
-#### osm2pgsql_lock
-Location of osm2pgsql lockfile
-* type: string
-* default: basedir/.osm2pgsql.lock
+#### osm2pgsql_slice
+Process shapes in batches of N
+* type: int
+* default: 8
 
 Upstream cookbook overrides
 

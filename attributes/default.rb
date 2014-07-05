@@ -46,6 +46,7 @@ default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -XX:SurvivorRat
 
 # shapes
 default[:metroextractor][:shapes][:osm2pgsql_timeout] = 172_800
+default[:metroextractor][:shapes][:osm2pgsql_slice]   = 8
 
 # osmosis
 default[:osmosis][:install_type] = 'tgz'

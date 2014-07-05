@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.11.0
+------
+- process shapes (osm2psql) in batches (default 8)
+
 0.10.6
 ------
 - node cache for osmosis
