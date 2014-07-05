@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.11.3
+------
+- set slice count to cpu total
+
 0.11.2
 ------
 - read pbf rather than bz2 for osm2pgsql
