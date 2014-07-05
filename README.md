@@ -14,7 +14,7 @@ Produces shape files in both imposm and osm2pgsql formats.
 
 What hardware do I need?
 ------------------------
-On AWS, a c3.4xl (30GB RAM and at least 75GB of free disk). The entire process will take ~18 hours.
+On AWS, a c3.4xl (30GB RAM and at least 75GB of free disk). The entire process will take ~15 hours.
 
 If you'd rather not go that route, you're in luck. We'll be producing extracts weekly, and you can find
 them here: [Mapzen Metro Extracts](http://mapzen.com/metro-extracts/)
