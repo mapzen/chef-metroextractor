@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.11.1
+------
+- use larger slices
+
 0.11.0
 ------
 - process shapes (osm2psql) in batches (default 8)
