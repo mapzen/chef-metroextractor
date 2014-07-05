@@ -13,7 +13,7 @@ function osm2pgsql_shapefiles
 
   # generate shp files
   #
-  osm2pgsql -sluc -C 1024 ${OSMOPTS} -S <%= node[:metroextractor][:setup][:scriptsdir] %>/osm2pgsql.style -p ${prefix} ex/$slug.osm.bz2
+  osm2pgsql -sluc -C 2048 ${OSMOPTS} -S <%= node[:metroextractor][:setup][:scriptsdir] %>/osm2pgsql.style -p ${prefix} --number-processes <%= node[:cpu][:total] %> ex/$slug.osm.pbf
 
   pgsql2shp -rk -f shp/${slug}.osm-point.shp    ${PGSQL2SHPOPTS} ${prefix}_point  
   pgsql2shp -rk -f shp/${slug}.osm-polygon.shp  ${PGSQL2SHPOPTS} ${prefix}_polygon

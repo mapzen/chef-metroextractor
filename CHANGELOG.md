@@ -1,6 +1,13 @@
 metroextractor changelog
 ========================
 
+0.11.2
+------
+- read pbf rather than bz2 for osm2pgsql
+- back to smaller slice size
+- increase workers for osm2pgsql
+- increase node cache for osm2pgsql
+
 0.11.1
 ------
 - use larger slices
