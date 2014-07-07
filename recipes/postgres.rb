@@ -32,6 +32,12 @@ pg_user node[:metroextractor][:postgres][:user] do
   encrypted_password node[:metroextractor][:postgres][:password]
 end
 
+# drop then create the db. Ensure we're fresh on every run
+#   should we need to start over in the middle for some reason.
+pg_database node[:metroextractor][:postgres][:db] do
+  action :drop
+end
+
 pg_database node[:metroextractor][:postgres][:db] do
   owner     node[:metroextractor][:postgres][:user]
   encoding  'utf8'
