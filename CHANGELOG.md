@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.11.7
+------
+- fewer slices
+
 0.11.6
 ------
 - pg max connections
