@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.11.10
+-------
+- don't re-sync the cities repo if we've already cloned it once, to avoid pulling in changes we
+  aren't potentially expecting if we abort and re-start a run
+
 0.11.9
 ------
 - slice count

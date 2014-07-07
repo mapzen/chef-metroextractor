@@ -68,6 +68,7 @@ git "#{node[:metroextractor][:setup][:scriptsdir]}/metroextractor-cities" do
   action      :sync
   repository  node[:metroextractor][:setup][:cities_repo]
   user        node[:metroextractor][:user][:id]
+  not_if      { ::File.directory?("#{node[:metroextractor][:setup][:scriptsdir]}/metroextractor-cities")
 end
 
 link "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
