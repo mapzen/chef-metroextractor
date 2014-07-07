@@ -28,7 +28,7 @@ function osm2pgsql_shapefiles
   # zip up our output
   #
   zip -j shp/${slug}.osm2pgsql-shapefiles.zip shp/${slug}.osm-*.shp shp/${slug}.osm-*.prj shp/${slug}.osm-*.dbf shp/${slug}.osm-*.shx
-  zip -j shp/${slug}.osm2pgsql-geojson.zip shp/${slug}.osm-*.geojson
+  zip -j shp/$slug.osm2pgsql-geojson.zip shp/$slug.osm-*.geojson
 
   # remove source files
   #
@@ -50,7 +50,7 @@ function imposm_shapefiles
   slug=$1
   prefix=${slug//-/_}
 
-  mkdir shp/${slug}-imposm
+  mkdir shp/$slug-imposm
 
   # NOTE: imposm2 vs imposm3 command switch
   #
@@ -93,8 +93,8 @@ function imposm_shapefiles
 <% data['regions'].each do |region, val| %>
   <% val['cities'].keys.each_slice(node[:metroextractor][:shapes][:osm2pgsql_slice]) do |slices| %>
     <% slices.each do |city| %>
-osm2pgsql_shapefiles <%= city %> > <%= node[:metroextractor][:setup][:logdir] %>/<%= city %>_osm2pgsql.log 2>&1 &
-imposm_shapefiles <%= city %> > <%= node[:metroextractor][:setup][:logdir] %>/<%= city %>_imposm.log 2>&1 &
+osm2pgsql_shapefiles <%= city %> &
+imposm_shapefiles <%= city %> &
     <% end %>
 wait
 
