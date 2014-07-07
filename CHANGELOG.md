@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.11.5
+------
+- increase checkpoint_segments
+
 0.11.4
 ------
 - drop osm2pgsql num procs

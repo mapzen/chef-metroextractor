@@ -31,7 +31,7 @@ default[:postgresql][:work_mem]                 = '64MB'
 default[:postgresql][:temp_buffers]             = '128MB'
 default[:postgresql][:shared_buffers]           = '1GB'
 default[:postgresql][:maintenance_work_mem]     = '1GB'
-default[:postgresql][:checkpoint_segments]      = '20'
+default[:postgresql][:checkpoint_segments]      = '50'
 
 # planet
 default[:metroextractor][:planet][:url]  = 'http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf'
