@@ -22,7 +22,7 @@ describe 'metroextractor::shapes' do
   end
 
   it 'should run osm2pgsql' do
-    expect(chef_run).to run_bash('osm2pgsql').with(
+    expect(chef_run).to run_execute('/opt/metroextractor-scripts/osm2pgsql.sh').with(
       user:         'metro',
       cwd:          '/mnt/metro',
       timeout:      172_800

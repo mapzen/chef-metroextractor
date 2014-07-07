@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.11.6
+------
+- better logging
+
 0.11.5
 ------
 - increase checkpoint_segments
