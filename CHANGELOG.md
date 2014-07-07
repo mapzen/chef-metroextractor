@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.11.4
+------
+- drop osm2pgsql num procs
+
 0.11.3
 ------
 - set slice count to cpu total
