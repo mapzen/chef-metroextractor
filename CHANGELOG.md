@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.11.9
+------
+- slice count
+
 0.11.8
 ------
 - drop the pg db during a re-run
