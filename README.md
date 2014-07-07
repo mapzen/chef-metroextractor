@@ -159,6 +159,7 @@ Set the timeout for processing of shape files
 
 #### osm2pgsql_slice
 Process shapes in batches of N
+NOTE: be careful with large slice size leading to running out of PG connections!
 * type: int
 * default: 8
 
