@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'metroextractor::user' do
-
   before do
     stub_command('pgrep postgres').and_return(true)
     stub_command('test -f /var/lib/postgresql/9.3/main/PG_VERSION').and_return(true)

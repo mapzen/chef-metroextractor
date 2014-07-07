@@ -1,12 +1,6 @@
 require 'spec_helper'
 
 describe 'metroextractor::default' do
-  let(:chef_run) do
-    ChefSpec::Runner.new do |node|
-      node.automatic[:memory][:total] = '2048kB'
-    end.converge(described_recipe)
-  end
-
   before do
     stub_command('pgrep postgres').and_return(true)
     stub_command('test -f /var/lib/postgresql/9.3/main/PG_VERSION').and_return(true)
@@ -16,6 +10,12 @@ describe 'metroextractor::default' do
     stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osm'\" | grep osm").and_return(true)
     stub_command('test -f /mnt/metro/pg_data/PG_VERSION').and_return(true)
     stub_command("psql -c \"SELECT datname from pg_database WHERE datname='osm'\" postgres | grep osm").and_return(true)
+  end
+
+  let(:chef_run) do
+    ChefSpec::Runner.new do |node|
+      node.automatic[:memory][:total] = '2048kB'
+    end.converge(described_recipe)
   end
 
   %w(
