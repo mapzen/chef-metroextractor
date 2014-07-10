@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.11.11
+-------
+- include branch in metroextractor-cities git pull, to allow override
+
 0.11.10
 -------
 - don't re-sync the cities repo if we've already cloned it once, to avoid pulling in changes we

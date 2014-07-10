@@ -4,9 +4,10 @@
 #
 
 # setup
-default[:metroextractor][:setup][:basedir]      = '/mnt/metro'
-default[:metroextractor][:setup][:scriptsdir]   = '/opt/metroextractor-scripts'
-default[:metroextractor][:setup][:cities_repo]  = 'https://github.com/mapzen/metroextractor-cities.git'
+default[:metroextractor][:setup][:basedir]        = '/mnt/metro'
+default[:metroextractor][:setup][:scriptsdir]     = '/opt/metroextractor-scripts'
+default[:metroextractor][:setup][:cities_repo]    = 'https://github.com/mapzen/metroextractor-cities.git'
+default[:metroextractor][:setup][:cities_branch]  = 'master'
 
 # user
 default[:metroextractor][:user][:id]            = 'metro'

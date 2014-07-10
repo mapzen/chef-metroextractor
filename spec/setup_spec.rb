@@ -137,6 +137,7 @@ describe 'metroextractor::setup' do
     expect(chef_run).to sync_git('/opt/metroextractor-scripts/metroextractor-cities').with(
       action:       [:sync],
       repository:   'https://github.com/mapzen/metroextractor-cities.git',
+      revision:     'master',
       user:         'metro'
     )
   end
