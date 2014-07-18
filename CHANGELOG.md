@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.12.0
+------
+- go back to using remote_file to fetch the planet pbf
+
 0.11.11
 -------
 - include branch in metroextractor-cities git pull, to allow override
