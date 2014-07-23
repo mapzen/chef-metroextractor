@@ -15,7 +15,7 @@ bash 'osmosis' do
     #{node[:metroextractor][:setup][:scriptsdir]}/osmosis.sh \
     >#{node[:metroextractor][:setup][:basedir]}/logs/osmosis.log 2>&1
   EOH
-  timeout node[:metroextractor][:extracts][:osmosis_timeout]
-  notifies :create, "file[#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock]", :immediately
-  not_if { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock") }
+  timeout   node[:metroextractor][:extracts][:osmosis_timeout]
+  notifies  :create, "file[#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock]", :immediately
+  not_if    { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock") }
 end
