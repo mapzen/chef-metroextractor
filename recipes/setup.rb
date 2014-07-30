@@ -15,6 +15,7 @@ end
 %w(
   build-essential
   gdal-bin
+  parallel
   zip
 ).each do |p|
   package p
