@@ -12,8 +12,7 @@ bash 'osmosis' do
   cwd  node[:metroextractor][:setup][:basedir]
   environment('JAVACMD_OPTIONS' => node[:metroextractor][:extracts][:osmosis_jvmopts])
   code <<-EOH
-    #{node[:metroextractor][:setup][:scriptsdir]}/osmosis.sh \
-    >#{node[:metroextractor][:setup][:basedir]}/logs/osmosis.log 2>&1
+    parallel -a #{node[:metroextractor][:setup][:scriptsdir]}/osmosis.sh --joblog #{node[:metroextractor][:setup][:basedir]}/logs/parallel_osmosis.log
   EOH
   timeout   node[:metroextractor][:extracts][:osmosis_timeout]
   notifies  :create, "file[#{node[:metroextractor][:setup][:basedir]}/.osmosis.lock]", :immediately
