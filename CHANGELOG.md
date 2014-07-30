@@ -1,7 +1,7 @@
 metroextractor changelog
 ========================
 
-0.13.1
+0.13.0
 ------
 * update shapes and extracts to use gnu parallel: provide better logging
   and better error handling.
