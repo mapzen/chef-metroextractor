@@ -26,6 +26,7 @@ describe 'metroextractor::extracts' do
       user:         'metro',
       cwd:          '/mnt/metro',
       environment:  { 'JAVACMD_OPTIONS' => '-server -XX:SurvivorRatio=8 -Xms4G -Xmx4G' },
+      code:         "    parallel -a /opt/metroextractor-scripts/osmosis.sh -d ';' --joblog /mnt/metro/logs/parallel_osmosis.log\n",
       timeout:      172_800
     )
   end
