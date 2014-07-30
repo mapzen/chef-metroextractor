@@ -94,6 +94,5 @@ function imposm_shapefiles
   <% val['cities'].keys.each do |city| %>
 osm2pgsql_shapefiles <%= city %> ><%= node[:metroextractor][:setup][:basedir] %>/logs/osm2pgsql_shapefiles.<%= city %>.log 2>&1
 imposm_shapefiles <%= city %> ><%= node[:metroextractor][:setup][:basedir] %>/logs/imposm_shapefiles.<%= city %>.log 2>&1
-
   <% end %>
 <% end %>
