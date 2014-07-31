@@ -100,5 +100,5 @@ declare -a cities=(
 <% end -%>
 )
 
-parallel --jobs <%= node[:metroextractor][:shapes][:parallel_jobs] %> --joblog <%= node[:metroextractor][:setup][:basedir] %>/logs/parallel_osm2pgsql_shapefiles.log osm2pgsql_shapefiles ::: "${cities[@]}" ><%= node[:metroextractor][:setup][:basedir] %>/logs/osm2pgsql_shapefiles.log 2>&1
-parallel --jobs <%= node[:metroextractor][:shapes][:parallel_jobs] %> --joblog <%= node[:metroextractor][:setup][:basedir] %>/logs/parallel_imposm_shapefiles.log imposm_shapefiles ::: "${cities[@]}" ><%= node[:metroextractor][:setup][:basedir] %>/logs/imposm_shapefiles.log 2>&1
+parallel --jobs <%= node[:metroextractor][:shapes][:osm2pgsql_jobs] %> --joblog <%= node[:metroextractor][:setup][:basedir] %>/logs/parallel_osm2pgsql_shapefiles.log osm2pgsql_shapefiles ::: "${cities[@]}" ><%= node[:metroextractor][:setup][:basedir] %>/logs/osm2pgsql_shapefiles.log 2>&1
+parallel --jobs <%= node[:metroextractor][:shapes][:imposm_jobs] %> --joblog <%= node[:metroextractor][:setup][:basedir] %>/logs/parallel_imposm_shapefiles.log imposm_shapefiles ::: "${cities[@]}" ><%= node[:metroextractor][:setup][:basedir] %>/logs/imposm_shapefiles.log 2>&1
