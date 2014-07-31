@@ -22,10 +22,10 @@ describe 'metroextractor::shapes' do
   end
 
   it 'should run osm2pgsql' do
-    expect(chef_run).to run_bash('osm2pgsql').with(
+    expect(chef_run).to run_execute('osm2pgsql').with(
       user:         'metro',
       cwd:          '/mnt/metro',
-      code:         "    parallel --jobs 8 -a /opt/metroextractor-scripts/osm2pgsql.sh -d ';' --joblog /mnt/metro/logs/paralle_osm2pgsql.log\n",
+      command:      '/opt/metroextractor-scripts/osm2pgsql.sh',
       timeout:      172_800
     )
   end
