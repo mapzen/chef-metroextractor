@@ -89,16 +89,16 @@ function imposm_shapefiles
 }
 export -f imposm_shapefiles
 
-<% require 'json' %>
-<% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") %>
-<% data = JSON.parse(json) %>
-<% data['regions'].each do |region, val| %>
-  <% val['cities'].keys.each do |city| %>
 declare -a cities=(
+<% require 'json' -%>
+<% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") -%>
+<% data = JSON.parse(json) %>
+<% data['regions'].each do |region, val| -%>
+  <% val['cities'].keys.each do |city| -%>
 '<%= city %>'
+  <% end -%>
+<% end -%>
 )
-  <% end %>
-<% end %>
 
-parallel --jobs <%= node[:metroextractor][:shapes][:parallel_jobs] %> --joblog <%= node[:metroextractor][:setup][:basedir] %>/logs/parallel_osm2pgsql_shapefiles.log osm2pgsql_shapefiles ::: "${extracts[@]}" ><%= node[:metroextractor][:setup][:basedir] %>/logs/osm2pgsql_shapefiles.log 2>&1
-parallel --jobs <%= node[:metroextractor][:shapes][:parallel_jobs] %> --joblog <%= node[:metroextractor][:setup][:basedir] %>/logs/parallel_imposm_shapefiles.log imposm_shapefiles ::: "${extracts[@]}" ><%= node[:metroextractor][:setup][:basedir] %>/logs/imposm_shapefiles.log 2>&1
+parallel --jobs <%= node[:metroextractor][:shapes][:parallel_jobs] %> --joblog <%= node[:metroextractor][:setup][:basedir] %>/logs/parallel_osm2pgsql_shapefiles.log osm2pgsql_shapefiles ::: "${cities[@]}" ><%= node[:metroextractor][:setup][:basedir] %>/logs/osm2pgsql_shapefiles.log 2>&1
+parallel --jobs <%= node[:metroextractor][:shapes][:parallel_jobs] %> --joblog <%= node[:metroextractor][:setup][:basedir] %>/logs/parallel_imposm_shapefiles.log imposm_shapefiles ::: "${cities[@]}" ><%= node[:metroextractor][:setup][:basedir] %>/logs/imposm_shapefiles.log 2>&1
