@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.13.2
+------
+* PG tuning
+
 0.13.1
 ------
 * break out parallel_jobs into two attributes: imposm_jobs and osm2pgsql_jobs, for more granular tuning
