@@ -47,7 +47,7 @@ heap                                                  = '4G'
 default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -XX:SurvivorRatio=8 -Xms#{heap} -Xmx#{heap}"
 
 # shapes
-default[:metroextractor][:shapes][:imposm_jobs]       = 8
+default[:metroextractor][:shapes][:imposm_jobs]       = 12
 default[:metroextractor][:shapes][:osm2pgsql_jobs]    = 8
 default[:metroextractor][:shapes][:osm2pgsql_timeout] = 172_800
 

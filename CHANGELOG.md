@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.13.3
+------
+* imposm parallel job tuning
+
 0.13.2
 ------
 * PG tuning
