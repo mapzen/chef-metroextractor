@@ -24,17 +24,12 @@ describe 'metroextractor::postgres' do
     )
   end
 
-  it 'should install chef_gem chef-rewind' do
-    expect(chef_run).to install_chef_gem 'chef-rewind'
-  end
-
   it 'should create template postgresql.conf' do
     expect(chef_run).to create_template('/etc/postgresql/9.3/main/postgresql.conf').with(
       source:   'postgresql.conf.standard.erb',
       cookbook: 'metroextractor',
       owner:    'postgres',
-      group:    'postgres',
-      mode:     0644
+      group:    'postgres'
     )
   end
 

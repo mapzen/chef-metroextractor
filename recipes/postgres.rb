@@ -11,16 +11,10 @@
   include_recipe r
 end
 
-chef_gem 'chef-rewind'
-require 'chef/rewind'
-
-rewind template: "/etc/postgresql/#{node[:postgresql][:version]}/main/postgresql.conf" do
-  source    'postgresql.conf.standard.erb'
-  cookbook  'metroextractor'
-  owner     'postgres'
-  group     'postgres'
-  mode      0644
-end
+# override the default postgres template
+r = resources(template: "/etc/postgresql/#{node[:postgresql][:version]}/main/postgresql.conf")
+r.cookbook('metroextractor')
+r.source('postgresql.conf.standard.erb')
 
 directory node[:postgresql][:data_directory] do
   action  :create
