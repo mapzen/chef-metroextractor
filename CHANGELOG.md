@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.13.4
+------
+* replace chef-rewind with resource override
+
 0.13.3
 ------
 * imposm parallel job tuning
