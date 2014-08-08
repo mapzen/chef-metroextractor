@@ -18,8 +18,9 @@ describe 'metroextractor::planet' do
   end
 
   it 'should download the planet' do
-    expect(chef_run).to create_remote_file_if_missing('/mnt/metro/planet-latest.osm.pbf').with(
+    expect(chef_run).to create_remote_file('/mnt/metro/planet-latest.osm.pbf').with(
       source: 'http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf',
+      backup: false,
       mode:   0644
     )
   end
