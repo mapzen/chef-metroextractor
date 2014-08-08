@@ -12,7 +12,8 @@ ENV['TMP'] = node[:metroextractor][:setup][:basedir]
 fail if node[:metroextractor][:planet][:file] !~ /\.pbf$/
 
 remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}" do
-  action  :create_if_missing
+  action  :create
+  backup  false
   source  node[:metroextractor][:planet][:url]
   mode    0644
 end

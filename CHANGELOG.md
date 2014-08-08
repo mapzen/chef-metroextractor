@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.13.5
+------
+* :create the planet_remote file to allow use on stateful systems (i.e. non instance store)
+* don't back up the planet file when we get a new one
+
 0.13.4
 ------
 * replace chef-rewind with resource override
