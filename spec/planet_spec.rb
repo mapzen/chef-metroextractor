@@ -17,12 +17,24 @@ describe 'metroextractor::planet' do
     end.converge(described_recipe)
   end
 
-  it 'should download the planet' do
-    expect(chef_run).to create_remote_file('/mnt/metro/planet-latest.osm.pbf').with(
-      source: 'http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf',
+  it 'should download the planet md5 and notify the planet remote_file and the md5 check' do
+    expect(chef_run).to create_remote_file('/mnt/metro/planet-latest.osm.pbf.md5').with(
+      source: 'http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf.md5',
       backup: false,
       mode:   0644
     )
+
+    resource = chef_run.remote_file('/mnt/metro/planet-latest.osm.pbf.md5')
+    expect(resource).to notify('remote_file[/mnt/metro/planet-latest.osm.pbf]').to(:create).immediately
+    expect(resource).to notify('ruby_block[verify md5]').to(:run).immediately
+  end
+
+  it 'should not remote_file the planet' do
+    expect(chef_run).to_not create_remote_file('/mnt/metro/planet-latest.osm.pbf')
+  end
+
+  it 'should not verify the md5' do
+    expect(chef_run).to_not run_ruby_block('verify md5')
   end
 
 end

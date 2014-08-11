@@ -1,6 +1,12 @@
 metroextractor changelog
 ========================
 
+0.13.6
+------
+* make the planet download trigger off the md5 remote_file resource. If the md5 hasn't changed, we won't
+  go through the trouble of downloading the planet again.
+* calculate the md5 of the downloaded planet file and compare it against the provided md5sum
+
 0.13.5
 ------
 * :create the planet_remote file to allow use on stateful systems (i.e. non instance store)
