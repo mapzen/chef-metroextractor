@@ -17,7 +17,7 @@ remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][
   source    "#{node[:metroextractor][:planet][:url]}.md5"
   mode      0644
   notifies  :create, "remote_file[#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}]", :immediately
-  notifies  :run,    'ruby_block[verify md5]',                                                                          :immediately
+  notifies  :run,    'ruby_block[verify md5]',                                                                           :immediately
 end
 
 remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}" do
