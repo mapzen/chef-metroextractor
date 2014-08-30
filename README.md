@@ -21,7 +21,7 @@ them here: [Mapzen Metro Extracts](http://mapzen.com/metro-extracts/)
 
 Contributing
 ------------
-Extract creation is drivin off the cities.json file found here: [metroextractor-cities](https://github.com/mapzen/metroextractor-cities).
+Extract creation is driven off the cities.json file found here: [metroextractor-cities](https://github.com/mapzen/metroextractor-cities).
 If you'd like to add an extract, you can either update the file directly if you feel comfortable doing so and submit a pull request,
 or open a GitHub issue and we'll look into doing it for you.
 
