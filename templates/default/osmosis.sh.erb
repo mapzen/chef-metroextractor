@@ -13,7 +13,7 @@ osmosis --read-pbf-fast <%= node[:metroextractor][:setup][:basedir] %>/<%= node[
   --bb top=<%= val['bbox']['top'] %> left=<%= val['bbox']['left'] %> bottom=<%= val['bbox']['bottom'] %> right=<%= val['bbox']['right'] %> clipIncompleteEntities=true \
   --b --tee outputCount=<%= count %> \
   <% val['cities'].each do |city, val| %>
-    --bb top=<%= val['bbox']['top'] %> left=<%= val['bbox']['left'] %> bottom=<%= val['bbox']['bottom'] %> right=<%= val['bbox']['right'] %> clipIncompleteEntities=true \
+    --bb top=<%= val['bbox']['top'] %> left=<%= val['bbox']['left'] %> bottom=<%= val['bbox']['bottom'] %> right=<%= val['bbox']['right'] %> clipIncompleteEntities=true cascadingRelations=yes \
     --tee outputCount=2 --wx file=ex/<%= city %>.osm.bz2 --wb omitmetadata=true file=ex/<%= city %>.osm.pbf \
   <% end %>
 ><%= node[:metroextractor][:setup][:basedir] %>/logs/osmosis.<%= region %>.log 2>&1;

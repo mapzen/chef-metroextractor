@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.13.7
+------
+* use cascadingRelations=yes for processing city extracts. Additional information can be
+  found [here](http://wiki.openstreetmap.org/wiki/Osmosis/Detailed_Usage_0.43)
+
 0.13.6
 ------
 * make the planet download trigger off the md5 remote_file resource. If the md5 hasn't changed, we won't
