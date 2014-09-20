@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.13.8
+------
+* replace remote_file for planet download with wget: remote_file is too slow and flaky for files this large
+
 0.13.7
 ------
 * lower default heap size to 2G per osmosis processes

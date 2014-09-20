@@ -25,12 +25,12 @@ describe 'metroextractor::planet' do
     )
 
     resource = chef_run.remote_file('/mnt/metro/planet-latest.osm.pbf.md5')
-    expect(resource).to notify('remote_file[/mnt/metro/planet-latest.osm.pbf]').to(:create).immediately
+    expect(resource).to notify('execute[download planet]').to(:run).immediately
     expect(resource).to notify('ruby_block[verify md5]').to(:run).immediately
   end
 
-  it 'should not remote_file the planet' do
-    expect(chef_run).to_not create_remote_file('/mnt/metro/planet-latest.osm.pbf')
+  it 'should not download the planet' do
+    expect(chef_run).to_not run_execute('download planet')
   end
 
   it 'should not verify the md5' do
