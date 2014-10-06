@@ -15,9 +15,11 @@ Produces shape files in both imposm and osm2pgsql formats.
 Projections
 -----------
 GeoJSON is generated via ogr2ogr and output in CRS:84 (e.g. EPSG:4326) projection.
+
 Imposm shapfiles are generated using default projections. As the code allows for the use of either imposm2 or imposm3, that currently means:
   * EPSG:3857 for imposm3
   * EPSG:90013 for imposm2
+
 Mapzen is using imposm3 to generate these shapefiles, so the imposm shapefiles found at our [metro extracts](https://mapzen.com/metro-extracts/) page
 are using EPSG:3857.
 
