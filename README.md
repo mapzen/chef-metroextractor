@@ -14,7 +14,7 @@ Produces shape files in both imposm and osm2pgsql formats.
 
 Projections
 -----------
-GeoJSON is generated via ogr2ogr and output in CRS:84 (e.g. EPSG:4326) projection
+GeoJSON is generated via ogr2ogr and output in CRS:84 (e.g. EPSG:4326) projection.
 Imposm shapfiles are generated using default projections. As the code allows for the use of either imposm2 or imposm3, that currently means:
   * EPSG:3857 for imposm3
   * EPSG:90013 for imposm2
