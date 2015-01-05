@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'metroextractor::postgres' do
   before do
     stub_command('pgrep postgres').and_return(true)
-    stub_command('test -f /var/lib/postgresql/9.3/main/PG_VERSION').and_return(true)
+    stub_command('test -f /var/lib/postgresql/9.4/main/PG_VERSION').and_return(true)
     stub_command("psql -c \"SELECT rolname FROM pg_roles WHERE rolname='osmuser'\" | grep osmuser").and_return(true)
     stub_command("psql -c \"SELECT datname from pg_database WHERE datname='osm'\" | grep osm").and_return(true)
     stub_command("psql -c 'SELECT lanname FROM pg_catalog.pg_language' osm | grep '^ plpgsql$'").and_return(true)
@@ -25,7 +25,7 @@ describe 'metroextractor::postgres' do
   end
 
   it 'should create template postgresql.conf' do
-    expect(chef_run).to create_template('/etc/postgresql/9.3/main/postgresql.conf').with(
+    expect(chef_run).to create_template('/etc/postgresql/9.4/main/postgresql.conf').with(
       source:   'postgresql.conf.standard.erb',
       cookbook: 'metroextractor',
       owner:    'postgres',
