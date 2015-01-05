@@ -3,6 +3,8 @@
 # Recipe:: postgres
 #
 
+package 'postgis'
+
 %w(
   postgresql::server
   postgresql::server_dev
