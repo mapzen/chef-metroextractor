@@ -5,6 +5,7 @@
 
 %w(
   postgresql::server
+  postgresql::server_dev
   postgresql::contrib
   postgresql::postgis
 ).each do |r|
