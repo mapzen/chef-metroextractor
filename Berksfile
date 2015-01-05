@@ -8,4 +8,4 @@ cookbook 'user'
 
 cookbook 'osm2pgsql'  , github: 'mapzen/chef-osm2pgsql'
 cookbook 'osmosis'    , github: 'mapzen/chef-osmosis'
-cookbook 'postgresql' , github: 'phlipper/chef-postgresql' , tag: 'v0.16.0'
+cookbook 'postgresql' , github: 'phlipper/chef-postgresql' , tag: 'v0.15.0'
