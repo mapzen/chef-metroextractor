@@ -5,6 +5,7 @@
 
 %w(
   postgresql::server
+  postgresql::server_dev
   postgresql::contrib
   postgresql::postgis
 ).each do |r|
@@ -21,27 +22,31 @@ directory node[:postgresql][:data_directory] do
   owner   'postgres'
 end
 
-pg_user node[:metroextractor][:postgres][:user] do
-  privileges         superuser: true, createdb: true, login: true
-  encrypted_password node[:metroextractor][:postgres][:password]
+postgresql_user node[:metroextractor][:postgres][:user] do
+  superuser           true
+  createdb            true
+  login               true
+  encrypted_password  node[:metroextractor][:postgres][:password]
 end
 
 # drop then create the db. Ensure we're fresh on every run
 #   should we need to start over in the middle for some reason.
-pg_database node[:metroextractor][:postgres][:db] do
+postgresql_database node[:metroextractor][:postgres][:db] do
   action :drop
 end
 
-pg_database node[:metroextractor][:postgres][:db] do
-  owner     node[:metroextractor][:postgres][:user]
-  encoding  'utf8'
-  template  'template0'
+postgresql_database node[:metroextractor][:postgres][:db] do
+  owner       node[:metroextractor][:postgres][:user]
+  encoding    'utf8'
+  template    'template0'
 end
 
-pg_database_extensions node[:metroextractor][:postgres][:db] do
-  extensions  ['hstore']
-  languages   'plpgsql'
-  postgis     true
+postgresql_extension 'postgis' do
+  database node[:metroextractor][:postgres][:db]
+end
+
+postgresql_extension 'hstore' do
+  database node[:metroextractor][:postgres][:db]
 end
 
 # force a restart up front
