@@ -18,6 +18,10 @@ describe 'metroextractor::postgres' do
     end.converge(described_recipe)
   end
 
+  it 'should install the package postgis' do
+    expect(chef_run).to install_package 'postgis'
+  end
+
   it 'should create the postgres data directory' do
     expect(chef_run).to create_directory('/mnt/metro/pg_data').with(
       owner: 'postgres'
