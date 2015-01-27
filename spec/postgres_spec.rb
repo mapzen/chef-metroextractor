@@ -40,5 +40,4 @@ describe 'metroextractor::postgres' do
   it 'should restart postgres' do
     expect(chef_run).to restart_service 'postgresql'
   end
-
 end

@@ -36,5 +36,4 @@ describe 'metroextractor::planet' do
   it 'should not verify the md5' do
     expect(chef_run).to_not run_ruby_block('verify md5')
   end
-
 end

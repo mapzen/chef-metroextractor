@@ -25,6 +25,7 @@ describe 'metroextractor::setup' do
       gdal-bin
       parallel
       zip
+      git
     ).each do |p|
       it "should install package #{p}" do
         expect(chef_run).to install_package p
@@ -165,6 +166,14 @@ describe 'metroextractor::setup' do
     )
   end
 
+  it 'should create template /opt/metroextractor-scripts/coastlines.sh' do
+    expect(chef_run).to create_template('/opt/metroextractor-scripts/coastlines.sh').with(
+      owner:  'metro',
+      mode:   0755,
+      source: 'coastlines.sh.erb'
+    )
+  end
+
   it 'should create the file /opt/metroextractor-scripts/osm2pgsql.style' do
     expect(chef_run).to create_cookbook_file('/opt/metroextractor-scripts/osm2pgsql.style').with(
       owner:  'metro',
@@ -181,6 +190,10 @@ describe 'metroextractor::setup' do
 
   it 'should create /mnt/metro/ex' do
     expect(chef_run).to create_directory '/mnt/metro/ex'
+  end
+
+  it 'should create /mnt/metro/coast' do
+    expect(chef_run).to create_directory '/mnt/metro/coast'
   end
 
   it 'should create /mnt/metro/logs' do

@@ -43,5 +43,4 @@ describe 'metroextractor::user' do
       expect(chef_run).to_not create_user_account('root')
     end
   end
-
 end

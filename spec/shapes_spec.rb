@@ -29,5 +29,4 @@ describe 'metroextractor::shapes' do
       timeout:      172_800
     )
   end
-
 end

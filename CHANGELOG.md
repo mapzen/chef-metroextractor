@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.13.11
+-------
+* build coastline extract data from land and water polygons
+
 0.13.8
 ------
 * replace remote_file for planet download with wget: remote_file is too slow and flaky for files this large
