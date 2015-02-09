@@ -75,7 +75,7 @@ function imposm_shapefiles
     <% when 'imposm2' -%>
       <% projection = 900913 %>
     <% end -%>
-    ogr2ogr -f GeoJSON -s_srs epsg:<%= projection %> -t_srs crs:84 shp/${slug}-imposm/${slug}-${i}.geojson shp/${slug}-imposm/${slug}.osm-${i}.shp
+    SHAPEFILE_ENCODING="UTF-8" ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -s_srs epsg:<%= projection %> -t_srs crs:84 shp/${slug}-imposm/${slug}-${i}.geojson shp/${slug}-imposm/${slug}.osm-${i}.shp
   done
 
   zip -j shp/${slug}.imposm-shapefiles.zip shp/${slug}-imposm/${slug}.osm-*.shp shp/${slug}-imposm/${slug}.osm-*.prj shp/${slug}-imposm/${slug}.osm-*.dbf shp/${slug}-imposm/${slug}.osm-*.shx

@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.13.12
+-------
+* fix encoding issue with geojson generated from Imposm shp files
+
 0.13.11
 -------
 * build coastline extract data from land and water polygons
