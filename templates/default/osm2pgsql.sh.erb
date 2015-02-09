@@ -4,7 +4,8 @@ PGPASSWORD=<%= node[:metroextractor][:postgres][:password] %>
 OSMOPTS="--host localhost --database <%= node[:metroextractor][:postgres][:db] %> --username <%= node[:metroextractor][:postgres][:user] %>"
 PGSQLOPTS="-h localhost -d <%= node[:metroextractor][:postgres][:db] %> -U <%= node[:metroextractor][:postgres][:user] %>"
 PGSQL2SHPOPTS="-h localhost -u <%= node[:metroextractor][:postgres][:user] %> -P <%= node[:metroextractor][:postgres][:password] %> <%= node[:metroextractor][:postgres][:db] %>"
-export PGPASSWORD OSMOPTS PGSQLOPTS PGSQL2SHPOPTS
+SHAPEFILE_ENCODING="UTF-8"
+export PGPASSWORD OSMOPTS PGSQLOPTS PGSQL2SHPOPTS SHAPEFILE_ENCODING
 
 function osm2pgsql_shapefiles
 {
@@ -21,9 +22,9 @@ function osm2pgsql_shapefiles
 
   # generate geojson from shp files
   #
-  ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.osm-line.geojson shp/${slug}.osm-line.shp      
-  ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.osm-point.geojson shp/${slug}.osm-point.shp    
-  ogr2ogr -f GeoJSON -t_srs crs:84 shp/${slug}.osm-polygon.geojson shp/${slug}.osm-polygon.shp
+  ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -t_srs crs:84 shp/${slug}.osm-line.geojson shp/${slug}.osm-line.shp      
+  ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -t_srs crs:84 shp/${slug}.osm-point.geojson shp/${slug}.osm-point.shp    
+  ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -t_srs crs:84 shp/${slug}.osm-polygon.geojson shp/${slug}.osm-polygon.shp
 
   # zip up our output
   #
@@ -75,7 +76,7 @@ function imposm_shapefiles
     <% when 'imposm2' -%>
       <% projection = 900913 %>
     <% end -%>
-    SHAPEFILE_ENCODING="UTF-8" ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -s_srs epsg:<%= projection %> -t_srs crs:84 shp/${slug}-imposm/${slug}-${i}.geojson shp/${slug}-imposm/${slug}.osm-${i}.shp
+    ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -s_srs epsg:<%= projection %> -t_srs crs:84 shp/${slug}-imposm/${slug}-${i}.geojson shp/${slug}-imposm/${slug}.osm-${i}.shp
   done
 
   zip -j shp/${slug}.imposm-shapefiles.zip shp/${slug}-imposm/${slug}.osm-*.shp shp/${slug}-imposm/${slug}.osm-*.prj shp/${slug}-imposm/${slug}.osm-*.dbf shp/${slug}-imposm/${slug}.osm-*.shx

@@ -3,7 +3,7 @@ metroextractor changelog
 
 0.13.12
 -------
-* fix encoding issue with geojson generated from Imposm shp files
+* fix encoding issue with geojson generated from shp files
 
 0.13.11
 -------
