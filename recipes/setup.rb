@@ -80,54 +80,24 @@ end
 
 # scripts
 #
-template "#{node[:metroextractor][:setup][:scriptsdir]}/osmosis.sh" do
-  owner   node[:metroextractor][:user][:id]
-  source  'osmosis.sh.erb'
-  mode    0755
+%w(osmosis.sh osm2pgsql.sh coastlines.sh).each do |t|
+  template "#{node[:metroextractor][:setup][:scriptsdir]}/#{t}" do
+    owner   node[:metroextractor][:user][:id]
+    source  "#{t}.erb"
+    mode    0755
+  end
 end
 
-template "#{node[:metroextractor][:setup][:scriptsdir]}/osm2pgsql.sh" do
-  owner   node[:metroextractor][:user][:id]
-  source  'osm2pgsql.sh.erb'
-  mode    0755
+%w(osm2pgsql.style merge-geojson.py).each do |f|
+  cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/#{f}" do
+    owner   node[:metroextractor][:user][:id]
+    source  f
+    mode    0644
+  end
 end
 
-template "#{node[:metroextractor][:setup][:scriptsdir]}/coastlines.sh" do
-  owner   node[:metroextractor][:user][:id]
-  source  'coastlines.sh.erb'
-  mode    0755
-end
-
-cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/osm2pgsql.style" do
-  owner   node[:metroextractor][:user][:id]
-  source  'osm2pgsql.style'
-  mode    0644
-end
-
-cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/merge-geojson.py" do
-  owner   node[:metroextractor][:user][:id]
-  source  'merge-geojson.py'
-  mode    0755
-end
-
-# directories for extracts and logs
-#
-directory "#{node[:metroextractor][:setup][:basedir]}/ex" do
-  owner node[:metroextractor][:user][:id]
-end
-
-directory "#{node[:metroextractor][:setup][:basedir]}/logs" do
-  owner node[:metroextractor][:user][:id]
-end
-
-# directories for shapes
-#
-directory "#{node[:metroextractor][:setup][:basedir]}/shp" do
-  owner node[:metroextractor][:user][:id]
-end
-
-# directories for coastlines
-#
-directory "#{node[:metroextractor][:setup][:basedir]}/coast" do
-  owner node[:metroextractor][:user][:id]
+%w(ex logs shp coast).each do |d|
+  directory "#{node[:metroextractor][:setup][:basedir]}/#{d}" do
+    owner node[:metroextractor][:user][:id]
+  end
 end
