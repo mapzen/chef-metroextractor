@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.13.14
+-------
+* lint coastlines.sh
+
 0.13.13
 -------
 * lint
