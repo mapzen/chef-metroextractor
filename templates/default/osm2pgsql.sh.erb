@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 PGPASSWORD=<%= node[:metroextractor][:postgres][:password] %>
-OSMOPTS="--host localhost --database <%= node[:metroextractor][:postgres][:db] %> --username <%= node[:metroextractor][:postgres][:user] %>"
+OSMOPTS="--hstore --host localhost --database <%= node[:metroextractor][:postgres][:db] %> --username <%= node[:metroextractor][:postgres][:user] %>"
 PGSQLOPTS="-h localhost -d <%= node[:metroextractor][:postgres][:db] %> -U <%= node[:metroextractor][:postgres][:user] %>"
 PGSQL2SHPOPTS="-h localhost -u <%= node[:metroextractor][:postgres][:user] %> -P <%= node[:metroextractor][:postgres][:password] %> <%= node[:metroextractor][:postgres][:db] %>"
 SHAPE_ENCODING="UTF-8"

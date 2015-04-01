@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.14.0
+------
+* add hstore to osm2pgsql run
+
 0.13.14
 -------
 * lint coastlines.sh
