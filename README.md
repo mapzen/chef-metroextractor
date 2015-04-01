@@ -25,7 +25,7 @@ are using EPSG:3857.
 
 What hardware do I need?
 ------------------------
-On AWS, a c3.8xl (60GB RAM and at least 75GB of fast disk), will result in the entire process taking ~15 hours.
+On AWS, a r3.4xl (124GB RAM and at least 75GB of fast disk), will result in the entire process taking ~17 hours.
 
 If you'd rather not go that route, you're in luck. We'll be producing extracts weekly, and you can find
 them here: [Mapzen Metro Extracts](https://mapzen.com/metro-extracts/)
