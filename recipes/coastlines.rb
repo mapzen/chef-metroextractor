@@ -31,6 +31,7 @@ bash 'generate coastlines' do
   code <<-EOH
     #{node[:metroextractor][:setup][:scriptsdir]}/coastlines.sh >#{node[:metroextractor][:setup][:basedir]}/logs/coastlines.log 2>&1
   EOH
+  timeout   node[:coastlines][:generate][:timeout]
   notifies  :create, "file[#{node[:metroextractor][:setup][:basedir]}/.coastlines.lock]", :immediately
   not_if    { ::File.exist?("#{node[:metroextractor][:setup][:basedir]}/.coastlines.lock") }
 end
