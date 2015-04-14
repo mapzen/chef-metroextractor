@@ -88,7 +88,7 @@ end
   end
 end
 
-%w(osm2pgsql.style merge-geojson.py).each do |f|
+%w(osm2pgsql.style merge-geojson.py mapping.json).each do |f|
   cookbook_file "#{node[:metroextractor][:setup][:scriptsdir]}/#{f}" do
     owner   node[:metroextractor][:user][:id]
     source  f
