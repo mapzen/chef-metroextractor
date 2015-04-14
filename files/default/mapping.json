@@ -268,7 +268,7 @@
                             "village",
                             "hamlet",
                             "suburb",
-                            "neighborhood",
+                            "neighbourhood",
                             "locality"
                         ]
                     },
@@ -294,7 +294,7 @@
                     "village",
                     "hamlet",
                     "suburb",
-                    "neighborhood",
+                    "neighbourhood",
                     "locality"
                 ]
             }
