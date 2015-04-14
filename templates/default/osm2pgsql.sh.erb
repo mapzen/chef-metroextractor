@@ -58,7 +58,7 @@ function imposm_shapefiles
   #
   <%- case node[:metroextractor][:imposm][:major_version] -%>
   <% when 'imposm3' -%>
-  imposm3 import -mapping <%= node[:metroextractor][:imposm][:installdir] %>/imposm3/mapping.json -read ex/${slug}.osm.pbf -cachedir shp/${slug}-imposm -write -connection postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %>?prefix=${prefix}_ -deployproduction
+  imposm3 import -mapping <%= node[:metroextractor][:setup][:scriptsdir] %>/mapping.json -read ex/${slug}.osm.pbf -cachedir shp/${slug}-imposm -write -connection postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %>?prefix=${prefix}_ -deployproduction
   <% when 'imposm2' -%>
   imposm --read --cache-dir shp/${slug}-imposm --write --table-prefix=${prefix}_ --connect postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %> ex/${slug}.osm.pbf
   <% end -%>
