@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.15.0
+------
+* maintain custom mapping for imposm3
+  * custom mapping adds neighborhoods
+
 0.14.0
 ------
 * add hstore to osm2pgsql run
