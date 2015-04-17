@@ -1,7 +1,6 @@
 site-cookbooks
 nodes
 .vagrant
-Berksfile.lock
 *~
 *#
 .#*
