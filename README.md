@@ -1,5 +1,5 @@
 Metroextractor Chef Cookbook
-===================
+----------------------------
 ![Build Status](https://circleci.com/gh/mapzen/chef-metroextractor.svg?style=svg)
 
 Attribution
