@@ -43,7 +43,7 @@ default[:metroextractor][:planet_update][:timeout]    = 10_800 # 3 hours
 
 # extracts
 default[:metroextractor][:extracts][:osmosis_timeout] = 172_800
-default[:metroextractor][:extracts][:osmosis_jobs]    = 6
+default[:metroextractor][:extracts][:osmosis_jobs]    = node[:cpu][:total] / 3
 
 # set osmosis heap (per process!!!)
 default[:metroextractor][:extracts][:osmosis_heap]    = '15G'
