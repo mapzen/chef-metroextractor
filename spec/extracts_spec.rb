@@ -25,7 +25,7 @@ describe 'metroextractor::extracts' do
     expect(chef_run).to run_bash('osmosis').with(
       user:         'metro',
       cwd:          '/mnt/metro',
-      environment:  { 'JAVACMD_OPTIONS' => '-server -XX:SurvivorRatio=8 -Xms10G -Xmx10G' },
+      environment:  { 'JAVACMD_OPTIONS' => '-server -XX:SurvivorRatio=8 -Xms15G -Xmx15G' },
       code:         "    parallel -a /opt/metroextractor-scripts/osmosis.sh -d ';' --joblog /mnt/metro/logs/parallel_osmosis.log\n",
       timeout:      172_800
     )
