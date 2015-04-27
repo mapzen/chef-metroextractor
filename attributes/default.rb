@@ -38,7 +38,7 @@ default[:postgresql][:max_connections]                = '200'
 # planet
 default[:metroextractor][:planet][:url]               = 'http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf'
 default[:metroextractor][:planet][:file]              = node[:metroextractor][:planet][:url].split('/').last
-default[:metroextractor][:planet][:update]            = 'false'  # whether to update the downloaded planet pbf with the latest changeset before processing extracts: set to true if so
+default[:metroextractor][:planet][:update]            = false  # whether to update the downloaded planet pbf with the latest changeset before processing extracts: set to true if so
 default[:metroextractor][:planet_update][:timeout]    = 10_800 # 3 hours
 
 # extracts
