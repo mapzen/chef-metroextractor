@@ -27,7 +27,7 @@ GRAPH
   build-essential (2.1.3)
   chef_handler (1.1.6)
   java (1.29.0)
-  metroextractor (0.13.13)
+  metroextractor (0.16.0)
     apt (>= 0.0.0)
     ark (>= 0.0.0)
     osm2pgsql (>= 0.0.0)

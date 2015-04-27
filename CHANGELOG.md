@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.16.0
+------
+* allow application of changesets to the planet before processing extracts
+
 0.15.0
 ------
 * maintain custom mapping for imposm3

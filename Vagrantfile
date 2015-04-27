@@ -39,13 +39,11 @@ Vagrant.configure('2') do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider :virtualbox do |vb|
-  #   # Don't boot with headless mode
-  #   vb.gui = true
-  #
-  #   # Use VBoxManage to customize the VM. For example to change memory:
-  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  # end
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+    vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
+    vb.memory = 8192
+  end
   #
   # View the documentation for the provider you're using for more
   # information on available options.
@@ -70,12 +68,15 @@ Vagrant.configure('2') do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
+      'metroextractor' => {
+        'planet' => {
+          'url' => 'http://download.geofabrik.de/north-america/greenland-latest.osm.pbf'
+        }
+      }
     }
 
     chef.run_list = [
-      'recipe[metroextractor::user]',
-      'recipe[metroextractor::setup]',
-      'recipe[metroextractor::coastlines]'
+      'recipe[metroextractor::default]'
     ]
   end
 end

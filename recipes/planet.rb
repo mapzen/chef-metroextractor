@@ -41,3 +41,5 @@ ruby_block 'verify md5' do
     end
   end
 end
+
+include_recipe 'metroextractor::planet_update' if node[:metroextractor][:planet][:update]
