@@ -4,9 +4,9 @@
 #
 
 # process?
-node[:metroextractor][:shapes][:process]              = true
-node[:metroextractor][:extracts][:process]            = true
-node[:metroextractor][:coastlines][:process]          = true
+default[:metroextractor][:shapes][:process]           = true
+default[:metroextractor][:extracts][:process]         = true
+default[:metroextractor][:coastlines][:process]       = true
 
 # setup
 default[:metroextractor][:setup][:basedir]            = '/mnt/metro'
