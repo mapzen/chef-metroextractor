@@ -3,6 +3,11 @@
 # Attributes:: default
 #
 
+# process?
+node[:metroextractor][:shapes][:process]              = true
+node[:metroextractor][:extracts][:process]            = true
+node[:metroextractor][:coastlines][:process]          = true
+
 # setup
 default[:metroextractor][:setup][:basedir]            = '/mnt/metro'
 default[:metroextractor][:setup][:scriptsdir]         = '/opt/metroextractor-scripts'
