@@ -9,15 +9,14 @@ Heavily influenced by Mike Migurski's [Extractotron](https://github.com/migurski
 What does it do?
 ----------------
 Downloads the latest planet in pbf format.
-Produces, via osmosis, a number of metro extracts in both pbf and bz2 formats.
+Produces, via osmconvert or vex, a number of metro extracts in both pbf and bz2 formats.
 Produces shape files in both imposm and osm2pgsql formats.
 
 Projections
 -----------
 GeoJSON is generated via ogr2ogr and output in CRS:84 (e.g. EPSG:4326) projection.
 
-Imposm shapfiles are generated using default projections. We use imposm3, which currently means:
-  * EPSG:3857
+Imposm shapfiles are generated using default projection for imposm3, which currently means EPSG:3857.
 
 What hardware do I need?
 ------------------------
