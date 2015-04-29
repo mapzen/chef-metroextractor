@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.17.0
+------
+* remove osmosis in favor of osmconvert or vex
+
 0.16.0
 ------
 * allow application of changesets to the planet before processing extracts
