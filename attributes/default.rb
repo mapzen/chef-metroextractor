@@ -41,7 +41,7 @@ default[:postgresql][:work_mem]                       = '64MB'
 default[:postgresql][:temp_buffers]                   = '128MB'
 default[:postgresql][:shared_buffers]                 = '8GB'
 default[:postgresql][:maintenance_work_mem]           = '512MB'
-default[:postgresql][:checkpoint_segments]            = '50'
+default[:postgresql][:checkpoint_segments]            = '100'
 default[:postgresql][:max_connections]                = '200'
 
 # planet
