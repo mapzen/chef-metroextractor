@@ -16,16 +16,17 @@ Projections
 -----------
 GeoJSON is generated via ogr2ogr and output in CRS:84 (e.g. EPSG:4326) projection.
 
-Imposm shapfiles are generated using default projections. As the code allows for the use of either imposm2 or imposm3, that currently means:
-  * EPSG:3857 for imposm3
-  * EPSG:90013 for imposm2
-
-Mapzen is using imposm3 to generate these shapefiles, so the imposm shapefiles found at our [metro extracts](https://mapzen.com/metro-extracts/) page
-are using EPSG:3857.
+Imposm shapfiles are generated using default projections. We use imposm3, which currently means:
+  * EPSG:3857
 
 What hardware do I need?
 ------------------------
-On AWS, a r3.4xl (124GB RAM and at least 75GB of fast disk), will result in the entire process taking ~17 hours.
+This depends on a few factors:
+  - what backend processing system for extracts do you want to use? We support vex and osmconvert.
+  - if you're using vex, do you have enough memory to store the planet in RAM?
+  - if osmconvert, how many cores do you have and how fast are they?
+
+The short version is that this could take anywhere from a few hours to days depending on setup and hardware .
 
 If you'd rather not go that route, you're in luck. We'll be producing extracts weekly, and you can find
 them here: [Mapzen Metro Extracts](https://mapzen.com/metro-extracts/)
@@ -46,7 +47,6 @@ Supported Platforms
 -------------------
 Tested and supported on the following platforms:
 
-* Ubuntu 12.04LTS
 * Ubuntu 14.04LTS
 
 Requirements
@@ -59,7 +59,7 @@ Attributes
 
 Dependencies
 -----------
-apt, ark, osm2pgsql, osmosis postgresql, python, user
+apt, ark, osm2pgsql, postgresql, python, user
 
 Vagrant Environment
 ===================

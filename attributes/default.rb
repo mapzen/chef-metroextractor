@@ -8,6 +8,11 @@ default[:metroextractor][:shapes][:process]           = true
 default[:metroextractor][:extracts][:process]         = true
 default[:metroextractor][:coastlines][:process]       = true
 
+default[:metroextractor][:data][:trigger_file]        = '/etc/.metroextractor_data_trigger'
+
+# extracts backend
+default[:metroextractor][:extracts][:backend]         = 'osmconvert' # choose vex or osmconvert
+
 # setup
 default[:metroextractor][:setup][:basedir]            = '/mnt/metro'
 default[:metroextractor][:setup][:scriptsdir]         = '/opt/metroextractor-scripts'
@@ -22,16 +27,15 @@ default[:metroextractor][:user][:create_group]        = true
 default[:metroextractor][:user][:ssh_keygen]          = false
 
 # imposm
-default[:metroextractor][:imposm][:major_version]     = 'imposm3'
 default[:metroextractor][:imposm][:version]           = '0.1'
-default[:metroextractor][:imposm][:url]               = 'http://imposm.org/static/rel/imposm3-0.1dev-20140702-ced9f92-linux-x86-64.tar.gz'
 default[:metroextractor][:imposm][:installdir]        = '/usr/local'
+default[:metroextractor][:imposm][:url]               = 'http://imposm.org/static/rel/imposm3-0.1dev-20140702-ced9f92-linux-x86-64.tar.gz'
 
 # postgres
 default[:metroextractor][:postgres][:db]              = 'osm'
 default[:metroextractor][:postgres][:user]            = 'osm'
 default[:metroextractor][:postgres][:password]        = 'password'
-default[:postgresql][:data_directory]                 = "#{node[:metroextractor][:setup][:basedir]}/pg_data"
+default[:postgresql][:data_directory]                 = '/mnt/postgres'
 default[:postgresql][:autovacuum]                     = 'off'
 default[:postgresql][:work_mem]                       = '64MB'
 default[:postgresql][:temp_buffers]                   = '128MB'
@@ -43,24 +47,24 @@ default[:postgresql][:max_connections]                = '200'
 # planet
 default[:metroextractor][:planet][:url]               = 'http://planet.openstreetmap.org/pbf/planet-latest.osm.pbf'
 default[:metroextractor][:planet][:file]              = node[:metroextractor][:planet][:url].split('/').last
-default[:metroextractor][:planet][:update]            = false  # whether to update the downloaded planet pbf with the latest changeset before processing extracts: set to true if so
+default[:metroextractor][:planet][:update]            = true  # whether to update the downloaded planet pbf with the latest changeset before processing extracts: set to true if so
 default[:metroextractor][:planet_update][:timeout]    = 10_800 # 3 hours
 
 # extracts
-default[:metroextractor][:extracts][:osmosis_timeout] = 172_800
-default[:metroextractor][:extracts][:osmosis_jobs]    = 6
+default[:metroextractor][:vex][:version]              = '0.0.3'
+default[:metroextractor][:vex][:installdir]           = '/usr/local'
+default[:metroextractor][:vex][:jobs]                 = node[:cpu][:total]
+default[:metroextractor][:vex][:db_timeout]           = 7200
+default[:metroextractor][:vex][:db]                   = "#{node[:metroextractor][:setup][:basedir]}/vex_db"
+default[:metroextractor][:vex][:url]                  = "https://github.com/mapzen/vanilla-extract/archive/#{node[:metroextractor][:vex][:version]}.tar.gz"
 
-# set osmosis heap (per process!!!)
-default[:metroextractor][:extracts][:osmosis_heap]    = '15G'
-default[:metroextractor][:extracts][:osmosis_jvmopts] = "-server -XX:SurvivorRatio=8 -Xms#{node[:metroextractor][:extracts][:osmosis_heap]} -Xmx#{node[:metroextractor][:extracts][:osmosis_heap]}"
+default[:metroextractor][:osmconvert][:timeout]       = 172_800
+default[:metroextractor][:osmconvert][:jobs]          = node[:cpu][:total]
 
 # shapes
 default[:metroextractor][:shapes][:imposm_jobs]       = 12
 default[:metroextractor][:shapes][:osm2pgsql_jobs]    = 8
 default[:metroextractor][:shapes][:osm2pgsql_timeout] = 172_800
-
-# osmosis
-default[:osmosis][:install_type]                      = 'tgz'
 
 # coastlines
 default[:coastlines][:generate][:timeout]             = 7_200

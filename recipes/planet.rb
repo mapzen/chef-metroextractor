@@ -12,18 +12,38 @@ ENV['TMP'] = node[:metroextractor][:setup][:basedir]
 fail if node[:metroextractor][:planet][:file] !~ /\.pbf$/
 
 remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}.md5" do
-  action    :create
   backup    false
   source    "#{node[:metroextractor][:planet][:url]}.md5"
   mode      0644
-  notifies  :run, 'execute[download planet]', :immediately
-  notifies  :run, 'ruby_block[verify md5]',   :immediately
+  notifies  :run, 'execute[download planet]',                                 :immediately
+  notifies  :run, 'ruby_block[verify md5]',                                   :immediately
+  notifies  :create, "file[#{node[:metroextractor][:data][:trigger_file]}]",  :immediately
+end
+
+file node[:metroextractor][:data][:trigger_file]
+
+execute 'update planet' do
+  user      node[:metroextractor][:user][:id]
+  cwd       node[:metroextractor][:setup][:basedir]
+  timeout   node[:metroextractor][:planet_update][:timeout]
+  notifies  :create, "file[#{node[:metroextractor][:data][:trigger_file]}]", :immediately
+  command <<-EOH
+    osmupdate #{node[:metroextractor][:planet][:file]} \
+      updated-#{node[:metroextractor][:planet][:file]} &&
+    rm #{node[:metroextractor][:planet][:file]} &&
+    mv updated-#{node[:metroextractor][:planet][:file]} #{node[:metroextractor][:planet][:file]}
+  EOH
+  only_if { node[:metroextractor][:planet][:update] == true }
 end
 
 execute 'download planet' do
   action  :nothing
-  command "wget --quiet -O #{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]} #{node[:metroextractor][:planet][:url]}"
   user    node[:metroextractor][:user][:id]
+  command <<-EOH
+    wget --quiet \
+      -O #{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]} \
+      #{node[:metroextractor][:planet][:url]}
+  EOH
 end
 
 ruby_block 'verify md5' do
@@ -41,5 +61,3 @@ ruby_block 'verify md5' do
     end
   end
 end
-
-include_recipe 'metroextractor::planet_update' if node[:metroextractor][:planet][:update] == true

@@ -7,9 +7,6 @@ DEPENDENCIES
   osm2pgsql
     git: git://github.com/mapzen/chef-osm2pgsql.git
     revision: 7a9788de028bca9419480f52759bd98249162e8d
-  osmosis
-    git: git://github.com/mapzen/chef-osmosis.git
-    revision: 029df8c5a26beaa9b77079fa5ef7fdfcd5e2a839
   postgresql
     git: git://github.com/phlipper/chef-postgresql.git
     revision: 17705405a77b2d35c829cceaf99d14534d9c5706
@@ -26,22 +23,16 @@ GRAPH
     windows (>= 0.0.0)
   build-essential (2.1.3)
   chef_handler (1.1.6)
-  java (1.29.0)
   metroextractor (0.16.0)
     apt (>= 0.0.0)
     ark (>= 0.0.0)
     osm2pgsql (>= 0.0.0)
-    osmosis (>= 0.0.0)
     postgresql (>= 0.0.0)
     python (>= 0.0.0)
     user (>= 0.0.0)
   osm2pgsql (0.5.2)
     apt (>= 0.0.0)
     ark (>= 0.0.0)
-  osmosis (0.6.0)
-    apt (>= 0.0.0)
-    ark (>= 0.0.0)
-    java (>= 0.0.0)
   postgresql (0.14.1)
     apt (>= 1.9.0)
   python (1.4.6)

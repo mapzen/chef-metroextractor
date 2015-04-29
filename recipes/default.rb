@@ -15,3 +15,7 @@
 ).each do |r|
   include_recipe r
 end
+
+file node[:metroextractor][:data][:trigger_file] do
+  action :delete
+end

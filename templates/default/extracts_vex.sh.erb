@@ -1,0 +1,8 @@
+<% require 'json' -%>
+<% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") -%>
+<% data = JSON.parse(json) -%>
+<% data['regions'].each do |_, v| -%>
+  <% v['cities'].each do |city, val| %>
+    vex <%= node[:metroextractor][:vex][:db] %> "<%= val['bbox']['bottom'] %>" "<%= val['bbox']['left'] %>" "<%= val['bbox']['top'] %>" "<%= val['bbox']['right'] %>" ex/<%= city %>.osm.pbf && osmconvert ex/<%= city %>.osm.pbf --out-osm -o=ex/<%= city %>.osm && bzip2 ex/<%= city %>.osm
+  <% end %>
+<% end %>

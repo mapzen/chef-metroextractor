@@ -12,7 +12,6 @@ recipe 'metroextractor', 'Builds metro extracts'
   apt
   ark
   osm2pgsql
-  osmosis
   postgresql
   python
   user
