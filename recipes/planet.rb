@@ -21,9 +21,11 @@ remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][
 end
 
 execute 'update planet' do
-  user      node[:metroextractor][:user][:id]
-  cwd       node[:metroextractor][:setup][:basedir]
-  timeout   node[:metroextractor][:planet_update][:timeout]
+  user        node[:metroextractor][:user][:id]
+  cwd         node[:metroextractor][:setup][:basedir]
+  timeout     node[:metroextractor][:planet_update][:timeout]
+  retries     2
+  retry_delay 30
   notifies  :create, "file[#{node[:metroextractor][:data][:trigger_file]}]", :immediately
   command <<-EOH
     osmupdate #{node[:metroextractor][:planet][:file]} \
