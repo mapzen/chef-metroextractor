@@ -20,8 +20,6 @@ remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][
   notifies  :create, "file[#{node[:metroextractor][:data][:trigger_file]}]",  :immediately
 end
 
-file node[:metroextractor][:data][:trigger_file]
-
 execute 'update planet' do
   user      node[:metroextractor][:user][:id]
   cwd       node[:metroextractor][:setup][:basedir]
@@ -36,6 +34,10 @@ execute 'update planet' do
   only_if { node[:metroextractor][:planet][:update] == true }
 end
 
+file node[:metroextractor][:data][:trigger_file] do
+  action :nothing
+end
+
 execute 'download planet' do
   action  :nothing
   user    node[:metroextractor][:user][:id]
@@ -48,7 +50,6 @@ end
 
 ruby_block 'verify md5' do
   action :nothing
-
   block do
     require 'digest'
 
