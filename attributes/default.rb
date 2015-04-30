@@ -3,15 +3,21 @@
 # Attributes:: default
 #
 
-# process?
+# the following are booleans and tell the cookbook whether or not
+#   we should produce certain types of data. Note that in order to produce
+#   shapes, you MUST procuce extracts, as the former is constructed from
+#   the latter.
 default[:metroextractor][:shapes][:process]           = true
 default[:metroextractor][:extracts][:process]         = true
 default[:metroextractor][:coastlines][:process]       = true
 
+# when the planet is updated in full or in part, create a file off of which
+#   subsequent processing will be triggered: either recreation of the vex db
+#   or conversion of the planet to .o5m dependin on the backend being used.
 default[:metroextractor][:data][:trigger_file]        = '/etc/.metroextractor_data_trigger'
 
-# extracts backend
-default[:metroextractor][:extracts][:backend]         = 'osmconvert' # choose vex or osmconvert
+# options are 'vex' or 'osmconvert'
+default[:metroextractor][:extracts][:backend]         = 'osmconvert'
 
 # setup
 default[:metroextractor][:setup][:basedir]            = '/mnt/metro'
@@ -61,7 +67,9 @@ default[:metroextractor][:vex][:url]                  = "https://github.com/mapz
 default[:metroextractor][:osmconvert][:timeout]       = 172_800
 default[:metroextractor][:osmconvert][:jobs]          = node[:cpu][:total]
 
-# shapes
+# shapes: note that the number of jobs below reflects close to the limit of what the
+#   local postgres instance can handle in terms of max connections. Not recommended
+#   to change.
 default[:metroextractor][:shapes][:imposm_jobs]       = 12
 default[:metroextractor][:shapes][:osm2pgsql_jobs]    = 8
 default[:metroextractor][:shapes][:osm2pgsql_timeout] = 172_800
