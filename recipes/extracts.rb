@@ -9,6 +9,7 @@ when 'vex'
   execute 'remove vex db' do
     user    node[:metroextractor][:user][:id]
     command "rm -rf #{node[:metroextractor][:vex][:db]}"
+    only_if { node[:metroextractor][:extracts][:process] == true && ::File.exist?(node[:metroextractor][:data][:trigger_file]) }
   end
 
   execute 'create vexdb' do
