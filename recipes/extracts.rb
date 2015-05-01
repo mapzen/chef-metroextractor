@@ -6,9 +6,9 @@
 case node[:metroextractor][:extracts][:backend]
 when 'vex'
   # can't re-import data over an existing import
-  execute 'clean vex db' do
+  execute 'remove vex db' do
     user    node[:metroextractor][:user][:id]
-    command "rm -rf #{node[:metroextractor][:vex][:db]}/*"
+    command "rm -rf #{node[:metroextractor][:vex][:db]}"
   end
 
   execute 'create vexdb' do

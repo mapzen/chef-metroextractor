@@ -62,12 +62,6 @@ if node[:metroextractor][:extracts][:backend] == 'vex'
     cwd     "#{node[:metroextractor][:vex][:installdir]}/vex-#{node[:metroextractor][:vex][:version]}"
     command "make -j#{node[:cpu][:total]}"
   end
-
-  directory node[:metroextractor][:vex][:db] do
-    recursive true
-    owner     node[:metroextractor][:user][:id]
-    not_if    { node[:metroextractor][:vex][:db] == 'memory' }
-  end
 end
 
 # scripts
