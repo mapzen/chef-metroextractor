@@ -45,6 +45,7 @@ end
 # vex
 if node[:metroextractor][:extracts][:backend] == 'vex'
   package 'libprotobuf-c0-dev'
+  package 'protobuf-c-compiler'
   package 'zlib1g-dev'
   package 'clang'
 
