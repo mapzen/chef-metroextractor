@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.17.1
+------
+* --drop-broken-refs when building extracts with osmconvert
+
 0.17.0
 ------
 * remove osmosis in favor of osmconvert or vex
