@@ -61,7 +61,11 @@ if node[:metroextractor][:extracts][:backend] == 'vex'
   execute 'build vex' do
     action  :nothing
     cwd     "#{node[:metroextractor][:vex][:installdir]}/vex-#{node[:metroextractor][:vex][:version]}"
-    command "make -j#{node[:cpu][:total]}"
+    command <<-EOH
+      protoc-c fileformat.proto --c_out=.
+      protoc-c osmformat.proto --c_out=.
+      make -j#{node[:cpu][:total]}
+    EOH
   end
 end
 
