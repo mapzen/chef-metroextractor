@@ -56,7 +56,7 @@ function imposm_shapefiles
 
   imposm3 import -mapping <%= node[:metroextractor][:setup][:scriptsdir] %>/mapping.json -read ex/${slug}.osm.pbf -cachedir shp/${slug}-imposm -write -connection postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %>?prefix=${prefix}_ -deployproduction
 
-  declare -a arr=('admin' 'aeroways' 'amenities' 'buildings' 'landusages' 'landusages_gen0' 'landusages_gen1' 'mainroads' 'mainroads_gen1' 'minorroads' 'motorways' 'motorways_gen0' 'motorways_gen1' 'places' 'railways' 'railways_gen0' 'railways_gen1' 'roads' 'roads_gen0' 'roads_gen1' 'transport_areas' 'transport_points' 'waterareas' 'waterareas_gen0' 'waterareas_gen1' 'waterways')
+  declare -a arr=('admin' 'aeroways' 'amenities' 'buildings' 'landusages' 'landusages_gen0' 'landusages_gen1' 'places' 'roads' 'roads_gen0' 'roads_gen1' 'transport_areas' 'transport_points' 'waterareas' 'waterareas_gen0' 'waterareas_gen1' 'waterways')
 
   for i in ${arr[@]}; do
     pgsql2shp -rk -f shp/${slug}-imposm/${slug}.osm-${i}.shp ${PGSQL2SHPOPTS} ${prefix}_${i}
