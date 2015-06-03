@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.17.2
+------
+* convert bzip work to pbzip
+
 0.17.1
 ------
 * --drop-broken-refs when building extracts with osmconvert

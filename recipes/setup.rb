@@ -10,6 +10,7 @@ include_recipe 'osm2pgsql::default'
   osmctools
   gdal-bin
   parallel
+  pbzip2
   zip
   git
 ).each do |p|

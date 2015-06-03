@@ -3,6 +3,6 @@
 <% data = JSON.parse(json) -%>
 <% data['regions'].each do |_, v| -%>
   <% v['cities'].each do |city, val| -%>
-    osmconvert planet.o5m --out-pbf -b=<%= val['bbox']['left'] %>,<%= val['bbox']['bottom'] %>,<%= val['bbox']['right'] %>,<%= val['bbox']['top'] %> --drop-broken-refs -o=ex/<%= city %>.osm.pbf && osmconvert ex/<%= city %>.osm.pbf --out-osm -o=ex/<%= city %>.osm && bzip2 -f ex/<%= city %>.osm
+    osmconvert planet.o5m --out-pbf -b=<%= val['bbox']['left'] %>,<%= val['bbox']['bottom'] %>,<%= val['bbox']['right'] %>,<%= val['bbox']['top'] %> --drop-broken-refs -o=ex/<%= city %>.osm.pbf && osmconvert ex/<%= city %>.osm.pbf --out-osm -o=ex/<%= city %>.osm && pbzip2 -f ex/<%= city %>.osm
   <% end %>
 <% end %>
