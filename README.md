@@ -16,7 +16,7 @@ Projections
 -----------
 GeoJSON is generated via ogr2ogr and output in CRS:84 (e.g. EPSG:4326) projection.
 
-Imposm shapfiles are generated using default projection for imposm3, which currently means EPSG:3857.
+Imposm shapfiles are generated in EPSG:4326.
 
 What hardware do I need?
 ------------------------
