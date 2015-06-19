@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.17.3
+------
+* imposm shp use 4326
+* update imposm version
+
 0.17.2
 ------
 * convert bzip work to pbzip
