@@ -54,15 +54,14 @@ function imposm_shapefiles
 
   mkdir shp/$slug-imposm
 
-  imposm3 import -mapping <%= node[:metroextractor][:setup][:scriptsdir] %>/mapping.json -read ex/${slug}.osm.pbf -cachedir shp/${slug}-imposm -write -connection postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %>?prefix=${prefix}_ -deployproduction
+  imposm3 import -mapping <%= node[:metroextractor][:setup][:scriptsdir] %>/mapping.json -read ex/${slug}.osm.pbf -cachedir shp/${slug}-imposm -srid 4326 -write -connection postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %>?prefix=${prefix}_ -deployproduction
 
   declare -a arr=('admin' 'aeroways' 'amenities' 'buildings' 'landusages' 'landusages_gen0' 'landusages_gen1' 'places' 'roads' 'roads_gen0' 'roads_gen1' 'transport_areas' 'transport_points' 'waterareas' 'waterareas_gen0' 'waterareas_gen1' 'waterways')
 
   for i in ${arr[@]}; do
     pgsql2shp -rk -f shp/${slug}-imposm/${slug}.osm-${i}.shp ${PGSQL2SHPOPTS} ${prefix}_${i}
 
-    <% projection = 3857 %>
-    ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -s_srs epsg:<%= projection %> -t_srs crs:84 shp/${slug}-imposm/${slug}-${i}.geojson shp/${slug}-imposm/${slug}.osm-${i}.shp
+    ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -s_srs epsg:4326 -t_srs crs:84 shp/${slug}-imposm/${slug}-${i}.geojson shp/${slug}-imposm/${slug}.osm-${i}.shp
   done
 
   zip -j shp/${slug}.imposm-shapefiles.zip shp/${slug}-imposm/${slug}.osm-*.shp shp/${slug}-imposm/${slug}.osm-*.prj shp/${slug}-imposm/${slug}.osm-*.dbf shp/${slug}-imposm/${slug}.osm-*.shx
