@@ -9,22 +9,22 @@ function package_coast
   bottom=$4
   right=$5
 
-  ogr2ogr -spat ${left} ${bottom} ${right} ${top} -t_srs EPSG:4326 coast/${slug}.water_coast.shp water-polygons-split-4326/water_polygons.shp
+  ogr2ogr -spat ${left} ${bottom} ${right} ${top} -t_srs EPSG:4326 coast/${slug}_water_coast.shp water-polygons-split-4326/water_polygons.shp
 
   # if our size is > 4 we have a coastline. Package it, then generate the inverse land polygons
   # for the extract as well
   size=$(du -sk coast/${slug}.water_coast.shp | awk '{print $1}')
   if [ ${size} -gt 4 ]; then
-    ogr2ogr -spat ${left} ${bottom} ${right} ${top} -t_srs EPSG:4326 coast/${slug}.land_coast.shp land-polygons-split-4326/land_polygons.shp
+    ogr2ogr -spat ${left} ${bottom} ${right} ${top} -t_srs EPSG:4326 coast/${slug}_land_coast.shp land-polygons-split-4326/land_polygons.shp
 
-    zip -j - coast/${slug}.water_coast.??? > coast/${slug}.water.coastline.zip
-    zip -j - coast/${slug}.land_coast.??? > coast/${slug}.land.coastline.zip
+    zip -j - coast/${slug}_water_coast.??? > coast/${slug}_water_coastline.zip
+    zip -j - coast/${slug}_land_coast.??? > coast/${slug}_land_coastline.zip
   else
     echo "Size not > 4, skipping ${slug}.water"
   fi
 
-  rm coast/${slug}.land_coast.*
-  rm coast/${slug}.water_coast.*
+  rm coast/${slug}_land_coast.*
+  rm coast/${slug}_water_coast.*
 }
 
 <% require 'json' -%>
