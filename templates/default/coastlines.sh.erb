@@ -13,7 +13,7 @@ function package_coast
 
   # if our size is > 4 we have a coastline. Package it, then generate the inverse land polygons
   # for the extract as well
-  size=$(du -sk coast/${slug}.water_coast.shp | awk '{print $1}')
+  size=$(du -sk coast/${slug}_water_coast.shp | awk '{print $1}')
   if [ ${size} -gt 4 ]; then
     ogr2ogr -spat ${left} ${bottom} ${right} ${top} -t_srs EPSG:4326 coast/${slug}_land_coast.shp land-polygons-split-4326/land_polygons.shp
 
