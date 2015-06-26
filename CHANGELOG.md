@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.18.0
+------
+* change archive contents filenames to only contain a single dot for the extension
+
 0.17.3
 ------
 * imposm shp use 4326
