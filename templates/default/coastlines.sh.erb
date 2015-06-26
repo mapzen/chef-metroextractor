@@ -17,8 +17,8 @@ function package_coast
   if [ ${size} -gt 4 ]; then
     ogr2ogr -spat ${left} ${bottom} ${right} ${top} -t_srs EPSG:4326 coast/${slug}_land_coast.shp land-polygons-split-4326/land_polygons.shp
 
-    zip -j - coast/${slug}_water_coast.??? > coast/${slug}.water_coastline.zip
-    zip -j - coast/${slug}_land_coast.??? > coast/${slug}.land_coastline.zip
+    zip -j - coast/${slug}_water_coast.??? > coast/${slug}.water.coastline.zip
+    zip -j - coast/${slug}_land_coast.??? > coast/${slug}.land.coastline.zip
   else
     echo "Size not > 4, skipping ${slug}.water"
   fi
