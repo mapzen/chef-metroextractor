@@ -14,26 +14,26 @@ function osm2pgsql_shapefiles
 
   # generate shp files
   #
-  osm2pgsql -sluc -C 2048 ${OSMOPTS} -S <%= node[:metroextractor][:setup][:scriptsdir] %>/osm2pgsql.style -p ${prefix} --number-processes 2 ex/$slug.osm.pbf
+  osm2pgsql -sluc -C 2048 ${OSMOPTS} -S <%= node[:metroextractor][:setup][:scriptsdir] %>/osm2pgsql.style -p ${prefix} --number-processes 2 ex/${slug}.osm.pbf
 
-  pgsql2shp -rk -f shp/${slug}.osm-point.shp    ${PGSQL2SHPOPTS} ${prefix}_point  
-  pgsql2shp -rk -f shp/${slug}.osm-polygon.shp  ${PGSQL2SHPOPTS} ${prefix}_polygon
-  pgsql2shp -rk -f shp/${slug}.osm-line.shp     ${PGSQL2SHPOPTS} ${prefix}_line   
+  pgsql2shp -rk -f shp/${slug}_osm_point.shp    ${PGSQL2SHPOPTS} ${prefix}_point  
+  pgsql2shp -rk -f shp/${slug}_osm_polygon.shp  ${PGSQL2SHPOPTS} ${prefix}_polygon
+  pgsql2shp -rk -f shp/${slug}_osm_line.shp     ${PGSQL2SHPOPTS} ${prefix}_line   
 
   # generate geojson from shp files
   #
-  ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -t_srs crs:84 shp/${slug}.osm-line.geojson shp/${slug}.osm-line.shp      
-  ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -t_srs crs:84 shp/${slug}.osm-point.geojson shp/${slug}.osm-point.shp    
-  ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -t_srs crs:84 shp/${slug}.osm-polygon.geojson shp/${slug}.osm-polygon.shp
+  ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -t_srs crs:84 shp/${slug}_osm_line.geojson shp/${slug}_osm_line.shp
+  ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -t_srs crs:84 shp/${slug}_osm_point.geojson shp/${slug}_osm_point.shp
+  ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -t_srs crs:84 shp/${slug}_osm_polygon.geojson shp/${slug}_osm_polygon.shp
 
   # zip up our output
   #
-  zip -j shp/${slug}.osm2pgsql-shapefiles.zip shp/${slug}.osm-*.shp shp/${slug}.osm-*.prj shp/${slug}.osm-*.dbf shp/${slug}.osm-*.shx
-  zip -j shp/$slug.osm2pgsql-geojson.zip shp/$slug.osm-*.geojson
+  zip -j shp/${slug}.osm2pgsql-shapefiles.zip shp/${slug}_osm_*.shp shp/${slug}_osm_*.prj shp/${slug}_osm_*.dbf shp/${slug}_osm_*.shx
+  zip -j shp/${slug}.osm2pgsql-geojson.zip shp/${slug}_osm_*.geojson
 
   # remove source files
   #
-  rm shp/${slug}.osm-*.*
+  rm shp/${slug}_osm_*.*
 
   # clean up the db
   #
@@ -52,20 +52,20 @@ function imposm_shapefiles
   slug=$1
   prefix=${slug//-/_}
 
-  mkdir shp/$slug-imposm
+  mkdir shp/${slug}-imposm
 
   imposm3 import -mapping <%= node[:metroextractor][:setup][:scriptsdir] %>/mapping.json -read ex/${slug}.osm.pbf -cachedir shp/${slug}-imposm -srid 4326 -write -connection postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %>?prefix=${prefix}_ -deployproduction
 
   declare -a arr=('admin' 'aeroways' 'amenities' 'buildings' 'landusages' 'landusages_gen0' 'landusages_gen1' 'places' 'roads' 'roads_gen0' 'roads_gen1' 'transport_areas' 'transport_points' 'waterareas' 'waterareas_gen0' 'waterareas_gen1' 'waterways')
 
   for i in ${arr[@]}; do
-    pgsql2shp -rk -f shp/${slug}-imposm/${slug}.osm-${i}.shp ${PGSQL2SHPOPTS} ${prefix}_${i}
+    pgsql2shp -rk -f shp/${slug}-imposm/${slug}_osm_${i}.shp ${PGSQL2SHPOPTS} ${prefix}_${i}
 
-    ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -s_srs epsg:4326 -t_srs crs:84 shp/${slug}-imposm/${slug}-${i}.geojson shp/${slug}-imposm/${slug}.osm-${i}.shp
+    ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -s_srs epsg:4326 -t_srs crs:84 shp/${slug}-imposm/${slug}_${i}.geojson shp/${slug}-imposm/${slug}_osm_${i}.shp
   done
 
-  zip -j shp/${slug}.imposm-shapefiles.zip shp/${slug}-imposm/${slug}.osm-*.shp shp/${slug}-imposm/${slug}.osm-*.prj shp/${slug}-imposm/${slug}.osm-*.dbf shp/${slug}-imposm/${slug}.osm-*.shx
-  zip -j shp/${slug}.imposm-geojson.zip shp/${slug}-imposm/${slug}-*.geojson
+  zip -j shp/${slug}.imposm-shapefiles.zip shp/${slug}-imposm/${slug}_osm_*.shp shp/${slug}-imposm/${slug}_osm_*.prj shp/${slug}-imposm/${slug}_osm_*.dbf shp/${slug}-imposm/${slug}_osm_*.shx
+  zip -j shp/${slug}.imposm-geojson.zip shp/${slug}-imposm/${slug}_*.geojson
 
   rm -r shp/${slug}-imposm
 
