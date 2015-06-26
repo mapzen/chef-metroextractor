@@ -28,8 +28,8 @@ function osm2pgsql_shapefiles
 
   # zip up our output
   #
-  zip -j shp/${slug}_osm2pgsql_shapefiles.zip shp/${slug}_osm_*.shp shp/${slug}_osm_*.prj shp/${slug}_osm_*.dbf shp/${slug}_osm_*.shx
-  zip -j shp/${slug}_osm2pgsql_geojson.zip shp/${slug}_osm_*.geojson
+  zip -j shp/${slug}.osm2pgsql_shapefiles.zip shp/${slug}_osm_*.shp shp/${slug}_osm_*.prj shp/${slug}_osm_*.dbf shp/${slug}_osm_*.shx
+  zip -j shp/${slug}.osm2pgsql_geojson.zip shp/${slug}_osm_*.geojson
 
   # remove source files
   #
@@ -64,8 +64,8 @@ function imposm_shapefiles
     ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -s_srs epsg:4326 -t_srs crs:84 shp/${slug}-imposm/${slug}_${i}.geojson shp/${slug}-imposm/${slug}_osm_${i}.shp
   done
 
-  zip -j shp/${slug}_imposm-shapefiles.zip shp/${slug}-imposm/${slug}_osm_*.shp shp/${slug}-imposm/${slug}_osm_*.prj shp/${slug}-imposm/${slug}_osm_*.dbf shp/${slug}-imposm/${slug}_osm_*.shx
-  zip -j shp/${slug}_imposm_geojson.zip shp/${slug}-imposm/${slug}_*.geojson
+  zip -j shp/${slug}.imposm-shapefiles.zip shp/${slug}-imposm/${slug}_osm_*.shp shp/${slug}-imposm/${slug}_osm_*.prj shp/${slug}-imposm/${slug}_osm_*.dbf shp/${slug}-imposm/${slug}_osm_*.shx
+  zip -j shp/${slug}.imposm_geojson.zip shp/${slug}-imposm/${slug}_*.geojson
 
   rm -r shp/${slug}-imposm
 
