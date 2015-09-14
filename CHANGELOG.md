@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.18.1
+------
+* imposm power landuse polys
+
 0.18.0
 ------
 * change archive contents filenames to only contain a single dot for the extension
