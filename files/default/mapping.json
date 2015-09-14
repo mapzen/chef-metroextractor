@@ -173,6 +173,11 @@
                 "place": [
                     "island"
                 ],
+                "power": [
+                    "plant",
+                    "generator",
+                    "substation"
+                ],
                 "military": [
                     "barracks"
                 ],
