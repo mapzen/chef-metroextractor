@@ -110,6 +110,9 @@
                             "vineyard",
                             "zoo",
                             "quarry",
+                            "plant",
+                            "generator",
+                            "substation",
                             "residential",
                             "retail",
                             "commercial",
@@ -172,6 +175,11 @@
                 ],
                 "place": [
                     "island"
+                ],
+                "power": [
+                    "plant",
+                    "generator",
+                    "substation"
                 ],
                 "military": [
                     "barracks"
