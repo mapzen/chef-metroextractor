@@ -51,6 +51,8 @@ Tested and supported on the following platforms:
 Requirements
 ------------
 * Chef >= 11.4
+* Ruby >= 2.0
+* Bundler >= 1.3
 
 Attributes
 ----------
