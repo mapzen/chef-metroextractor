@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.18.2
+------
+* always generate coast polys, regardless of an actual coastline
+
 0.18.1
 ------
 * imposm power landuse polys
