@@ -66,6 +66,7 @@ default[:metroextractor][:vex][:url]                  = "https://github.com/mapz
 
 default[:metroextractor][:osmconvert][:timeout]       = 172_800
 default[:metroextractor][:osmconvert][:jobs]          = node[:cpu][:total]
+# hash_memory is in megs
 default[:metroextractor][:osmconvert][:hash_memory]   = 1500
 
 # shapes: note that the number of jobs below reflects close to the limit of what the
