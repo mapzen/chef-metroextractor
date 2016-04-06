@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.18.3
+------
+* fix for memory buffer overflow
+
 0.18.2
 ------
 * always generate coast polys, regardless of an actual coastline
