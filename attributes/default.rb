@@ -65,7 +65,7 @@ default[:metroextractor][:vex][:db]                   = "#{node[:metroextractor]
 default[:metroextractor][:vex][:url]                  = "https://github.com/mapzen/vanilla-extract/archive/#{node[:metroextractor][:vex][:version]}.tar.gz"
 
 default[:metroextractor][:osmconvert][:timeout]       = 172_800
-default[:metroextractor][:osmconvert][:jobs]          = node[:cpu][:total]
+default[:metroextractor][:osmconvert][:jobs]          = (node[:cpu][:total] * 0.75).to_i
 # hash_memory is in megs
 default[:metroextractor][:osmconvert][:hash_memory]   = 1500
 
