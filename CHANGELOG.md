@@ -1,6 +1,10 @@
 metroextractor changelog
 ========================
 
+0.18.4
+------
+* set osmconvert jobs to 75% of cpu total
+
 0.18.3
 ------
 * fix for memory buffer overflow
