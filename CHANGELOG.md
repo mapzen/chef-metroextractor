@@ -6,6 +6,7 @@ metroextractor changelog
 * support for postgresql cookbook update
 * as above, upgrade to postgresql 9.4
 * upgrade imposm to latest
+* halt parallel processing on initial failure
 
 0.18.4
 ------
