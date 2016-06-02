@@ -25,7 +25,9 @@ directory node[:postgresql][:data_directory] do
 end
 
 postgresql_user node[:metroextractor][:postgres][:user] do
-  privileges         superuser: true, createdb: true, login: true
+  createdb  true
+  login     true
+  superuser true
   encrypted_password node[:metroextractor][:postgres][:password]
 end
 
