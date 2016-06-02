@@ -24,24 +24,24 @@ directory node[:postgresql][:data_directory] do
   owner   'postgres'
 end
 
-pg_user node[:metroextractor][:postgres][:user] do
+postgresql_user node[:metroextractor][:postgres][:user] do
   privileges         superuser: true, createdb: true, login: true
   encrypted_password node[:metroextractor][:postgres][:password]
 end
 
 # drop then create the db. Ensure we're fresh on every run
 #   should we need to start over in the middle for some reason.
-pg_database node[:metroextractor][:postgres][:db] do
+postgresql_database node[:metroextractor][:postgres][:db] do
   action :drop
 end
 
-pg_database node[:metroextractor][:postgres][:db] do
+postgresql_database node[:metroextractor][:postgres][:db] do
   owner     node[:metroextractor][:postgres][:user]
   encoding  'utf8'
   template  'template0'
 end
 
-pg_database_extensions node[:metroextractor][:postgres][:db] do
+postgresql_extension node[:metroextractor][:postgres][:db] do
   extensions  ['hstore']
   languages   'plpgsql'
   postgis     true
