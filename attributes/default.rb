@@ -33,9 +33,9 @@ default[:metroextractor][:user][:create_group]        = true
 default[:metroextractor][:user][:ssh_keygen]          = false
 
 # imposm
-default[:metroextractor][:imposm][:version]           = '0.1'
-default[:metroextractor][:imposm][:installdir]        = '/usr/local'
-default[:metroextractor][:imposm][:url]               = 'http://imposm.org/static/rel/imposm3-0.1dev-20150515-593f252-linux-x86-64.tar.gz'
+default[:mapzen_odes][:imposm][:version]                          = '0.2'
+default[:mapzen_odes][:imposm][:installdir]                       = '/usr/local'
+default[:mapzen_odes][:imposm][:url]                              = 'http://imposm.org/static/rel/imposm3-0.2.0dev-20160311-77162d9-linux-x86-64.tar.gz'
 
 # postgres
 default[:metroextractor][:postgres][:db]              = 'osm'
