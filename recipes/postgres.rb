@@ -43,10 +43,8 @@ postgresql_database node[:metroextractor][:postgres][:db] do
   template  'template0'
 end
 
-postgresql_extension node[:metroextractor][:postgres][:db] do
-  extensions  ['hstore']
-  languages   'plpgsql'
-  postgis     true
+postgresql_extension 'hstore' do
+  database node[:metroextractor][:postgres][:db]
 end
 
 # force a restart up front
