@@ -1,6 +1,11 @@
 metroextractor changelog
 ========================
 
+0.19.0
+------
+* support for postgresql cookbook update
+* as above, upgrade to postgresql 9.4
+
 0.18.4
 ------
 * set osmconvert jobs to 75% of cpu total
