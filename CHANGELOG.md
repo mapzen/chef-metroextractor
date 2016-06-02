@@ -5,6 +5,7 @@ metroextractor changelog
 ------
 * support for postgresql cookbook update
 * as above, upgrade to postgresql 9.4
+* upgrade imposm to latest
 
 0.18.4
 ------
