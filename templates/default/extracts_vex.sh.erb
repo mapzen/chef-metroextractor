@@ -1,8 +1,0 @@
-<% require 'json' -%>
-<% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") -%>
-<% data = JSON.parse(json) -%>
-<% data['regions'].each do |_, v| -%>
-  <% v['cities'].each do |city, val| %>
-    vex <%= node[:metroextractor][:vex][:db] %> <%= val['bbox']['left'] %> <%= val['bbox']['bottom'] %> <%= val['bbox']['right'] %> <%= val['bbox']['top'] %> ex/<%= city %>.osm.pbf ><%= node[:metroextractor][:setup][:basedir] %>/logs/<%= city %>_vex.log 2>&1
-  <% end %>
-<% end %>

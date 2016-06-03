@@ -12,12 +12,8 @@ default[:metroextractor][:extracts][:process]         = true
 default[:metroextractor][:coastlines][:process]       = true
 
 # when the planet is updated in full or in part, create a file off of which
-#   subsequent processing will be triggered: either recreation of the vex db
-#   or conversion of the planet to .o5m dependin on the backend being used.
+#   subsequent processing will be triggered
 default[:metroextractor][:data][:trigger_file]        = '/etc/.metroextractor_data_trigger'
-
-# options are 'vex' or 'osmconvert'
-default[:metroextractor][:extracts][:backend]         = 'osmconvert'
 
 # setup
 default[:metroextractor][:setup][:basedir]            = '/mnt/metro'
@@ -57,13 +53,6 @@ default[:metroextractor][:planet][:update]            = true  # whether to updat
 default[:metroextractor][:planet_update][:timeout]    = 10_800 # 3 hours
 
 # extracts
-default[:metroextractor][:vex][:version]              = '0.0.3'
-default[:metroextractor][:vex][:installdir]           = '/usr/local'
-default[:metroextractor][:vex][:jobs]                 = node[:cpu][:total]
-default[:metroextractor][:vex][:db_timeout]           = 7200
-default[:metroextractor][:vex][:db]                   = "#{node[:metroextractor][:setup][:basedir]}/vex_db"
-default[:metroextractor][:vex][:url]                  = "https://github.com/mapzen/vanilla-extract/archive/#{node[:metroextractor][:vex][:version]}.tar.gz"
-
 default[:metroextractor][:osmconvert][:timeout]       = 172_800
 default[:metroextractor][:osmconvert][:jobs]          = (node[:cpu][:total] * 0.75).to_i
 # hash_memory is in megs
