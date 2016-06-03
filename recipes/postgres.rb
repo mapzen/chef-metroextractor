@@ -41,7 +41,10 @@ postgresql_database node[:metroextractor][:postgres][:db] do
   owner     node[:metroextractor][:postgres][:user]
   encoding  'utf8'
   template  'template0'
-  postgis   true
+end
+
+postgresql_extension 'postgis' do
+  database node[:metroextractor][:postgres][:db]
 end
 
 postgresql_extension 'hstore' do
