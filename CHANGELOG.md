@@ -7,6 +7,7 @@ metroextractor changelog
 * as above, upgrade to postgresql 9.4
 * upgrade imposm to latest
 * halt parallel processing on initial failure
+* remove vex as an extract processing option
 
 0.18.4
 ------
