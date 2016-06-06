@@ -6,41 +6,50 @@ DEPENDENCIES
     metadata: true
   osm2pgsql
     git: git://github.com/mapzen/chef-osm2pgsql.git
-    revision: 7a9788de028bca9419480f52759bd98249162e8d
+    revision: 69b933b7074b4531183a8b4d99b938300664e177
   postgresql
     git: git://github.com/phlipper/chef-postgresql.git
-    revision: 17705405a77b2d35c829cceaf99d14534d9c5706
-    tag: v0.14.1
+    revision: 13a8c2ff4ec2b778a29ac4891740806807ce6e6f
+    tag: v0.16.1
   python
   user
 
 GRAPH
-  7-zip (1.0.2)
-    windows (>= 1.2.2)
-  apt (2.6.1)
-  ark (0.9.0)
-    7-zip (>= 0.0.0)
+  apt (4.0.0)
+    compat_resource (>= 0.0.0)
+  ark (1.1.0)
+    build-essential (>= 0.0.0)
+    seven_zip (>= 0.0.0)
     windows (>= 0.0.0)
-  build-essential (2.1.3)
-  chef_handler (1.1.6)
-  metroextractor (0.16.0)
+  build-essential (6.0.0)
+    compat_resource (>= 12.10)
+    mingw (>= 1.1)
+    seven_zip (>= 0.0.0)
+  chef_handler (1.4.0)
+  compat_resource (12.10.6)
+  metroextractor (0.19.0)
     apt (>= 0.0.0)
     ark (>= 0.0.0)
     osm2pgsql (>= 0.0.0)
     postgresql (>= 0.0.0)
     python (>= 0.0.0)
     user (>= 0.0.0)
-  osm2pgsql (0.5.2)
+  mingw (1.1.0)
+    compat_resource (>= 0.0.0)
+    seven_zip (>= 0.0.0)
+  osm2pgsql (0.5.4)
     apt (>= 0.0.0)
     ark (>= 0.0.0)
-  postgresql (0.14.1)
+  postgresql (0.16.1)
     apt (>= 1.9.0)
   python (1.4.6)
     build-essential (>= 0.0.0)
     yum-epel (>= 0.0.0)
-  user (0.3.0)
-  windows (1.36.1)
+  seven_zip (2.0.1)
+    windows (>= 1.2.2)
+  user (0.4.2)
+  windows (1.43.0)
     chef_handler (>= 0.0.0)
-  yum (3.5.2)
-  yum-epel (0.6.0)
-    yum (~> 3.0)
+  yum (3.11.0)
+  yum-epel (0.7.0)
+    yum (>= 3.6.3)
