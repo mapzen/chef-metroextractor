@@ -18,8 +18,10 @@ default[:metroextractor][:data][:trigger_file]        = '/etc/.metroextractor_da
 # setup
 default[:metroextractor][:setup][:basedir]            = '/mnt/metro'
 default[:metroextractor][:setup][:scriptsdir]         = '/opt/metroextractor-scripts'
-default[:metroextractor][:setup][:cities_repo]        = 'https://github.com/mapzen/metroextractor-cities.git'
-default[:metroextractor][:setup][:cities_branch]      = 'master'
+#default[:metroextractor][:setup][:cities_repo]        = 'https://github.com/mapzen/metro-extracts.git'
+#default[:metroextractor][:setup][:cities_branch]      = 'master'
+default[:metroextractor][:setup][:cities_repo]        = 'https://github.com/mapzen/data-pages.git'
+default[:metroextractor][:setup][:cities_branch]      = 'odes-client'
 
 # user
 default[:metroextractor][:user][:id]                  = 'metro'
@@ -29,9 +31,9 @@ default[:metroextractor][:user][:create_group]        = true
 default[:metroextractor][:user][:ssh_keygen]          = false
 
 # imposm
-default[:mapzen_odes][:imposm][:version]                          = '0.2'
-default[:mapzen_odes][:imposm][:installdir]                       = '/usr/local'
-default[:mapzen_odes][:imposm][:url]                              = 'http://imposm.org/static/rel/imposm3-0.2.0dev-20160311-77162d9-linux-x86-64.tar.gz'
+default[:metroextractor][:imposm][:version]           = '0.2'
+default[:metroextractor][:imposm][:installdir]        = '/usr/local'
+default[:metroextractor][:imposm][:url]               = 'http://imposm.org/static/rel/imposm3-0.2.0dev-20160311-77162d9-linux-x86-64.tar.gz'
 
 # postgres
 default[:metroextractor][:postgres][:db]              = 'osm'

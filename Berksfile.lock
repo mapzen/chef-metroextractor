@@ -27,7 +27,7 @@ GRAPH
     seven_zip (>= 0.0.0)
   chef_handler (1.4.0)
   compat_resource (12.10.6)
-  metroextractor (0.19.0)
+  metroextractor (1.0.0)
     apt (>= 0.0.0)
     ark (>= 0.0.0)
     osm2pgsql (>= 0.0.0)

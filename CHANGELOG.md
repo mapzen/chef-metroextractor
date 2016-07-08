@@ -1,6 +1,12 @@
 metroextractor changelog
 ========================
 
+1.0.0
+-----
+* cities.json has moved: update attribute to retrieve from new repository
+* update extracts and shapes script to parse new json file format
+* kill Vagrant
+
 0.19.0
 ------
 * support for postgresql cookbook update

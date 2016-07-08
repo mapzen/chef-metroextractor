@@ -32,7 +32,7 @@ directory node[:metroextractor][:setup][:scriptsdir] do
 end
 
 # cities
-git "#{node[:metroextractor][:setup][:scriptsdir]}/metroextractor-cities" do
+git "#{node[:metroextractor][:setup][:scriptsdir]}/cities" do
   action      :sync
   repository  node[:metroextractor][:setup][:cities_repo]
   revision    node[:metroextractor][:setup][:cities_branch]
@@ -40,7 +40,7 @@ git "#{node[:metroextractor][:setup][:scriptsdir]}/metroextractor-cities" do
 end
 
 link "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
-  to "#{node[:metroextractor][:setup][:scriptsdir]}/metroextractor-cities/cities.json"
+  to "#{node[:metroextractor][:setup][:scriptsdir]}/cities/cities.json"
 end
 
 # scripts
