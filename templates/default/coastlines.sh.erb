@@ -23,8 +23,6 @@ function package_coast
 <% require 'json' -%>
 <% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") -%>
 <% data = JSON.parse(json) -%>
-<% data['regions'].each do |region, val| -%>
-  <% val['cities'].each do |city, v| -%>
-package_coast <%= city %> "<%= v['bbox']['top'] %>" "<%= v['bbox']['left'] %>" "<%= v['bbox']['bottom'] %>" "<%= v['bbox']['right'] %>"
-  <% end -%>
+<% data.each do |val| -%>
+package_coast <%= val['id'] %> "<%= val['bbox']['top'] %>" "<%= val['bbox']['left'] %>" "<%= val['bbox']['bottom'] %>" "<%= val['bbox']['right'] %>"
 <% end -%>
