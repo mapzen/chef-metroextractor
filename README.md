@@ -1,6 +1,6 @@
 Metroextractor Chef
 ===================
-![Build Status](https://circleci.com/gh/mapzen/chef-metroextractor.svg?style=svg)
+[![CircleCI Build Status](https://circleci.com/gh/mapzen/chef-metroextractor.svg?style=svg)](https://circleci.com/gh/mapzen/chef-metroextractor)
 
 Attribution
 -----------
