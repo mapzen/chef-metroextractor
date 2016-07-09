@@ -9,7 +9,7 @@ ENV['TMP'] = node[:metroextractor][:setup][:basedir]
 
 # fail if someone tries to pull something other than
 #   a pbf data file
-raise if node[:metroextractor][:planet][:file] !~ /\.pbf$/
+fail if node[:metroextractor][:planet][:file] !~ /\.pbf$/
 
 remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}.md5" do
   backup    false
