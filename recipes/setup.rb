@@ -32,15 +32,12 @@ directory node[:metroextractor][:setup][:scriptsdir] do
 end
 
 # cities
-git "#{node[:metroextractor][:setup][:scriptsdir]}/cities" do
-  action      :sync
-  repository  node[:metroextractor][:setup][:cities_repo]
-  revision    node[:metroextractor][:setup][:cities_branch]
-  user        node[:metroextractor][:user][:id]
-end
-
-link "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
-  to "#{node[:metroextractor][:setup][:scriptsdir]}/cities/cities.json"
+remote_file "#{node[:metroextractor][:setup][:scriptsdir]}/cities.json" do
+  action      :create
+  mode        0644
+  retries     2
+  retry_delay 60
+  source      node[:metroextractor][:setup][:cities_json_url]
 end
 
 # scripts

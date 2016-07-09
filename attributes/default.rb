@@ -18,10 +18,7 @@ default[:metroextractor][:data][:trigger_file]        = '/etc/.metroextractor_da
 # setup
 default[:metroextractor][:setup][:basedir]            = '/mnt/metro'
 default[:metroextractor][:setup][:scriptsdir]         = '/opt/metroextractor-scripts'
-#default[:metroextractor][:setup][:cities_repo]        = 'https://github.com/mapzen/metro-extracts.git'
-#default[:metroextractor][:setup][:cities_branch]      = 'master'
-default[:metroextractor][:setup][:cities_repo]        = 'https://github.com/mapzen/data-pages.git'
-default[:metroextractor][:setup][:cities_branch]      = 'odes-client'
+default[:metroextractor][:setup][:cities_json_url]    = 'https://mapzen.com/data/metro-extracts/cities-extractor.json'
 
 # user
 default[:metroextractor][:user][:id]                  = 'metro'
