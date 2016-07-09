@@ -30,7 +30,7 @@ default[:metroextractor][:user][:ssh_keygen]          = false
 # imposm
 default[:metroextractor][:imposm][:version]           = '0.2'
 default[:metroextractor][:imposm][:installdir]        = '/usr/local'
-default[:metroextractor][:imposm][:url]               = 'http://imposm.org/static/rel/imposm3-0.2.0dev-20160311-77162d9-linux-x86-64.tar.gz'
+default[:metroextractor][:imposm][:url]               = 'https://imposm.org/static/rel/imposm3-0.2.0dev-20160615-d495ca4-linux-x86-64.tar.gz'
 
 # postgres
 default[:metroextractor][:postgres][:db]              = 'osm'
