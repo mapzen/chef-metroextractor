@@ -60,27 +60,6 @@ Dependencies
 -----------
 apt, ark, osm2pgsql, postgresql, python, user
 
-Vagrant Environment
-===================
-
-Installation
-------------
-    vagrant plugin install vagrant-berkshelf 
-    bundle install
-    berks install
-    vagrant up
-    vagrant ssh
-
-#### Note
-* running a planet download and then processing extracts on your local machine might be hit or miss (likely miss)
-
-#### I don't like Vagrant
-* well then sir, provision an Ubuntu12.04 LTS system with the provider of your choice, and then bootstrap with chef-solo:
-    `knife solo bootstrap root@${host} -r 'recipe[metroextractor]'`
-* and re-cook with the following:
-    `knife solo cook root@${host} -r 'recipe[metroextractor]'`
-* alternatively, you can add the metroextractor cookbook to your chef server and wrap it as you see fit
-
 License and Authors
 -------------------
 License: GPL
