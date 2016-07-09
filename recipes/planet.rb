@@ -9,7 +9,7 @@ ENV['TMP'] = node[:metroextractor][:setup][:basedir]
 
 # fail if someone tries to pull something other than
 #   a pbf data file
-fail if node[:metroextractor][:planet][:file] !~ /\.pbf$/
+raise if node[:metroextractor][:planet][:file] !~ /\.pbf$/
 
 remote_file "#{node[:metroextractor][:setup][:basedir]}/#{node[:metroextractor][:planet][:file]}.md5" do
   backup    false
@@ -51,7 +51,7 @@ execute 'update planet' do
   timeout     node[:metroextractor][:planet_update][:timeout]
   retries     2
   retry_delay 60
-  notifies  :create, "file[#{node[:metroextractor][:data][:trigger_file]}]", :immediately
+  notifies    :create, "file[#{node[:metroextractor][:data][:trigger_file]}]", :immediately
   command <<-EOH
     osmupdate #{node[:metroextractor][:planet][:file]} \
       updated-#{node[:metroextractor][:planet][:file]} &&

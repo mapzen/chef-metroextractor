@@ -4,6 +4,8 @@ maintainer_email 'grant@mapzen.com'
 license          'GPL v3'
 description      'Installs/Configures extractor'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+issues_url       'https://github.com/mapzen/chef-metroextractor/issues'
+source_url       'https://github.com/mapzen/chef-metroextractor'
 version          '1.0.0'
 
 recipe 'metroextractor', 'Builds metro extracts'

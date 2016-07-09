@@ -1,6 +1,6 @@
 LineLength:
   Max: 250
-SingleSpaceBeforeFirstArg:
+Style/SpaceBeforeFirstArg:
   Enabled: false
-SpaceBeforeFirstArg:
+NumericLiteralPrefix:
   Enabled: false

@@ -3,7 +3,7 @@ metroextractor changelog
 
 1.0.0
 -----
-* cities.json has moved: update attribute to retrieve from new repository
+* cities.json has moved: update attribute to retrieve from url endpoint
 * update extracts and shapes script to parse new json file format
 * kill Vagrant
 
