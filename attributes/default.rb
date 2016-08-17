@@ -18,7 +18,7 @@ default[:metroextractor][:data][:trigger_file]        = '/etc/.metroextractor_da
 # setup
 default[:metroextractor][:setup][:basedir]            = '/mnt/metro'
 default[:metroextractor][:setup][:scriptsdir]         = '/opt/metroextractor-scripts'
-default[:metroextractor][:setup][:cities_json_url]    = 'https://mapzen.com/data/metro-extracts-alt/cities-extractor.json'
+default[:metroextractor][:setup][:cities_json_url]    = 'https://mapzen.com/data/metro-extracts/cities-extractor.json'
 
 # user
 default[:metroextractor][:user][:id]                  = 'metro'
