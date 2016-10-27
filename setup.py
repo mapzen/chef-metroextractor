@@ -10,6 +10,7 @@ setup(
     packages = find_packages(),
     entry_points = dict(
         console_scripts = [
+            'extracts-nothingburger=metroextractor.nothingburger:main',
         ]
     ),
     package_data = {},
