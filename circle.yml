@@ -1,7 +1,9 @@
 machine:
   ruby:
     version: 2.3.0
+  python:
+    version: 3.5.0
 test:
   override:
     - bundle exec rake
-    - python setup.py test
+    - python3 setup.py test

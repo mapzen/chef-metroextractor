@@ -1,5 +1,6 @@
 from __future__ import print_function
 from argparse import ArgumentParser
+import io
 
 parser = ArgumentParser(description='Tell us what they told you.')
 
@@ -12,7 +13,7 @@ parser.add_argument('filename',
 def tell_us(bbox, filename):
     '''
     '''
-    with open(filename, 'w') as file:
+    with io.open(filename, 'w') as file:
         print(bbox, file=file)
 
 def main():

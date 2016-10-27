@@ -1,17 +1,13 @@
-import unittest, tempfile, os
+import unittest, unittest.mock
 
 from . import nothingburger
 
 class Nothingburger (unittest.TestCase):
 
-    def setUp(self):
-        handle, self.filename = tempfile.mkstemp()
-        os.close(handle)
-    
-    def tearDown(self):
-        os.remove(self.filename)
-
     def test_tell_us(self):
-        nothingburger.tell_us([0, 1, 2, 3], self.filename)
-        with open(self.filename) as file:
-            self.assertEqual(next(file), '[0, 1, 2, 3]\n')
+        with unittest.mock.patch('io.open') as io_open:
+            nothingburger.tell_us([0, 1, 2, 3], 'filename.txt')
+
+        io_open.assert_called_once_with('filename.txt', 'w')
+        write_call = io_open.return_value.__enter__.return_value.mock_calls[0]
+        self.assertTrue(write_call[1][0].startswith('[0, 1, 2, 3]'))
