@@ -1,0 +1,88 @@
+#!/bin/bash
+#
+PGPASSWORD=<%= node[:metroextractor][:postgres][:password] %>
+OSMOPTS="--hstore --host localhost --database <%= node[:metroextractor][:postgres][:db] %> --username <%= node[:metroextractor][:postgres][:user] %>"
+PGSQLOPTS="-h localhost -d <%= node[:metroextractor][:postgres][:db] %> -U <%= node[:metroextractor][:postgres][:user] %>"
+PGSQL2SHPOPTS="-h localhost -u <%= node[:metroextractor][:postgres][:user] %> -P <%= node[:metroextractor][:postgres][:password] %> <%= node[:metroextractor][:postgres][:db] %>"
+SHAPE_ENCODING="UTF-8"
+export PGPASSWORD OSMOPTS PGSQLOPTS PGSQL2SHPOPTS SHAPE_ENCODING
+
+function osm2pgsql_shapefiles
+{
+  slug=$1
+  prefix=${slug//-/_}_osm
+
+  # generate shp files
+  #
+  osm2pgsql -sluc -C 2048 ${OSMOPTS} -S <%= node[:metroextractor][:setup][:scriptsdir] %>/osm2pgsql.style -p ${prefix} --number-processes 2 ex/${slug}.osm.pbf
+
+  pgsql2shp -rk -f shp/${slug}_osm_point.shp    ${PGSQL2SHPOPTS} ${prefix}_point  
+  pgsql2shp -rk -f shp/${slug}_osm_polygon.shp  ${PGSQL2SHPOPTS} ${prefix}_polygon
+  pgsql2shp -rk -f shp/${slug}_osm_line.shp     ${PGSQL2SHPOPTS} ${prefix}_line   
+
+  # generate geojson from shp files
+  #
+  ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -t_srs crs:84 shp/${slug}_osm_line.geojson shp/${slug}_osm_line.shp
+  ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -t_srs crs:84 shp/${slug}_osm_point.geojson shp/${slug}_osm_point.shp
+  ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -t_srs crs:84 shp/${slug}_osm_polygon.geojson shp/${slug}_osm_polygon.shp
+
+  # zip up our output
+  #
+  zip -j shp/${slug}.osm2pgsql-shapefiles.zip shp/${slug}_osm_*.shp shp/${slug}_osm_*.prj shp/${slug}_osm_*.dbf shp/${slug}_osm_*.shx
+  zip -j shp/${slug}.osm2pgsql-geojson.zip shp/${slug}_osm_*.geojson
+
+  # remove source files
+  #
+  rm shp/${slug}_osm_*.*
+
+  # clean up the db
+  #
+  echo "DROP TABLE ${prefix}_line"    | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_nodes"   | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_point"   | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_polygon" | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_rels"    | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_roads"   | psql ${PGSQLOPTS}
+  echo "DROP TABLE ${prefix}_ways"    | psql ${PGSQLOPTS}
+}
+export -f osm2pgsql_shapefiles
+
+function imposm_shapefiles
+{
+  slug=$1
+  prefix=${slug//-/_}
+
+  mkdir shp/${slug}-imposm
+
+  imposm3 import -mapping <%= node[:metroextractor][:setup][:scriptsdir] %>/mapping.json -read ex/${slug}.osm.pbf -cachedir shp/${slug}-imposm -srid 4326 -write -connection postgis://<%= node[:metroextractor][:postgres][:user] %>:<%= node[:metroextractor][:postgres][:password] %>@localhost/<%= node[:metroextractor][:postgres][:db] %>?prefix=${prefix}_ -deployproduction
+
+  declare -a arr=('admin' 'aeroways' 'amenities' 'buildings' 'landusages' 'landusages_gen0' 'landusages_gen1' 'places' 'roads' 'roads_gen0' 'roads_gen1' 'transport_areas' 'transport_points' 'waterareas' 'waterareas_gen0' 'waterareas_gen1' 'waterways')
+
+  for i in ${arr[@]}; do
+    pgsql2shp -rk -f shp/${slug}-imposm/${slug}_osm_${i}.shp ${PGSQL2SHPOPTS} ${prefix}_${i}
+
+    ogr2ogr -lco ENCODING="UTF-8" -f GeoJSON -s_srs epsg:4326 -t_srs crs:84 shp/${slug}-imposm/${slug}_${i}.geojson shp/${slug}-imposm/${slug}_osm_${i}.shp
+  done
+
+  zip -j shp/${slug}.imposm-shapefiles.zip shp/${slug}-imposm/${slug}_osm_*.shp shp/${slug}-imposm/${slug}_osm_*.prj shp/${slug}-imposm/${slug}_osm_*.dbf shp/${slug}-imposm/${slug}_osm_*.shx
+  zip -j shp/${slug}.imposm-geojson.zip shp/${slug}-imposm/${slug}_*.geojson
+
+  rm -r shp/${slug}-imposm
+
+  for i in ${arr[@]}; do
+    echo "DROP TABLE ${prefix}_${i} CASCADE" | psql ${PGSQLOPTS}
+  done
+}
+export -f imposm_shapefiles
+
+declare -a cities=(
+<% require 'json' -%>
+<% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") -%>
+<% data = JSON.parse(json) %>
+<% data.each do |val| -%>
+  '<%= val['id'] %>'
+<% end -%>
+)
+
+parallel --halt-on-error 1 --jobs <%= node[:metroextractor][:shapes][:osm2pgsql_jobs] %> --joblog <%= node[:metroextractor][:setup][:basedir] %>/logs/parallel_osm2pgsql_shapefiles.log osm2pgsql_shapefiles ::: "${cities[@]}" ><%= node[:metroextractor][:setup][:basedir] %>/logs/osm2pgsql_shapefiles.log 2>&1
+parallel --halt-on-error 1 --jobs <%= node[:metroextractor][:shapes][:imposm_jobs] %> --joblog <%= node[:metroextractor][:setup][:basedir] %>/logs/parallel_imposm_shapefiles.log imposm_shapefiles ::: "${cities[@]}" ><%= node[:metroextractor][:setup][:basedir] %>/logs/imposm_shapefiles.log 2>&1

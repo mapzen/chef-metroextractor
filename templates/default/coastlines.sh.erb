@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+
+function package_coast
+{
+  slug=$1
+  left=$2
+  bottom=$3
+  right=$4
+  top=$5
+
+  ogr2ogr -spat ${left} ${bottom} ${right} ${top} -t_srs EPSG:4326 coast/${slug}_water_coast.shp water-polygons-split-4326/water_polygons.shp
+
+  ogr2ogr -spat ${left} ${bottom} ${right} ${top} -t_srs EPSG:4326 coast/${slug}_land_coast.shp land-polygons-split-4326/land_polygons.shp
+
+  zip -j - coast/${slug}_water_coast.??? > coast/${slug}.water.coastline.zip
+  zip -j - coast/${slug}_land_coast.??? > coast/${slug}.land.coastline.zip
+
+  rm coast/${slug}_land_coast.*
+  rm coast/${slug}_water_coast.*
+}
+
+<% require 'json' -%>
+<% json = File.read("#{node[:metroextractor][:setup][:scriptsdir]}/cities.json") -%>
+<% data = JSON.parse(json) -%>
+<% data.each do |val| -%>
+package_coast <%= val['id'] %> "<%= val['bbox']['left'] %>" "<%= val['bbox']['bottom'] %>" "<%= val['bbox']['right'] %>" "<%= val['bbox']['top'] %>"
+<% end -%>

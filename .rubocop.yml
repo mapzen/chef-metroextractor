@@ -1,0 +1,10 @@
+LineLength:
+  Max: 250
+Style/SpaceBeforeFirstArg:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/SignalException:
+  Enabled: false
+NumericLiteralPrefix:
+  Enabled: false
