@@ -11,6 +11,7 @@ setup(
     entry_points = dict(
         console_scripts = [
             'extracts-nothingburger=metroextractor.nothingburger:main',
+            'extracts-wof-bundle=metroextractor.wof_bundle:main',
         ]
     ),
     package_data = {},
@@ -18,5 +19,6 @@ setup(
     install_requires = [
         'requests == 2.11.1',
         'uritemplate == 3.0.0',
+        'httmock==1.2.5',
         ]
 )
