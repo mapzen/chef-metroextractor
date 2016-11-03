@@ -1,7 +1,7 @@
 import unittest, unittest.mock, httmock
 from urllib.parse import parse_qsl
 
-from . import nothingburger, wof_bundle
+from . import nothingburger, wof_bundle, oa_extract
 
 class Nothingburger (unittest.TestCase):
 
@@ -53,3 +53,28 @@ class WofBundle (unittest.TestCase):
         tar_info, bytes_io = tar.addfile.mock_calls[0][1]
         self.assertEqual(tar_info.name, 'data/554/753/227/554753227.geojson')
         self.assertIn(b'554753227', bytes_io.getvalue())
+
+class OpenAddrExtract (unittest.TestCase):
+    
+    def test_get_bounds(self):
+        bounds1 = oa_extract.get_bounds(1, 2, 3, 4)
+        self.assertEqual(bounds1, (1, 2, 3, 4))
+
+        bounds2 = oa_extract.get_bounds(4, 3, 2, 1)
+        self.assertEqual(bounds2, (2, 1, 4, 3))
+    
+    def test_iterate_tile_coords(self):
+        coords1 = list(oa_extract.iterate_tile_coords(1, 1, 1, 1))
+        self.assertEqual(coords1, [(1, 1)])
+
+        coords2 = list(oa_extract.iterate_tile_coords(1, 1, 1, 2))
+        self.assertEqual(coords2, [(1, 1), (1, 2)])
+
+        coords3 = list(oa_extract.iterate_tile_coords(1, 1, 2, 2))
+        self.assertEqual(coords3, [(1, 1), (1, 2), (2, 1), (2, 2)])
+
+        coords4 = list(oa_extract.iterate_tile_coords(1.1, 1.1, 1.1, 2.9))
+        self.assertEqual(coords4, [(1, 1), (1, 2)])
+
+        coords5 = list(oa_extract.iterate_tile_coords(1.1, 1.1, 2.9, 2.9))
+        self.assertEqual(coords5, [(1, 1), (1, 2), (2, 1), (2, 2)])

@@ -12,6 +12,7 @@ setup(
         console_scripts = [
             'extracts-nothingburger=metroextractor.nothingburger:main',
             'extracts-wof-bundle=metroextractor.wof_bundle:main',
+            'extracts-oa-extract=metroextractor.oa_extract:main',
         ]
     ),
     package_data = {},
